@@ -20,13 +20,14 @@ FDEs are the "Technical Special Ops" who bridge the gap (The Delta) between a co
    - [Multi-Agent Orchestration (ADK)](#-multi-agent-orchestration-with-google-adk)
    - [LLM Systems Evaluation](#%EF%B8%8F-llm-systems-evaluation-the-success-key)
    - [Enterprise RAG Blueprint](#-the-enterprise-rag-blueprint)
-4. [**The "Soft Stack": Consulting & Strategy**](#-the-soft-stack-consulting--strategy)
-5. [**The Interview Blackbook & Case Studies**](#-the-interview-blackbook--case-studies)
-6. [**Artifact Templates (Copy-Paste)**](#-artifact-templates-copy-paste)
-7. [**Comprehensive Reading List**](#-comprehensive-reading-list)
-8. [**The FDE Glossary**](#-the-fde-glossary)
-9. [**Creators**](#%E2%80%8D-creators)
-10. [**Contributing**](#-contributing)
+4. [**Air-Gapped & Tactical Edge Deployment**](#-air-gapped--tactical-edge-deployment)
+5. [**The "Soft Stack": Consulting & Strategy**](#-the-soft-stack-consulting--strategy)
+6. [**The Interview Blackbook & Case Studies**](#-the-interview-blackbook--case-studies)
+7. [**Artifact Templates (Copy-Paste)**](#-artifact-templates-copy-paste)
+8. [**Comprehensive Reading List**](#-comprehensive-reading-list)
+9. [**The FDE Glossary**](#-the-fde-glossary)
+10. [**Creators**](#%E2%80%8D-creators)
+11. [**Contributing**](#-contributing)
 
 ---
 
@@ -195,6 +196,63 @@ Scalable, automated evaluation for high-volume production data and CI/CD integra
 *   **[Google ADK Quickstart](https://github.com/google/adk-python)** – Start here to build your first multi-agent team.
 *   **[Agent Starter Pack](https://github.com/GoogleCloudPlatform/agent-starter-pack)** – Production-ready templates with built-in CI/CD and evaluation.
 *   **[Pinecone: RAG Learning Center](https://www.pinecone.io/learn/series/rag/)** – Best end-to-end RAG education.
+
+---
+
+## 📡 Air-Gapped & Tactical Edge Deployment
+*The hardest FDE work happens where the internet doesn't reach: SCIFs, submarines, forward operating bases, offline factory floors, and regulated on-prem enclaves. Standard cloud playbooks fail here — you must ship the platform, not point at it.*
+
+### 🔒 The Compliance Bedrock
+Before you write code, know the classification and the accreditation path. These acronyms drive every architectural choice:
+*   **ATO (Authority to Operate):** The signed authorization from a government agency's Authorizing Official permitting a system to run on their network. Achieved via the **[NIST Risk Management Framework](https://csrc.nist.gov/projects/risk-management/about-rmf)** and typically takes 6–18 months.
+*   **DoD Impact Levels:** **IL2** (publicly releasable / non-critical unclassified), **IL4** (Controlled Unclassified Information), **IL5** (higher-sensitivity CUI + mission-critical / unclassified National Security Systems), **IL6** (classified up to Secret). Each level dictates which clouds (GCC High, AWS GovCloud, Azure Government) and which network enclaves (NIPRNet, SIPRNet) you can touch.
+*   **FedRAMP High vs. Moderate:** Federal civilian equivalent. Most Gen AI services are only FedRAMP Moderate — a hard blocker for many defense workloads. Check the **[FedRAMP Marketplace](https://marketplace.fedramp.gov/)** before promising a feature.
+*   **STIGs (Security Technical Implementation Guides):** Line-by-line hardening checklists published by DISA for every OS, container image, and database. Your CI must produce STIG-compliant artifacts or ATO will bounce you.
+*   **ITAR / EAR:** Export-control regimes. If your model was trained on ITAR-controlled data, its weights themselves are controlled — you cannot ship them to a non-US person, ever.
+*   **CMMC 2.0:** The DoD contractor certification. Level 2 is the practical floor for FDE work in the defense industrial base; per DoD Class Deviation 2024-O0013 (May 2024) it currently assesses against **NIST SP 800-171 Rev. 2** (110 security requirements). Rev. 3 (May 2024, 97 requirements) is published but not yet the CMMC baseline — rulemaking to adopt it is expected around 2027.
+
+### 📦 Offline Model Weights & Package Mirrors
+An air-gapped host cannot `pip install`, `huggingface_hub.download`, or reach `api.openai.com`. Pre-stage everything:
+*   **Model Weights:** Ship weights on encrypted physical media (a signed portable disk delivered via courier or a cleared engineer's laptop). SHA-256 verify on arrival, load via **`safetensors`** (not pickle — pickle is an RCE waiting to happen inside a classified enclave).
+*   **License & Provenance:** Every weight file needs a signed provenance record: source, license (Apache 2.0? Llama Community? Gemma Terms?), training-data attestation. Auditors will ask, and "we downloaded it from HuggingFace" is not an answer.
+*   **Package Mirrors:** Stand up an internal **PyPI mirror** (`devpi`, `bandersnatch`), **npm mirror** (`Verdaccio`), and **APT mirror** (`apt-mirror`). Nothing installs from the public internet — ever. Air-gap `pip.conf` and `~/.npmrc` to point at the mirrors.
+*   **CVE Scanning:** Every mirrored artifact runs through **[Trivy](https://github.com/aquasecurity/trivy)** or **[Grype](https://github.com/anchore/grype)** before it's approved for the enclave. Track vulnerabilities against an offline NVD snapshot that you refresh via manifest-based sync.
+
+### 🐳 Hardened Container Registries
+Public Docker Hub and gcr.io are unreachable and untrusted. Ship images through a hardened pipeline:
+*   **[Iron Bank](https://p1.dso.mil/products/iron-bank):** The DoD's centralized repository of pre-hardened, STIG-compliant, continuously-scanned container images. If a base image isn't in Iron Bank, it typically can't run on Platform One clusters.
+*   **[Harbor](https://goharbor.io/):** The de facto private registry for air-gapped environments — supports image signing (Notary/Cosign), replication, and CVE scanning out of the box.
+*   **Image Signing:** Every image signed with **[Cosign](https://github.com/sigstore/cosign)** using an offline root-of-trust key. Kubernetes admission controllers (**[Kyverno](https://kyverno.io/)**, **OPA Gatekeeper**) reject unsigned images at deploy time.
+*   **Distroless Bases:** Prefer Google's **`distroless`** images or **`chainguard/static`** — a container with no shell is a container an attacker cannot pivot from.
+
+### 🔁 Sync-Back & Cross-Domain Patterns
+Data has to move between the enclave and the outside world — but only in the directions and formats policy allows:
+*   **One-Way Data Diodes:** Hardware devices (e.g., **Owl Cyber Defense**, **Fox-IT**) that physically permit data flow in only one direction. Common pattern: model weights flow *into* the enclave, telemetry flows *out*.
+*   **Cross-Domain Solutions (CDS):** Accredited software/hardware that mediates transfers between classification levels (e.g., Unclassified → Secret). CDS approval is its own multi-month process — plan for it on the discovery call, not week 12.
+*   **Manifest-Based Sync:** Every artifact leaving or entering the enclave has a signed manifest, human-review sign-off, and an immutable audit log. No "background sync" processes.
+*   **Redaction Pipelines:** Outbound telemetry passes through a **DLP** stage (regex + ML classifier) that scrubs PII, coordinates, unit designators, and any string matching classified-keyword lists before it hits the low-side.
+
+### ⚙️ The Edge Runtime Stack
+Real edge deployments — a Humvee, a factory PLC network, a ship at sea — don't run full GKE. They run lightweight, offline-first Kubernetes:
+*   **[K3s](https://k3s.io/) / [MicroK8s](https://microk8s.io/) / [k0s](https://k0sproject.io/):** Single-binary Kubernetes distributions designed for edge and disconnected environments.
+*   **[GKE on Bare Metal / Google Distributed Cloud](https://cloud.google.com/distributed-cloud):** Google's managed-style Kubernetes running inside a customer's own data center or air-gapped enclave, with periodic sync to the control plane.
+*   **Local Inference Runtimes:** **[Ollama](https://ollama.com/)**, **[vLLM](https://github.com/vllm-project/vllm)**, **[llama.cpp](https://github.com/ggerganov/llama.cpp)**, and **[TensorRT-LLM](https://github.com/NVIDIA/TensorRT-LLM)** for running quantized open-weight models (Gemma, Llama, Mistral) on constrained hardware — including CPU-only or single-GPU nodes.
+*   **Store-and-Forward Telemetry:** Assume the network drops for hours. Buffer logs and metrics locally (**Fluent Bit** + local disk WAL), forward opportunistically when connectivity returns.
+
+### 🚨 Air-Gap-Specific Failure Modes
+*Things that never happen in the cloud and always happen at a client site:*
+*   **Clock Drift:** No NTP means TLS certs silently expire and Kerberos tickets stop minting. Ship a local **Chrony** or **PTP** setup on day one.
+*   **Cert Rotation:** You cannot Let's Encrypt. Bake an internal **PKI** (**[HashiCorp Vault](https://www.vaultproject.io/)**, **step-ca**, or **Smallstep**) into the enclave from day one.
+*   **Secrets Management:** Cloud KMS is unreachable. Use **Vault** in HA mode with auto-unseal via HSM, or **[SOPS](https://github.com/getsops/sops)** with age keys for GitOps flows.
+*   **The "First Boot" Problem:** How does day-1 configuration get in? Usually via a signed sneakernet ISO delivered by a cleared engineer. Design for this from week one — don't discover it at week twelve.
+
+#### 📚 Air-Gap & Edge Resources
+*   **[DoD Platform One](https://p1.dso.mil/):** The DoD's DevSecOps reference platform — read the docs even if you're not building for DoD; the patterns transfer directly to any regulated on-prem client.
+*   **[NIST SP 800-171 Rev. 2](https://csrc.nist.gov/pubs/sp/800/171/r2/final)** (the 110 requirements that currently underpin CMMC Level 2) and **[Rev. 3](https://csrc.nist.gov/pubs/sp/800/171/r3/final)** (May 2024, 97 requirements — the future baseline).
+*   **[DoD Enterprise DevSecOps Reference Design](https://public.cyber.mil/devsecops/):** The canonical architecture doc for accredited software factories.
+*   **[Sigstore](https://www.sigstore.dev/):** Cosign, Rekor, Fulcio — the modern supply-chain-security toolkit that has become table stakes in accredited environments.
+*   **[K3s Air-Gap Install Guide](https://docs.k3s.io/installation/airgap):** A concrete walkthrough of getting Kubernetes running without a package repo.
+*   **[Anduril: Lattice](https://www.anduril.com/lattice/):** Real-world case study of an AI platform designed for disconnected tactical operations.
 
 ---
 
@@ -493,7 +551,7 @@ Being a "Forward" engineer means staying six months ahead of the industry. This 
 *   **Last-Mile Integration:** The complex work of stitching a modern SaaS/AI platform into legacy, often undocumented, "messy" enterprise systems.
 
 ### 🏗 The Technical & Infra Stack (GCP & Beyond)
-*   **Air-Gap / Tactical Edge:** Environments with zero or intermittent internet connectivity (Common in Defense/Energy). Requires local container registries and offline model weights.
+*   **Air-Gap / Tactical Edge:** Environments with zero or intermittent internet connectivity (Common in Defense/Energy). Requires local container registries and offline model weights. See the [Air-Gapped & Tactical Edge Deployment](#-air-gapped--tactical-edge-deployment) section for the full playbook.
 *   **VPC Service Controls (VPC SC):** A GCP security perimeter that prevents data exfiltration by restricting access to Google-managed services (like BigQuery or Agent Platform) only from authorized networks.
 *   **Hardening:** The process of moving a prototype from "it works on my machine" to "it meets SOC2/HIPAA security standards," including encryption at rest/transit and least-privilege IAM roles.
 *   **Shadow IT:** Unauthorized tools or "rogue" databases used by client employees. This is often where the "cleanest" and most useful data actually lives.
