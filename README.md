@@ -631,9 +631,8 @@ We built this resource to help bridge the gap for engineers moving into high-sta
 ---
 
 ## 🤝 Contributing
-Found a resource that changed your FDE career? 
-1. Open a PR.
-2. Ensure the link is high-quality and free (or worth the cost).
-3. Add a 1-sentence description of *why* it matters for FDEs.
+Found a resource that changed your FDE career? See **[CONTRIBUTING.md](CONTRIBUTING.md)** for the quality bar, formatting rules, PR checklist, and process.
+
+**TL;DR:** open a focused PR, ensure the link is high-quality and free (or clearly worth the cost), and add a one-sentence description of *why* it matters for FDEs. Not every PR gets merged — the list stays strong by staying selective.
 
 ### 🚀 "The FDE's goal is to become obsolete at a client site—because the system you built is so good, it runs itself".
