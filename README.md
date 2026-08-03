@@ -132,7 +132,7 @@ As an FDE, you are the bridge between "State-of-the-Art" research and "Productio
 Read these to understand how elite teams solve the "messy reality" of enterprise deployment.
 *   **[Palantir: Dev vs. Delta](https://blog.palantir.com/dev-versus-delta-demystifying-engineering-roles-at-palantir-ad44c2a6e87)** – The mandatory "Origin Story" of the FDE role.
 *   **[OpenAI: Customer Stories](https://openai.com/customer-stories)** – Real-world case studies on deploying GPT-4 into complex workflows (e.g., Morgan Stanley, Harvey).
-*   **[Google Cloud: Architecture Blog](https://docs.cloud.google.com/architecture)** – Focus on GKE, BigQuery, and Vertex AI enterprise patterns.
+*   **[Google Cloud: Architecture Blog](https://docs.cloud.google.com/architecture)** – Focus on GKE, BigQuery, and Gemini Enterprise Agent Platform (formerly Vertex AI) enterprise patterns.
 *   **[Anthropic: Evaluating AI Agents](https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents)** – Deep dive into the "Evals" mindset required for production AI.
 
 ---
@@ -144,7 +144,7 @@ The **[Agent Development Kit (ADK)](https://github.com/google/adk-docs)** is Goo
 *   **Multi-Agent by Design:** Compose specialized agents in a hierarchy (e.g., a "Manager" delegating to "Researcher" and "Coder" agents).
 *   **The Agent2Agent (A2A) Protocol:** An open standard that allows agents to discover and communicate with each other via consistent HTTP-based interfaces.
 *   **Model Agnostic:** While optimized for Gemini, ADK uses **LiteLLM** to support GPT-4o, Claude, and Mistral.
-*   **Deployment:** Native integration with **[Vertex AI Agent Engine](https://cloud.google.com/vertex-ai/docs/generative-ai/agent-engine/overview)** for managed, auto-scaling production runtimes.
+*   **Deployment:** Native integration with **[Agent Runtime on Gemini Enterprise Agent Platform](https://docs.cloud.google.com/gemini-enterprise-agent-platform/scale)** (formerly Vertex AI Agent Engine) for managed, auto-scaling production deployment of ADK, LangChain, LangGraph, and other framework agents.
 
 ---
 
@@ -156,23 +156,23 @@ Focuses on fast, manual, and interactive debugging during development.
 *   **`adk eval`:** A CLI and Web UI tool to test execution paths against "Golden Datasets".
 *   **Metrics:** `tool_trajectory_avg_score` (Did it use the right tools?), `response_match_score` (ROUGE similarity), and `rubric_based_final_response_quality`.
 
-#### 2. The Outer Loop (Production Evaluation with Vertex AI)
+#### 2. The Outer Loop (Production Evaluation on Agent Platform)
 Scalable, automated evaluation for high-volume production data and CI/CD integration. FDEs use this to prove that a model update or a prompt change is a measurable improvement across thousands of test cases.
 
-*   **[Vertex AI Gen AI Evaluation Service](https://cloud.google.com/vertex-ai/docs/generative-ai/models/evaluate-models):** The unified platform for both **Rapid Evaluation** (synchronous, for dev/test) and **Pipeline Evaluation** (asynchronous, for massive datasets).
+*   **[Gemini Enterprise Agent Platform Evals](https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/computation-based-eval-pipeline)** (formerly Vertex AI Gen AI Evaluation Service): The unified service for both **Rapid Evaluation** (synchronous, for dev/test) and **Pipeline Evaluation** (asynchronous, for massive datasets).
 *   **Pairwise Evaluation (The evolution of AutoSxS):** A "Model-as-a-Judge" approach. It uses a superior model (e.g., Gemini 3 Pro) as an autorater to compare two model responses (Model A vs. Model B) based on a specific rubric, providing win rates and detailed explanations for every "judgment."
 *   **Pointwise Evaluation (The RAG Triad):** Assessing single model responses against specific quality dimensions using the **Rapid Eval API**:
     *   **Groundedness:** Does the response strictly follow the retrieved context? (Crucial for eliminating hallucinations).
     *   **Fulfillment:** Did the agent actually follow the instructions in the system prompt?
     *   **Summarization & Coherence:** Evaluating the linguistic quality and density of the output.
-*   **[Vertex AI Model Monitoring](https://cloud.google.com/vertex-ai/docs/model-monitoring):** Essential for "Day 2" operations. FDEs set up monitoring to detect **Prediction Drift** and **Feature Attribution** changes in production, ensuring the agentic system doesn't degrade over time as client data evolves.
+*   **[Model Monitoring on Gemini Enterprise Agent Platform](https://docs.cloud.google.com/gemini-enterprise-agent-platform/machine-learning/model-monitoring/overview)** (formerly Vertex AI Model Monitoring): Essential for "Day 2" operations. FDEs set up monitoring to detect **Prediction Drift** and **Feature Attribution** changes in production, ensuring the agentic system doesn't degrade over time as client data evolves.
 
 ---
 
 ### 🤖 The Enterprise RAG Blueprint
 1.  **Ingestion:** Using **[LlamaParse](https://developers.llamaindex.ai/python/framework/llama_cloud/llama_parse/)** to extract data from complex enterprise PDFs/tables.
-2.  **Grounding:** Using **[Vertex AI Search](https://docs.cloud.google.com/generative-ai-app-builder/docs)** as a managed RAG engine for semantic retrieval over client data.
-3.  **Vector Storage:** High-scale indexing with **[Vertex AI Vector Search](https://docs.cloud.google.com/vertex-ai/docs/vector-search/overview)**.
+2.  **Grounding:** Using **[Agent Search on Gemini Enterprise Agent Platform](https://docs.cloud.google.com/generative-ai-app-builder/docs)** (formerly Vertex AI Search) as a managed RAG engine for semantic retrieval over client data.
+3.  **Vector Storage:** High-scale indexing with **[Vector Search on Gemini Enterprise Agent Platform](https://docs.cloud.google.com/gemini-enterprise-agent-platform/build/vector-search/overview)** (formerly Vertex AI Vector Search).
 4.  **Hybrid Search:** Combining semantic vectors with keyword-based BM25 search to satisfy specific industry nomenclature.
 
 ---
@@ -182,10 +182,10 @@ Scalable, automated evaluation for high-volume production data and CI/CD integra
 #### Cloud Architecture (GCP Focused)
 *   **[BigQuery Performance Tuning](https://docs.cloud.google.com/bigquery/docs/best-practices-performance-overview):** Master clustering and partitioning for TB-scale client datasets.
 *   **[VPC Service Controls (VPC SC)](https://cloud.google.com/vpc-service-controls/docs/overview):** Mandatory for FDEs in Finance/Gov to satisfy data privacy requirements.
-*   **[Infrastructure as Code (Terraform)](https://registry.terraform.io/providers/hashicorp/google/latest/docs):** Automating the spin-up of GKE, BigQuery, and Vertex AI environments.
+*   **[Infrastructure as Code (Terraform)](https://registry.terraform.io/providers/hashicorp/google/latest/docs):** Automating the spin-up of GKE, BigQuery, and Agent Platform environments.
 
 #### Observability & Debugging
-*   **[Cloud Trace & Logging](https://cloud.google.com/stackdriver):** Tracking agent latency and debugging failed tool calls in the field.
+*   **[Google Cloud Observability](https://cloud.google.com/products/observability)** (Cloud Trace, Cloud Logging, Cloud Monitoring — formerly Stackdriver): Tracking agent latency and debugging failed tool calls in the field.
 *   **[LangSmith (Tracing)](https://www.langchain.com/langsmith):** Integrated with ADK to visualize exactly where an agent's "chain of thought" broke.
 *   **[The System Design Primer](https://github.com/donnemartin/system-design-primer)** – The ultimate resource for architecting systems that don't crash under client load.
 
@@ -287,10 +287,10 @@ When given a case study, do not start coding. Use this four-step diagnostic appr
     *   **Architecture:** Propose a **GCP Landing Zone**. Use **Cloud Storage** for ingestion and **BigQuery** for the data warehouse.
     *   **Security:** Implement **VPC Service Controls** and **Sensitive Data Protection (DLP)** to mask PII before it hits the analytics layer. This satisfies the HIPAA requirement.
 *   **Days 16–25 (The Agentic Pipeline):**
-    *   **Engineering:** Build a pipeline using **Vertex AI Search** grounded in the patient’s history. 
+    *   **Engineering:** Build a pipeline using **Agent Search** grounded in the patient’s history. 
     *   **The Delta:** Write a custom Python service on **Cloud Run** that pulls real-time patient "vitals" from the SQL Server to update the prediction.
 *   **Days 26–30 (Value Validation):**
-    *   **Evaluation:** Use **AutoSxS** to compare the model's predictions against historical outcomes.
+    *   **Evaluation:** Use **Pairwise Evaluation** (the successor to AutoSxS) to compare the model's predictions against historical outcomes.
     *   **UAT:** Put a simple dashboard in front of 5 doctors. If they don't change their behavior based on the data, the project has failed.
 
 ---
@@ -307,7 +307,7 @@ When given a case study, do not start coding. Use this four-step diagnostic appr
 
 #### 3. Real-Time Latency vs. AI
 *   **Question:** "A bank wants real-time fraud detection (<100ms) using an LLM. How do you architect this?"
-*   **FDE Answer:** "An LLM is too slow for the primary path. I’d architect a two-tier system: Use a fast, deterministic model (XGBoost/Vertex AI) for the 100ms decision. Then, pass the 'flagged' transactions to a **Gemini-powered agent** via **Vertex AI Reasoning Engine** for an asynchronous, deep-dive explanation that the fraud analyst can read 5 seconds later".
+*   **FDE Answer:** "An LLM is too slow for the primary path. I’d architect a two-tier system: Use a fast, deterministic model (XGBoost on Agent Platform Inference) for the 100ms decision. Then, pass the 'flagged' transactions to a **Gemini-powered agent** running on **Agent Runtime** for an asynchronous, deep-dive explanation that the fraud analyst can read 5 seconds later".
 
 ---
 
@@ -352,7 +352,7 @@ In the field, your documentation is your contract. Use these templates to define
 - **Proposed Glue:** Build a custom GCF (Cloud Function) parser to convert `.xyz` to Parquet.
 
 #### 4. The Quick Win (Week 2 Objective)
-- [e.g., Stand up a Vertex AI Search instance on the 'Policy' dataset to prove 90% retrieval accuracy.]
+- [e.g., Stand up an Agent Search instance on the 'Policy' dataset to prove 90% retrieval accuracy.]
 ```
 
 ---
@@ -392,8 +392,8 @@ graph LR
     end
 
     subgraph "GCP Landing Zone"
-        B[Cloud Storage / GCS] --> C(Vertex AI Search)
-        C --> D{Google ADK Agent Engine}
+        B[Cloud Storage / GCS] --> C(Agent Search)
+        C --> D{ADK on Agent Runtime}
         
         subgraph "Multi-Agent Swarm"
             D --> E[Planner Agent]
@@ -433,7 +433,7 @@ graph LR
 - **Action Required:** Need [Executive Sponsor Name] to approve the exception ticket #12345.
 
 #### 🗓️ The "Day 30" Horizon
-- Finalize **AutoSxS** evaluation for the production agent.
+- Finalize **Pairwise Evaluation** run for the production agent.
 - Transition 1st-line support to the internal Client Ops team.
 ```
 
@@ -494,16 +494,18 @@ Being a "Forward" engineer means staying six months ahead of the industry. This 
 
 ### 🏗 The Technical & Infra Stack (GCP & Beyond)
 *   **Air-Gap / Tactical Edge:** Environments with zero or intermittent internet connectivity (Common in Defense/Energy). Requires local container registries and offline model weights.
-*   **VPC Service Controls (VPC SC):** A GCP security perimeter that prevents data exfiltration by restricting access to Google-managed services (like BigQuery or Vertex AI) only from authorized networks.
+*   **VPC Service Controls (VPC SC):** A GCP security perimeter that prevents data exfiltration by restricting access to Google-managed services (like BigQuery or Agent Platform) only from authorized networks.
 *   **Hardening:** The process of moving a prototype from "it works on my machine" to "it meets SOC2/HIPAA security standards," including encryption at rest/transit and least-privilege IAM roles.
 *   **Shadow IT:** Unauthorized tools or "rogue" databases used by client employees. This is often where the "cleanest" and most useful data actually lives.
 *   **System of Record (SoR):** The authoritative data source for a given piece of information (e.g., SAP for finance, Salesforce for CRM). FDEs must identify this to avoid building on "stale" data replicas.
 
 ### 🤖 The AI & Agentic Layer (ADK & Evals)
+*   **Gemini Enterprise Agent Platform (formerly Vertex AI):** Google's umbrella brand (announced at Google Cloud Next '26) for the full agent-building stack — Model Garden, Agent Studio, Agent Runtime, Agent Search, Vector Search, Evals, Model Monitoring, and more. Existing Vertex AI SDKs, APIs (`aiplatform.v1beta1.*`), and billing are unchanged; only the product-level branding and console UI have moved.
+*   **Agent Runtime (formerly Vertex AI Agent Engine):** The managed, auto-scaling runtime for deploying agents built with ADK, LangChain, LangGraph, or any Python framework. Sits under "Scale" in the Agent Platform console alongside Memory Bank and Sessions.
 *   **Agent2Agent (A2A) Protocol:** An open standard used in the **Google Agent Development Kit (ADK)** that allows autonomous agents to discover, hand off tasks, and communicate with one another across systems.
 *   **Workflow Agents:** Deterministic agents in ADK (`SequentialAgent`, `ParallelAgent`, `LoopAgent`) that follow fixed logic paths rather than relying on an LLM to "plan" the next step.
 *   **Grounding:** The process of connecting an LLM to "Ground Truth" data (via RAG or Google Search) to ensure its responses are factual and cite-able.
-*   **AutoSxS (Side-by-Side):** A GCP-native evaluation method where an "Autorater" LLM compares two model outputs and provides a structured judgment on which is better and why.
+*   **Pairwise Evaluation (formerly AutoSxS):** A GCP-native evaluation method where an "Autorater" LLM compares two model outputs and provides a structured judgment on which is better and why. Runs inside **Gemini Enterprise Agent Platform Evals** (formerly Vertex AI Gen AI Evaluation Service).
 *   **Faithfulness (RAGAS Metric):** A measure of how much the answer is derived *only* from the retrieved context, essentially a "hallucination score".
 
 ### 🤝 Strategic Consulting (Boardroom Language)
