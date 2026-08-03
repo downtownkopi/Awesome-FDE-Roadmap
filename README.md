@@ -20,13 +20,14 @@ FDEs are the "Technical Special Ops" who bridge the gap (The Delta) between a co
    - [Multi-Agent Orchestration (ADK)](#-multi-agent-orchestration-with-google-adk)
    - [LLM Systems Evaluation](#%EF%B8%8F-llm-systems-evaluation-the-success-key)
    - [Enterprise RAG Blueprint](#-the-enterprise-rag-blueprint)
-4. [**The "Soft Stack": Consulting & Strategy**](#-the-soft-stack-consulting--strategy)
-5. [**The Interview Blackbook & Case Studies**](#-the-interview-blackbook--case-studies)
-6. [**Artifact Templates (Copy-Paste)**](#-artifact-templates-copy-paste)
-7. [**Comprehensive Reading List**](#-comprehensive-reading-list)
-8. [**The FDE Glossary**](#-the-fde-glossary)
-9. [**Creators**](#%E2%80%8D-creators)
-10. [**Contributing**](#-contributing)
+4. [**Air-Gapped & Tactical Edge Deployment**](#-air-gapped--tactical-edge-deployment)
+5. [**The "Soft Stack": Consulting & Strategy**](#-the-soft-stack-consulting--strategy)
+6. [**The Interview Blackbook & Case Studies**](#-the-interview-blackbook--case-studies)
+7. [**Artifact Templates (Copy-Paste)**](#-artifact-templates-copy-paste)
+8. [**Comprehensive Reading List**](#-comprehensive-reading-list)
+9. [**The FDE Glossary**](#-the-fde-glossary)
+10. [**Creators**](#%E2%80%8D-creators)
+11. [**Contributing**](#-contributing)
 
 ---
 
@@ -132,7 +133,7 @@ As an FDE, you are the bridge between "State-of-the-Art" research and "Productio
 Read these to understand how elite teams solve the "messy reality" of enterprise deployment.
 *   **[Palantir: Dev vs. Delta](https://blog.palantir.com/dev-versus-delta-demystifying-engineering-roles-at-palantir-ad44c2a6e87)** – The mandatory "Origin Story" of the FDE role.
 *   **[OpenAI: Customer Stories](https://openai.com/customer-stories)** – Real-world case studies on deploying GPT-4 into complex workflows (e.g., Morgan Stanley, Harvey).
-*   **[Google Cloud: Architecture Blog](https://docs.cloud.google.com/architecture)** – Focus on GKE, BigQuery, and Vertex AI enterprise patterns.
+*   **[Google Cloud: Architecture Blog](https://docs.cloud.google.com/architecture)** – Focus on GKE, BigQuery, and Gemini Enterprise Agent Platform (formerly Vertex AI) enterprise patterns.
 *   **[Anthropic: Evaluating AI Agents](https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents)** – Deep dive into the "Evals" mindset required for production AI.
 
 ---
@@ -144,7 +145,44 @@ The **[Agent Development Kit (ADK)](https://github.com/google/adk-docs)** is Goo
 *   **Multi-Agent by Design:** Compose specialized agents in a hierarchy (e.g., a "Manager" delegating to "Researcher" and "Coder" agents).
 *   **The Agent2Agent (A2A) Protocol:** An open standard that allows agents to discover and communicate with each other via consistent HTTP-based interfaces.
 *   **Model Agnostic:** While optimized for Gemini, ADK uses **LiteLLM** to support GPT-4o, Claude, and Mistral.
-*   **Deployment:** Native integration with **[Vertex AI Agent Engine](https://cloud.google.com/vertex-ai/docs/generative-ai/agent-engine/overview)** for managed, auto-scaling production runtimes.
+*   **Deployment:** Native integration with **[Agent Runtime on Gemini Enterprise Agent Platform](https://docs.cloud.google.com/gemini-enterprise-agent-platform/scale)** (formerly Vertex AI Agent Engine) for managed, auto-scaling production deployment of ADK, LangChain, LangGraph, and other framework agents. In practice, most FDE teams drive this through **Agents CLI** (below) rather than hand-rolling Terraform.
+
+#### 🧰 Agents CLI (Launched at Google Cloud Next '26)
+Announced on **April 22, 2026** at Google Cloud Next '26 (Alpha), the **[Agents CLI](https://google.github.io/agents-cli/guide/getting-started/)** is Google's opinionated lifecycle tool for ADK on Google Cloud — scaffold, eval, deploy, publish, observe. It's **not** a replacement for your AI coding tool (Claude Code, Gemini CLI, Cursor, Codex, Antigravity); it's a skills package that *turns those tools into ADK experts* by shipping seven domain-specific skills that the coding agent auto-discovers:
+
+| Skill | What it covers |
+| :--- | :--- |
+| `google-agents-cli-workflow` | Always-active orchestrator — lifecycle, code-preservation rules, model selection |
+| `google-agents-cli-scaffold` | `agents-cli create` / `enhance` / `upgrade` — project bootstrap with `DESIGN_SPEC.md`, tests, and eval sets |
+| `google-agents-cli-adk-code` | ADK Python API patterns — agents, tools, callbacks, state, orchestration |
+| `google-agents-cli-eval` | Eval datasets, LLM-as-judge, tool-trajectory scoring, `agents-cli eval run` / `eval compare` |
+| `google-agents-cli-deploy` | Deploy targets: **Agent Runtime**, **Cloud Run**, **GKE**. Handles service accounts, secrets, rollback |
+| `google-agents-cli-publish` | Register agents with **Gemini Enterprise** / **Agent Registry** (ADK or A2A modes) |
+| `google-agents-cli-observability` | Cloud Trace, prompt-response logging, BigQuery Agent Analytics, third-party integrations (AgentOps, Phoenix, MLflow) |
+
+**Why FDEs should care:** the tool bridges the local-prototype → cloud-production gap that historically required stitching together `gcloud`, Terraform, and hand-written CI. Two ways to drive it — through a coding agent, or standalone from your terminal:
+
+```bash
+# One-time install (Python 3.11+, uv, Node.js required)
+uvx google-agents-cli setup
+
+# Coding-agent flow: launch Claude Code / Gemini CLI / Codex / Antigravity and prompt it —
+#   "Use agents-cli to scaffold a finance agent that summarizes expense reports,
+#    deploy it to Agent Runtime, and publish it to Gemini Enterprise."
+
+# Standalone terminal flow (from the Google Developers Blog launch post):
+agents-cli create finance-agent -y --deployment-target agent_runtime   # scaffold
+cd finance-agent
+agents-cli eval run                                                    # run evals
+agents-cli eval compare evals/run_v1.json evals/run_v2.json            # compare runs
+agents-cli infra single-project                                        # provision GCP infra
+agents-cli deploy                                                      # ship to Agent Runtime
+agents-cli publish gemini-enterprise                                   # register with Gemini Enterprise
+```
+
+Cloud Trace is on by default. Additional observability (service account, GCS bucket, BigQuery dataset for full prompt-response logging) can be provisioned by prompting the coding agent to "set up observability infrastructure."
+
+**Requirements:** Python 3.11+, `uv`, Node.js (for skills install). Optional for deploy: Google Cloud SDK, Terraform. Platform support: macOS, Linux, and Windows (WSL 2 — native Windows not officially supported).
 
 ---
 
@@ -156,23 +194,23 @@ Focuses on fast, manual, and interactive debugging during development.
 *   **`adk eval`:** A CLI and Web UI tool to test execution paths against "Golden Datasets".
 *   **Metrics:** `tool_trajectory_avg_score` (Did it use the right tools?), `response_match_score` (ROUGE similarity), and `rubric_based_final_response_quality`.
 
-#### 2. The Outer Loop (Production Evaluation with Vertex AI)
+#### 2. The Outer Loop (Production Evaluation on Agent Platform)
 Scalable, automated evaluation for high-volume production data and CI/CD integration. FDEs use this to prove that a model update or a prompt change is a measurable improvement across thousands of test cases.
 
-*   **[Vertex AI Gen AI Evaluation Service](https://cloud.google.com/vertex-ai/docs/generative-ai/models/evaluate-models):** The unified platform for both **Rapid Evaluation** (synchronous, for dev/test) and **Pipeline Evaluation** (asynchronous, for massive datasets).
+*   **[Gemini Enterprise Agent Platform Evals](https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/computation-based-eval-pipeline)** (formerly Vertex AI Gen AI Evaluation Service): The unified service for both **Rapid Evaluation** (synchronous, for dev/test) and **Pipeline Evaluation** (asynchronous, for massive datasets).
 *   **Pairwise Evaluation (The evolution of AutoSxS):** A "Model-as-a-Judge" approach. It uses a superior model (e.g., Gemini 3 Pro) as an autorater to compare two model responses (Model A vs. Model B) based on a specific rubric, providing win rates and detailed explanations for every "judgment."
 *   **Pointwise Evaluation (The RAG Triad):** Assessing single model responses against specific quality dimensions using the **Rapid Eval API**:
     *   **Groundedness:** Does the response strictly follow the retrieved context? (Crucial for eliminating hallucinations).
     *   **Fulfillment:** Did the agent actually follow the instructions in the system prompt?
     *   **Summarization & Coherence:** Evaluating the linguistic quality and density of the output.
-*   **[Vertex AI Model Monitoring](https://cloud.google.com/vertex-ai/docs/model-monitoring):** Essential for "Day 2" operations. FDEs set up monitoring to detect **Prediction Drift** and **Feature Attribution** changes in production, ensuring the agentic system doesn't degrade over time as client data evolves.
+*   **[Model Monitoring on Gemini Enterprise Agent Platform](https://docs.cloud.google.com/gemini-enterprise-agent-platform/machine-learning/model-monitoring/overview)** (formerly Vertex AI Model Monitoring): Essential for "Day 2" operations. FDEs set up monitoring to detect **Prediction Drift** and **Feature Attribution** changes in production, ensuring the agentic system doesn't degrade over time as client data evolves.
 
 ---
 
 ### 🤖 The Enterprise RAG Blueprint
 1.  **Ingestion:** Using **[LlamaParse](https://developers.llamaindex.ai/python/framework/llama_cloud/llama_parse/)** to extract data from complex enterprise PDFs/tables.
-2.  **Grounding:** Using **[Vertex AI Search](https://docs.cloud.google.com/generative-ai-app-builder/docs)** as a managed RAG engine for semantic retrieval over client data.
-3.  **Vector Storage:** High-scale indexing with **[Vertex AI Vector Search](https://docs.cloud.google.com/vertex-ai/docs/vector-search/overview)**.
+2.  **Grounding:** Using **[Agent Search on Gemini Enterprise Agent Platform](https://docs.cloud.google.com/generative-ai-app-builder/docs)** (formerly Vertex AI Search) as a managed RAG engine for semantic retrieval over client data.
+3.  **Vector Storage:** High-scale indexing with **[Vector Search on Gemini Enterprise Agent Platform](https://docs.cloud.google.com/gemini-enterprise-agent-platform/build/vector-search/overview)** (formerly Vertex AI Vector Search).
 4.  **Hybrid Search:** Combining semantic vectors with keyword-based BM25 search to satisfy specific industry nomenclature.
 
 ---
@@ -182,10 +220,10 @@ Scalable, automated evaluation for high-volume production data and CI/CD integra
 #### Cloud Architecture (GCP Focused)
 *   **[BigQuery Performance Tuning](https://docs.cloud.google.com/bigquery/docs/best-practices-performance-overview):** Master clustering and partitioning for TB-scale client datasets.
 *   **[VPC Service Controls (VPC SC)](https://cloud.google.com/vpc-service-controls/docs/overview):** Mandatory for FDEs in Finance/Gov to satisfy data privacy requirements.
-*   **[Infrastructure as Code (Terraform)](https://registry.terraform.io/providers/hashicorp/google/latest/docs):** Automating the spin-up of GKE, BigQuery, and Vertex AI environments.
+*   **[Infrastructure as Code (Terraform)](https://registry.terraform.io/providers/hashicorp/google/latest/docs):** Automating the spin-up of GKE, BigQuery, and Agent Platform environments.
 
 #### Observability & Debugging
-*   **[Cloud Trace & Logging](https://cloud.google.com/stackdriver):** Tracking agent latency and debugging failed tool calls in the field.
+*   **[Google Cloud Observability](https://cloud.google.com/products/observability)** (Cloud Trace, Cloud Logging, Cloud Monitoring — formerly Stackdriver): Tracking agent latency and debugging failed tool calls in the field.
 *   **[LangSmith (Tracing)](https://www.langchain.com/langsmith):** Integrated with ADK to visualize exactly where an agent's "chain of thought" broke.
 *   **[The System Design Primer](https://github.com/donnemartin/system-design-primer)** – The ultimate resource for architecting systems that don't crash under client load.
 
@@ -193,8 +231,71 @@ Scalable, automated evaluation for high-volume production data and CI/CD integra
 
 ### 🚀 Key Resources
 *   **[Google ADK Quickstart](https://github.com/google/adk-python)** – Start here to build your first multi-agent team.
+*   **[Agents CLI: Getting Started](https://google.github.io/agents-cli/guide/getting-started/)** – The opinionated lifecycle tool for ADK. Install once, drive from any AI coding agent — or standalone from your terminal.
+*   **[Agents CLI on GitHub](https://github.com/google/agents-cli)** – Source, install instructions (`uvx google-agents-cli setup`), and skills reference.
+*   **[Agents CLI in Agent Platform: create to production in one CLI (launch post, Apr 22, 2026)](https://developers.googleblog.com/agents-cli-in-agent-platform-create-to-production-in-one-cli/)** – The Google Developers Blog announcement from Google Cloud Next '26.
+*   **[Automate agent development lifecycles with Gemini Enterprise](https://cloud.google.com/blog/topics/developers-practitioners/automate-agent-development-lifecycles-with-gemini-enterprise)** – Companion Google Cloud practitioner deep-dive.
+*   **[Codelab: Agents CLI in Agent Platform – From Development to Production](https://codelabs.developers.google.com/agents-cli-agent-platform/agents-cli-agent-platform)** – End-to-end walkthrough of the scaffold → eval → deploy → publish loop.
+*   **[Codelab: Vibe Coding AI Agents – Managing the Agent Lifecycle with Agents CLI and ADK 2.0](https://codelabs.developers.google.com/agents-cli-adk-lifecycle)** – Coding-agent-driven variant of the same lifecycle.
 *   **[Agent Starter Pack](https://github.com/GoogleCloudPlatform/agent-starter-pack)** – Production-ready templates with built-in CI/CD and evaluation.
 *   **[Pinecone: RAG Learning Center](https://www.pinecone.io/learn/series/rag/)** – Best end-to-end RAG education.
+
+---
+
+## 📡 Air-Gapped & Tactical Edge Deployment
+*The hardest FDE work happens where the internet doesn't reach: SCIFs, submarines, forward operating bases, offline factory floors, and regulated on-prem enclaves. Standard cloud playbooks fail here — you must ship the platform, not point at it.*
+
+### 🔒 The Compliance Bedrock
+Before you write code, know the classification and the accreditation path. These acronyms drive every architectural choice:
+*   **ATO (Authority to Operate):** The signed authorization from a government agency's Authorizing Official permitting a system to run on their network. Achieved via the **[NIST Risk Management Framework](https://csrc.nist.gov/projects/risk-management/about-rmf)** and typically takes 6–18 months.
+*   **DoD Impact Levels:** **IL2** (publicly releasable / non-critical unclassified), **IL4** (Controlled Unclassified Information), **IL5** (higher-sensitivity CUI + mission-critical / unclassified National Security Systems), **IL6** (classified up to Secret). Each level dictates which clouds (GCC High, AWS GovCloud, Azure Government) and which network enclaves (NIPRNet, SIPRNet) you can touch.
+*   **FedRAMP High vs. Moderate:** Federal civilian equivalent. Most Gen AI services are only FedRAMP Moderate — a hard blocker for many defense workloads. Check the **[FedRAMP Marketplace](https://marketplace.fedramp.gov/)** before promising a feature.
+*   **STIGs (Security Technical Implementation Guides):** Line-by-line hardening checklists published by DISA for every OS, container image, and database. Your CI must produce STIG-compliant artifacts or ATO will bounce you.
+*   **ITAR / EAR:** Export-control regimes. If your model was trained on ITAR-controlled data, its weights themselves are controlled — you cannot ship them to a non-US person, ever.
+*   **CMMC 2.0:** The DoD contractor certification. Level 2 is the practical floor for FDE work in the defense industrial base; per DoD Class Deviation 2024-O0013 (May 2024) it currently assesses against **NIST SP 800-171 Rev. 2** (110 security requirements). Rev. 3 (May 2024, 97 requirements) is published but not yet the CMMC baseline — rulemaking to adopt it is expected around 2027.
+
+### 📦 Offline Model Weights & Package Mirrors
+An air-gapped host cannot `pip install`, `huggingface_hub.download`, or reach `api.openai.com`. Pre-stage everything:
+*   **Model Weights:** Ship weights on encrypted physical media (a signed portable disk delivered via courier or a cleared engineer's laptop). SHA-256 verify on arrival, load via **`safetensors`** (not pickle — pickle is an RCE waiting to happen inside a classified enclave).
+*   **License & Provenance:** Every weight file needs a signed provenance record: source, license (Apache 2.0? Llama Community? Gemma Terms?), training-data attestation. Auditors will ask, and "we downloaded it from HuggingFace" is not an answer.
+*   **Package Mirrors:** Stand up an internal **PyPI mirror** (`devpi`, `bandersnatch`), **npm mirror** (`Verdaccio`), and **APT mirror** (`apt-mirror`). Nothing installs from the public internet — ever. Air-gap `pip.conf` and `~/.npmrc` to point at the mirrors.
+*   **CVE Scanning:** Every mirrored artifact runs through **[Trivy](https://github.com/aquasecurity/trivy)** or **[Grype](https://github.com/anchore/grype)** before it's approved for the enclave. Track vulnerabilities against an offline NVD snapshot that you refresh via manifest-based sync.
+
+### 🐳 Hardened Container Registries
+Public Docker Hub and gcr.io are unreachable and untrusted. Ship images through a hardened pipeline:
+*   **[Iron Bank](https://p1.dso.mil/products/iron-bank):** The DoD's centralized repository of pre-hardened, STIG-compliant, continuously-scanned container images. If a base image isn't in Iron Bank, it typically can't run on Platform One clusters.
+*   **[Harbor](https://goharbor.io/):** The de facto private registry for air-gapped environments — supports image signing (Notary/Cosign), replication, and CVE scanning out of the box.
+*   **Image Signing:** Every image signed with **[Cosign](https://github.com/sigstore/cosign)** using an offline root-of-trust key. Kubernetes admission controllers (**[Kyverno](https://kyverno.io/)**, **OPA Gatekeeper**) reject unsigned images at deploy time.
+*   **Distroless Bases:** Prefer Google's **`distroless`** images or **`chainguard/static`** — a container with no shell is a container an attacker cannot pivot from.
+
+### 🔁 Sync-Back & Cross-Domain Patterns
+Data has to move between the enclave and the outside world — but only in the directions and formats policy allows:
+*   **One-Way Data Diodes:** Hardware devices (e.g., **Owl Cyber Defense**, **Fox-IT**) that physically permit data flow in only one direction. Common pattern: model weights flow *into* the enclave, telemetry flows *out*.
+*   **Cross-Domain Solutions (CDS):** Accredited software/hardware that mediates transfers between classification levels (e.g., Unclassified → Secret). CDS approval is its own multi-month process — plan for it on the discovery call, not week 12.
+*   **Manifest-Based Sync:** Every artifact leaving or entering the enclave has a signed manifest, human-review sign-off, and an immutable audit log. No "background sync" processes.
+*   **Redaction Pipelines:** Outbound telemetry passes through a **DLP** stage (regex + ML classifier) that scrubs PII, coordinates, unit designators, and any string matching classified-keyword lists before it hits the low-side.
+
+### ⚙️ The Edge Runtime Stack
+Real edge deployments — a Humvee, a factory PLC network, a ship at sea — don't run full GKE. They run lightweight, offline-first Kubernetes:
+*   **[K3s](https://k3s.io/) / [MicroK8s](https://microk8s.io/) / [k0s](https://k0sproject.io/):** Single-binary Kubernetes distributions designed for edge and disconnected environments.
+*   **[GKE on Bare Metal / Google Distributed Cloud](https://cloud.google.com/distributed-cloud):** Google's managed-style Kubernetes running inside a customer's own data center or air-gapped enclave, with periodic sync to the control plane.
+*   **Local Inference Runtimes:** **[Ollama](https://ollama.com/)**, **[vLLM](https://github.com/vllm-project/vllm)**, **[llama.cpp](https://github.com/ggerganov/llama.cpp)**, and **[TensorRT-LLM](https://github.com/NVIDIA/TensorRT-LLM)** for running quantized open-weight models (Gemma, Llama, Mistral) on constrained hardware — including CPU-only or single-GPU nodes.
+*   **Store-and-Forward Telemetry:** Assume the network drops for hours. Buffer logs and metrics locally (**Fluent Bit** + local disk WAL), forward opportunistically when connectivity returns.
+
+### 🚨 Air-Gap-Specific Failure Modes
+*Things that never happen in the cloud and always happen at a client site:*
+*   **Clock Drift:** No NTP means TLS certs silently expire and Kerberos tickets stop minting. Ship a local **Chrony** or **PTP** setup on day one.
+*   **Cert Rotation:** You cannot Let's Encrypt. Bake an internal **PKI** (**[HashiCorp Vault](https://www.vaultproject.io/)**, **step-ca**, or **Smallstep**) into the enclave from day one.
+*   **Secrets Management:** Cloud KMS is unreachable. Use **Vault** in HA mode with auto-unseal via HSM, or **[SOPS](https://github.com/getsops/sops)** with age keys for GitOps flows.
+*   **The "First Boot" Problem:** How does day-1 configuration get in? Usually via a signed sneakernet ISO delivered by a cleared engineer. Design for this from week one — don't discover it at week twelve.
+
+#### 📚 Air-Gap & Edge Resources
+*   **[DoD Platform One](https://p1.dso.mil/):** The DoD's DevSecOps reference platform — read the docs even if you're not building for DoD; the patterns transfer directly to any regulated on-prem client.
+*   **[NIST SP 800-171 Rev. 2](https://csrc.nist.gov/pubs/sp/800/171/r2/final)** (the 110 requirements that currently underpin CMMC Level 2) and **[Rev. 3](https://csrc.nist.gov/pubs/sp/800/171/r3/final)** (May 2024, 97 requirements — the future baseline).
+*   **[DoD Enterprise DevSecOps Reference Design](https://public.cyber.mil/devsecops/):** The canonical architecture doc for accredited software factories.
+*   **[Sigstore](https://www.sigstore.dev/):** Cosign, Rekor, Fulcio — the modern supply-chain-security toolkit that has become table stakes in accredited environments.
+*   **[K3s Air-Gap Install Guide](https://docs.k3s.io/installation/airgap):** A concrete walkthrough of getting Kubernetes running without a package repo.
+*   **[Anduril: Lattice](https://www.anduril.com/lattice/):** Real-world case study of an AI platform designed for disconnected tactical operations.
 
 ---
 
@@ -287,10 +388,10 @@ When given a case study, do not start coding. Use this four-step diagnostic appr
     *   **Architecture:** Propose a **GCP Landing Zone**. Use **Cloud Storage** for ingestion and **BigQuery** for the data warehouse.
     *   **Security:** Implement **VPC Service Controls** and **Sensitive Data Protection (DLP)** to mask PII before it hits the analytics layer. This satisfies the HIPAA requirement.
 *   **Days 16–25 (The Agentic Pipeline):**
-    *   **Engineering:** Build a pipeline using **Vertex AI Search** grounded in the patient’s history. 
+    *   **Engineering:** Build a pipeline using **Agent Search** grounded in the patient’s history. 
     *   **The Delta:** Write a custom Python service on **Cloud Run** that pulls real-time patient "vitals" from the SQL Server to update the prediction.
 *   **Days 26–30 (Value Validation):**
-    *   **Evaluation:** Use **AutoSxS** to compare the model's predictions against historical outcomes.
+    *   **Evaluation:** Use **Pairwise Evaluation** (the successor to AutoSxS) to compare the model's predictions against historical outcomes.
     *   **UAT:** Put a simple dashboard in front of 5 doctors. If they don't change their behavior based on the data, the project has failed.
 
 ---
@@ -307,7 +408,7 @@ When given a case study, do not start coding. Use this four-step diagnostic appr
 
 #### 3. Real-Time Latency vs. AI
 *   **Question:** "A bank wants real-time fraud detection (<100ms) using an LLM. How do you architect this?"
-*   **FDE Answer:** "An LLM is too slow for the primary path. I’d architect a two-tier system: Use a fast, deterministic model (XGBoost/Vertex AI) for the 100ms decision. Then, pass the 'flagged' transactions to a **Gemini-powered agent** via **Vertex AI Reasoning Engine** for an asynchronous, deep-dive explanation that the fraud analyst can read 5 seconds later".
+*   **FDE Answer:** "An LLM is too slow for the primary path. I’d architect a two-tier system: Use a fast, deterministic model (XGBoost on Agent Platform Inference) for the 100ms decision. Then, pass the 'flagged' transactions to a **Gemini-powered agent** running on **Agent Runtime** for an asynchronous, deep-dive explanation that the fraud analyst can read 5 seconds later".
 
 ---
 
@@ -352,7 +453,7 @@ In the field, your documentation is your contract. Use these templates to define
 - **Proposed Glue:** Build a custom GCF (Cloud Function) parser to convert `.xyz` to Parquet.
 
 #### 4. The Quick Win (Week 2 Objective)
-- [e.g., Stand up a Vertex AI Search instance on the 'Policy' dataset to prove 90% retrieval accuracy.]
+- [e.g., Stand up an Agent Search instance on the 'Policy' dataset to prove 90% retrieval accuracy.]
 ```
 
 ---
@@ -392,8 +493,8 @@ graph LR
     end
 
     subgraph "GCP Landing Zone"
-        B[Cloud Storage / GCS] --> C(Vertex AI Search)
-        C --> D{Google ADK Agent Engine}
+        B[Cloud Storage / GCS] --> C(Agent Search)
+        C --> D{ADK on Agent Runtime}
         
         subgraph "Multi-Agent Swarm"
             D --> E[Planner Agent]
@@ -433,7 +534,7 @@ graph LR
 - **Action Required:** Need [Executive Sponsor Name] to approve the exception ticket #12345.
 
 #### 🗓️ The "Day 30" Horizon
-- Finalize **AutoSxS** evaluation for the production agent.
+- Finalize **Pairwise Evaluation** run for the production agent.
 - Transition 1st-line support to the internal Client Ops team.
 ```
 
@@ -493,17 +594,20 @@ Being a "Forward" engineer means staying six months ahead of the industry. This 
 *   **Last-Mile Integration:** The complex work of stitching a modern SaaS/AI platform into legacy, often undocumented, "messy" enterprise systems.
 
 ### 🏗 The Technical & Infra Stack (GCP & Beyond)
-*   **Air-Gap / Tactical Edge:** Environments with zero or intermittent internet connectivity (Common in Defense/Energy). Requires local container registries and offline model weights.
-*   **VPC Service Controls (VPC SC):** A GCP security perimeter that prevents data exfiltration by restricting access to Google-managed services (like BigQuery or Vertex AI) only from authorized networks.
+*   **Air-Gap / Tactical Edge:** Environments with zero or intermittent internet connectivity (Common in Defense/Energy). Requires local container registries and offline model weights. See the [Air-Gapped & Tactical Edge Deployment](#-air-gapped--tactical-edge-deployment) section for the full playbook.
+*   **VPC Service Controls (VPC SC):** A GCP security perimeter that prevents data exfiltration by restricting access to Google-managed services (like BigQuery or Agent Platform) only from authorized networks.
 *   **Hardening:** The process of moving a prototype from "it works on my machine" to "it meets SOC2/HIPAA security standards," including encryption at rest/transit and least-privilege IAM roles.
 *   **Shadow IT:** Unauthorized tools or "rogue" databases used by client employees. This is often where the "cleanest" and most useful data actually lives.
 *   **System of Record (SoR):** The authoritative data source for a given piece of information (e.g., SAP for finance, Salesforce for CRM). FDEs must identify this to avoid building on "stale" data replicas.
 
 ### 🤖 The AI & Agentic Layer (ADK & Evals)
+*   **Gemini Enterprise Agent Platform (formerly Vertex AI):** Google's umbrella brand (announced at Google Cloud Next '26) for the full agent-building stack — Model Garden, Agent Studio, Agent Runtime, Agent Search, Vector Search, Evals, Model Monitoring, and more. Existing Vertex AI SDKs, APIs (`aiplatform.v1beta1.*`), and billing are unchanged; only the product-level branding and console UI have moved.
+*   **Agent Runtime (formerly Vertex AI Agent Engine):** The managed, auto-scaling runtime for deploying agents built with ADK, LangChain, LangGraph, or any Python framework. Sits under "Scale" in the Agent Platform console alongside Memory Bank and Sessions.
+*   **Agents CLI:** Launched in Alpha at Google Cloud Next '26 (April 22, 2026), an opinionated CLI + seven-skill package (`google-agents-cli-workflow`, `-scaffold`, `-adk-code`, `-eval`, `-deploy`, `-publish`, `-observability`) that turns any AI coding tool (Claude Code, Gemini CLI, Cursor, Codex, Antigravity) into an ADK-lifecycle expert — and also runs standalone from the terminal. Installed via `uvx google-agents-cli setup`.
 *   **Agent2Agent (A2A) Protocol:** An open standard used in the **Google Agent Development Kit (ADK)** that allows autonomous agents to discover, hand off tasks, and communicate with one another across systems.
 *   **Workflow Agents:** Deterministic agents in ADK (`SequentialAgent`, `ParallelAgent`, `LoopAgent`) that follow fixed logic paths rather than relying on an LLM to "plan" the next step.
 *   **Grounding:** The process of connecting an LLM to "Ground Truth" data (via RAG or Google Search) to ensure its responses are factual and cite-able.
-*   **AutoSxS (Side-by-Side):** A GCP-native evaluation method where an "Autorater" LLM compares two model outputs and provides a structured judgment on which is better and why.
+*   **Pairwise Evaluation (formerly AutoSxS):** A GCP-native evaluation method where an "Autorater" LLM compares two model outputs and provides a structured judgment on which is better and why. Runs inside **Gemini Enterprise Agent Platform Evals** (formerly Vertex AI Gen AI Evaluation Service).
 *   **Faithfulness (RAGAS Metric):** A measure of how much the answer is derived *only* from the retrieved context, essentially a "hallucination score".
 
 ### 🤝 Strategic Consulting (Boardroom Language)
