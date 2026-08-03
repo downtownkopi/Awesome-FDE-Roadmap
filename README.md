@@ -145,7 +145,44 @@ The **[Agent Development Kit (ADK)](https://github.com/google/adk-docs)** is Goo
 *   **Multi-Agent by Design:** Compose specialized agents in a hierarchy (e.g., a "Manager" delegating to "Researcher" and "Coder" agents).
 *   **The Agent2Agent (A2A) Protocol:** An open standard that allows agents to discover and communicate with each other via consistent HTTP-based interfaces.
 *   **Model Agnostic:** While optimized for Gemini, ADK uses **LiteLLM** to support GPT-4o, Claude, and Mistral.
-*   **Deployment:** Native integration with **[Agent Runtime on Gemini Enterprise Agent Platform](https://docs.cloud.google.com/gemini-enterprise-agent-platform/scale)** (formerly Vertex AI Agent Engine) for managed, auto-scaling production deployment of ADK, LangChain, LangGraph, and other framework agents.
+*   **Deployment:** Native integration with **[Agent Runtime on Gemini Enterprise Agent Platform](https://docs.cloud.google.com/gemini-enterprise-agent-platform/scale)** (formerly Vertex AI Agent Engine) for managed, auto-scaling production deployment of ADK, LangChain, LangGraph, and other framework agents. In practice, most FDE teams drive this through **Agents CLI** (below) rather than hand-rolling Terraform.
+
+#### 🧰 Agents CLI (Launched at Google Cloud Next '26)
+Announced on **April 22, 2026** at Google Cloud Next '26 (Alpha), the **[Agents CLI](https://google.github.io/agents-cli/guide/getting-started/)** is Google's opinionated lifecycle tool for ADK on Google Cloud — scaffold, eval, deploy, publish, observe. It's **not** a replacement for your AI coding tool (Claude Code, Gemini CLI, Cursor, Codex, Antigravity); it's a skills package that *turns those tools into ADK experts* by shipping seven domain-specific skills that the coding agent auto-discovers:
+
+| Skill | What it covers |
+| :--- | :--- |
+| `google-agents-cli-workflow` | Always-active orchestrator — lifecycle, code-preservation rules, model selection |
+| `google-agents-cli-scaffold` | `agents-cli create` / `enhance` / `upgrade` — project bootstrap with `DESIGN_SPEC.md`, tests, and eval sets |
+| `google-agents-cli-adk-code` | ADK Python API patterns — agents, tools, callbacks, state, orchestration |
+| `google-agents-cli-eval` | Eval datasets, LLM-as-judge, tool-trajectory scoring, `agents-cli eval run` / `eval compare` |
+| `google-agents-cli-deploy` | Deploy targets: **Agent Runtime**, **Cloud Run**, **GKE**. Handles service accounts, secrets, rollback |
+| `google-agents-cli-publish` | Register agents with **Gemini Enterprise** / **Agent Registry** (ADK or A2A modes) |
+| `google-agents-cli-observability` | Cloud Trace, prompt-response logging, BigQuery Agent Analytics, third-party integrations (AgentOps, Phoenix, MLflow) |
+
+**Why FDEs should care:** the tool bridges the local-prototype → cloud-production gap that historically required stitching together `gcloud`, Terraform, and hand-written CI. Two ways to drive it — through a coding agent, or standalone from your terminal:
+
+```bash
+# One-time install (Python 3.11+, uv, Node.js required)
+uvx google-agents-cli setup
+
+# Coding-agent flow: launch Claude Code / Gemini CLI / Codex / Antigravity and prompt it —
+#   "Use agents-cli to scaffold a finance agent that summarizes expense reports,
+#    deploy it to Agent Runtime, and publish it to Gemini Enterprise."
+
+# Standalone terminal flow (from the Google Developers Blog launch post):
+agents-cli create finance-agent -y --deployment-target agent_runtime   # scaffold
+cd finance-agent
+agents-cli eval run                                                    # run evals
+agents-cli eval compare evals/run_v1.json evals/run_v2.json            # compare runs
+agents-cli infra single-project                                        # provision GCP infra
+agents-cli deploy                                                      # ship to Agent Runtime
+agents-cli publish gemini-enterprise                                   # register with Gemini Enterprise
+```
+
+Cloud Trace is on by default. Additional observability (service account, GCS bucket, BigQuery dataset for full prompt-response logging) can be provisioned by prompting the coding agent to "set up observability infrastructure."
+
+**Requirements:** Python 3.11+, `uv`, Node.js (for skills install). Optional for deploy: Google Cloud SDK, Terraform. Platform support: macOS, Linux, and Windows (WSL 2 — native Windows not officially supported).
 
 ---
 
@@ -194,6 +231,12 @@ Scalable, automated evaluation for high-volume production data and CI/CD integra
 
 ### 🚀 Key Resources
 *   **[Google ADK Quickstart](https://github.com/google/adk-python)** – Start here to build your first multi-agent team.
+*   **[Agents CLI: Getting Started](https://google.github.io/agents-cli/guide/getting-started/)** – The opinionated lifecycle tool for ADK. Install once, drive from any AI coding agent — or standalone from your terminal.
+*   **[Agents CLI on GitHub](https://github.com/google/agents-cli)** – Source, install instructions (`uvx google-agents-cli setup`), and skills reference.
+*   **[Agents CLI in Agent Platform: create to production in one CLI (launch post, Apr 22, 2026)](https://developers.googleblog.com/agents-cli-in-agent-platform-create-to-production-in-one-cli/)** – The Google Developers Blog announcement from Google Cloud Next '26.
+*   **[Automate agent development lifecycles with Gemini Enterprise](https://cloud.google.com/blog/topics/developers-practitioners/automate-agent-development-lifecycles-with-gemini-enterprise)** – Companion Google Cloud practitioner deep-dive.
+*   **[Codelab: Agents CLI in Agent Platform – From Development to Production](https://codelabs.developers.google.com/agents-cli-agent-platform/agents-cli-agent-platform)** – End-to-end walkthrough of the scaffold → eval → deploy → publish loop.
+*   **[Codelab: Vibe Coding AI Agents – Managing the Agent Lifecycle with Agents CLI and ADK 2.0](https://codelabs.developers.google.com/agents-cli-adk-lifecycle)** – Coding-agent-driven variant of the same lifecycle.
 *   **[Agent Starter Pack](https://github.com/GoogleCloudPlatform/agent-starter-pack)** – Production-ready templates with built-in CI/CD and evaluation.
 *   **[Pinecone: RAG Learning Center](https://www.pinecone.io/learn/series/rag/)** – Best end-to-end RAG education.
 
@@ -560,6 +603,7 @@ Being a "Forward" engineer means staying six months ahead of the industry. This 
 ### 🤖 The AI & Agentic Layer (ADK & Evals)
 *   **Gemini Enterprise Agent Platform (formerly Vertex AI):** Google's umbrella brand (announced at Google Cloud Next '26) for the full agent-building stack — Model Garden, Agent Studio, Agent Runtime, Agent Search, Vector Search, Evals, Model Monitoring, and more. Existing Vertex AI SDKs, APIs (`aiplatform.v1beta1.*`), and billing are unchanged; only the product-level branding and console UI have moved.
 *   **Agent Runtime (formerly Vertex AI Agent Engine):** The managed, auto-scaling runtime for deploying agents built with ADK, LangChain, LangGraph, or any Python framework. Sits under "Scale" in the Agent Platform console alongside Memory Bank and Sessions.
+*   **Agents CLI:** Launched in Alpha at Google Cloud Next '26 (April 22, 2026), an opinionated CLI + seven-skill package (`google-agents-cli-workflow`, `-scaffold`, `-adk-code`, `-eval`, `-deploy`, `-publish`, `-observability`) that turns any AI coding tool (Claude Code, Gemini CLI, Cursor, Codex, Antigravity) into an ADK-lifecycle expert — and also runs standalone from the terminal. Installed via `uvx google-agents-cli setup`.
 *   **Agent2Agent (A2A) Protocol:** An open standard used in the **Google Agent Development Kit (ADK)** that allows autonomous agents to discover, hand off tasks, and communicate with one another across systems.
 *   **Workflow Agents:** Deterministic agents in ADK (`SequentialAgent`, `ParallelAgent`, `LoopAgent`) that follow fixed logic paths rather than relying on an LLM to "plan" the next step.
 *   **Grounding:** The process of connecting an LLM to "Ground Truth" data (via RAG or Google Search) to ensure its responses are factual and cite-able.
