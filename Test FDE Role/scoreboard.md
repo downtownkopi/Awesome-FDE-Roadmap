@@ -2,6 +2,8 @@
 
 Goal: score 8/10+ in EVERY category. Retry new questions until all categories hit target. Update after each grilled question.
 
+Fast-glance view only. For the full question-by-question record (question, your answer, model answer, gap analysis) see [knowledge-tracker.md](knowledge-tracker.md); for the concept list questions are drawn from see [knowledge-map.md](knowledge-map.md).
+
 ## Categories (score 1-10 each)
 
 | # | Category | What it measures | Latest score | Best score | Attempts | Status |

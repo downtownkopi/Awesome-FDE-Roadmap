@@ -1,7 +1,7 @@
 ---
 title: "Chapter 1 — Introduction to Building AI Applications with Foundation Models"
 book: "AI Engineering: Building Applications with Foundation Models" (Chip Huyen)
-original_file: "AI Engineering - Building Applications with Foundational Models/1. Introduction-to-Building-AI-Applications-with-Foundation-Models.pdf"
+original_file: "Book - AI Engineering - Building Applications with Foundational Models/1. Introduction-to-Building-AI-Applications-with-Foundation-Models.pdf"
 status: source reference — do not edit
 ---
 

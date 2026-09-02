@@ -23,6 +23,12 @@ test" on a specific book/chapter.
    Medium/Low importance. Cross-check against the `Concept Mastery`
    table in `knowledge-tracker.md` so you don't repeat a mastered
    concept.
+   Before the question itself, state a one-line progress tally: how
+   many questions asked so far this chapter (Question Log count in
+   `knowledge-tracker.md`), and how many concepts in `knowledge-map.md`'s
+   Concept Mastery table are still `Untested` (i.e. not yet touched by
+   any question) — e.g. "Q10 — 14 concepts untested after this one
+   (10 Critical, wrapping up; 14 High remain)."
 2. After the user answers, assess against a model answer and assign one
    bucket: Correct / Mostly correct / Partially correct / Incorrect /
    Don't know.

@@ -1,5 +1,8 @@
 .DS_Store
+__pycache__/
+*.pyc
+_to_delete/
 
 # Copyrighted book PDFs — do not commit
-AI Engineering - Building Applications with Foundational Models/
-Designing Data-Intensive Applications/
+Book - AI Engineering - Building Applications with Foundational Models/
+Book - Designing Data-Intensive Applications/
