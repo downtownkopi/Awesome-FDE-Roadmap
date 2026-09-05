@@ -11,21 +11,21 @@ model answer, gap). `scoreboard.md` stays as the fast-glance category
 score view; this file is the detailed log behind those scores.
 
 ## Overall Progress
-- Questions attempted: 0
+- Questions attempted: 1
 - Correct: 0
-- Mostly correct: 0
+- Mostly correct: 1
 - Partially correct: 0
 - Incorrect: 0
 - Don't know: 0
-- Overall demonstrated mastery: Not started
-- Current weak areas: N/A — nothing tested yet
+- Overall demonstrated mastery: Just started
+- Current weak areas: T9 (Technical depth) — inverted reasoning on why plain embedding similarity search fails vs. keyword search
 
 ---
 # Knowledge Gaps
 
 | ID | Topic | Concept | Gap | Category | Severity | Status | Attempts | Correct |
 |---|---|---|---|---|---|---|---:|---:|
-| | | | | | | | | |
+| G1 | Embedding vs. keyword search failure modes | T9 | Described plain embedding similarity search as failing because it "assumes content is close to the word used" — that's keyword/lexical search's assumption, stated backwards for embeddings. Real reason: embeddings capture semantic/topical closeness but blur past exact-match signals (defined terms, IDs, dates, numbers, rare proper nouns) that hybrid search's keyword/BM25 leg exists to catch. | Technical depth | Medium | Open | 1 | 0 |
 
 ---
 # Concept Mastery
@@ -79,7 +79,7 @@ score view; this file is the detailed log behind those scores.
 | BJ5 Cost of Inaction (CoI) | Business/product judgment | — | — | — | — | Untested |
 | BJ6 UAT as definition of done | Business/product judgment | — | — | — | — | Untested |
 | BJ7 The Case Study Rubric | Business/product judgment | — | — | — | — | Untested |
-| T9 Production LLM/RAG engineering craft | Technical depth | — | — | — | — | Untested |
+| T9 Production LLM/RAG engineering craft | Technical depth | Good | Weak | Partial | Good | Weak |
 | T10 Defensible technical narrative under grilling | Technical depth | — | — | — | — | Untested |
 | S18 "Is it actually working?" differentiator | System design | — | — | — | — | Untested |
 | S19 Hypothesis-driven live incident debugging | System design | — | — | — | — | Untested |
@@ -96,8 +96,55 @@ score view; this file is the detailed log behind those scores.
 ---
 # Question Log
 
-*(No questions attempted yet. New entries appended below, following this structure per question:)*
+## Q001
+**Date:** 2026-09-05
+**Category:** Technical depth
+**Concept:** T9 — Production LLM/RAG engineering craft
+**Difficulty:** Level 3 (Application/Scenario)
+**Question:** You're building a RAG system for a customer-support chatbot over a mix of long legal contracts and short email threads. Walk me through your chunking strategy: what chunk size/overlap would you pick, and why would it differ between those two document types? Then — the naive embedding-similarity retrieval starts returning marginally-relevant chunks for a class of queries. What's your fallback, and why does it work when plain similarity search doesn't?
 
+### My Answer
+> Chunking strategy for email thread - if it's really small threads, I won't do chunking at all. However if it's significantly more, since emails typically don't really have structure to it, I would do an overlap of about 50 tokens per chunk and monitor whether results returned via the search are relevant.
+>
+> Chunking strategy for long legal contracts - I would examine the contracts and see whether there are patterns to them e.g. intro, expectations, terms etc. And perform chunking such that the chunks take into account those sections.
+>
+> My fallback would look into a mixture of metadata search, keyword search and embedding search followed by an evaluation everytime results are returned.
+>
+> Plain similarity search assumes the content we are looking for is close to the word we used when searching, which is usually not the case.
+
+### Assessment
+Mostly Correct
+
+### What I Got Right
+- Legal contracts: structure-aware chunking along the document's own sections (intro/terms/definitions) instead of fixed-size windows — matches best practice, since legal meaning is section-scoped and a fixed window can split a clause mid-thought.
+- Emails: correctly special-cased short threads as needing no chunking at all — good instinct against over-engineering.
+- Fallback: identified hybrid search (keyword + embedding + metadata) plus an evaluation step — right shape, matches the Enterprise RAG Blueprint's hybrid-search step (S7) and gestures toward the eval framework (S9-S11/S18).
+
+### What I Missed
+- Inverted the core "why": plain embedding similarity search does not fail because it "assumes content is close to the word used" — that's the assumption *keyword/lexical* search makes. Embedding search's actual failure mode is closer to the opposite: it captures general semantic/topical closeness well but blurs past exact-match signals (defined terms, contract clause IDs, dates, numbers, rare proper nouns) that hybrid search's keyword/BM25 leg exists specifically to catch.
+- Email chunking gave an overlap number (50 tokens) with no chunk-size number and no justification for either — T9's bar is explicitly "why, not just what." Stronger answer: chunk by message/turn boundary (email's natural boundary, unlike prose) and justify overlap as preserving cross-message pronoun/reference resolution.
+- "Monitor whether results are relevant" was under-specified — no named metric (e.g. Recall@k, or groundedness/faithfulness against retrieved context — the RAG Triad, S10). This is where S18's "how do you know it's working" differentiator lives; gestured at it without landing it.
+
+### Model Answer
+> Emails: chunk by message/turn boundary rather than a fixed token window — emails lack section structure but do have natural message boundaries, so respect those. Keep short threads as a single chunk (no chunking) as a special case. Use a modest overlap (e.g. the prior 1-2 messages, or ~10-15% tokens) justified specifically as preserving pronoun/reference resolution across message boundaries, not as an arbitrary number.
+>
+> Legal contracts: chunk along the document's own structural/semantic boundaries (clauses, defined-term sections) rather than fixed-size windows, because splitting mid-clause destroys legal meaning.
+>
+> Fallback: hybrid search — BM25/keyword (exact terms, IDs, defined terms, numbers) + embedding similarity (semantic/paraphrase matches) + metadata filters, merged via reciprocal rank fusion or a reranker. It works specifically because BM25 and embeddings have complementary blind spots: BM25 misses paraphrase/synonym matches that embeddings catch, embeddings miss the exact-term/rare-entity matches that BM25 catches. Continuously evaluate retrieval quality with a named metric (Recall@k, or RAG Triad groundedness/faithfulness — S10), not an unspecified "check if it looks relevant."
+
+### Knowledge Gap
+G1 — inverted reasoning on why plain embedding similarity search fails vs. why keyword/lexical search fails; needs to internalize the complementary-strengths argument for hybrid search rather than a single "search assumes word proximity" explanation.
+
+### Score (1-10, per scoreboard.md rubric)
+5 — right shape and correct fallback pattern (hybrid search + eval), but the one "why" explicitly asked for was factually inverted, and unspecified metrics/justifications elsewhere.
+
+### Memory Priority
+High
+
+### Follow-up Required
+Yes — re-test T9 (or S18/S10, which share the same underlying eval-judgment reasoning) once G1 has been reviewed, to confirm the embedding-vs-keyword complementary-strengths explanation lands correctly.
+
+---
 <!--
 ## Qnnn
 **Date:** YYYY-MM-DD
@@ -137,7 +184,15 @@ Yes/No — ...
 ---
 # Misconceptions
 
-*(None yet.)*
+**M1.** Plain embedding similarity search fails because it "assumes retrieved
+content must be close to the literal words used in the query." This is
+backwards — that assumption describes *keyword/lexical* search. Embedding
+search's actual weakness is the opposite: it's good at general semantic/
+topical closeness but blurs past exact-match signals (defined terms, IDs,
+dates, numbers, rare proper nouns) that a query may need matched precisely.
+Hybrid search pairs embeddings with BM25/keyword *because* their blind
+spots are complementary, not because embeddings share keyword search's
+literal-proximity assumption. Surfaced: Q001 (T9).
 
 ---
 # Mastered Concepts
@@ -145,7 +200,7 @@ Yes/No — ...
 
 ---
 # Weak Concepts
-- (none yet)
+- T9 Production LLM/RAG engineering craft — 1 attempt, score 5/10. Solid on chunking-strategy application (contracts) and correctly names hybrid search as the fallback, but inverted the "why" behind embedding search's failure mode (see M1/G1). Retest after review.
 
 ---
 # Concepts Requiring Review

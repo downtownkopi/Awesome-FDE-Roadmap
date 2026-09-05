@@ -38,9 +38,10 @@ Folder: [`Test FDE Role/`](Test%20FDE%20Role/)
 | [knowledge-tracker.md](Test%20FDE%20Role/knowledge-tracker.md) | Full question-by-question log, gaps, mastery, misconceptions |
 | [scoreboard.md](Test%20FDE%20Role/scoreboard.md) | Fast-glance 6-category score tracker (target: 8/10 in all) |
 
-**Status:** Not started. All 6 categories (technical depth, system design,
-problem decomposition, customer-facing judgment, behavioral, business
-judgment) at 0 attempts.
+**Status:** 0/6 categories passing. Technical depth: 1 question attempted,
+score 5/10 (weak: inverted reasoning on why embedding similarity search
+fails vs. keyword search — see knowledge-tracker.md M1/G1). Other 5
+categories at 0 attempts.
 
 ---
 

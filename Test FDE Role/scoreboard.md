@@ -8,7 +8,7 @@ Fast-glance view only. For the full question-by-question record (question, your 
 
 | # | Category | What it measures | Latest score | Best score | Attempts | Status |
 |---|----------|-------------------|---------------|------------|----------|--------|
-| 1 | Technical depth (coding/Python/SQL) | Production-quality code, correctness, data pipelines | - | - | 0 | NOT STARTED |
+| 1 | Technical depth (coding/Python/SQL) | Production-quality code, correctness, data pipelines | 5 | 5 | 1 | IN PROGRESS |
 | 2 | System design | End-to-end data workflow / architecture design | - | - | 0 | NOT STARTED |
 | 3 | Problem decomposition (ambiguity) | Clarify first, decompose, prioritize, tradeoffs, narrate | - | - | 0 | NOT STARTED |
 | 4 | Customer-facing judgment | Discovery, translating business<->tech, empathy | - | - | 0 | NOT STARTED |
@@ -29,7 +29,7 @@ Target: 8/10 in all 6. Status values: NOT STARTED / IN PROGRESS / PASS.
 
 | Date | Category | Score | Notes |
 |------|----------|-------|-------|
-| | | | |
+| 2026-09-05 | Technical depth | 5 | T9 — RAG chunking (contracts vs. emails) + hybrid-search fallback; inverted the "why" behind embedding search's failure mode (see knowledge-tracker.md M1) |
 
 ## Rule
 
