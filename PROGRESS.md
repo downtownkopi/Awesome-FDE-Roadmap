@@ -32,8 +32,8 @@ Folder: [`Test FDE Role/`](Test%20FDE%20Role/)
 
 | File | Purpose |
 |---|---|
-| [findings.md](Test%20FDE%20Role/findings.md) | Research on FDE role/interview process (target companies: OpenAI, Cohere) |
-| [interview-stories/](Test%20FDE%20Role/interview-stories/) | Real candidate interview accounts per company (OpenAI, Cohere), used to calibrate question difficulty/framing |
+| [findings.md](Test%20FDE%20Role/findings.md) | Research on FDE role/interview process (target companies: OpenAI, Cohere, Anthropic, xAI) |
+| [interview-stories/](Test%20FDE%20Role/interview-stories/) | Real candidate interview accounts (OpenAI, Cohere) + compiled secondary-source summaries (Anthropic, xAI — r/OfferEngineering and primary source sites blocked in this environment, see findings.md confidence note), used to calibrate question difficulty/framing |
 | [knowledge-map.md](Test%20FDE%20Role/knowledge-map.md) | Target concepts (sourced from README.md + findings.md + interview-stories), grouped by the 6 categories |
 | [knowledge-tracker.md](Test%20FDE%20Role/knowledge-tracker.md) | Full question-by-question log, gaps, mastery, misconceptions |
 | [scoreboard.md](Test%20FDE%20Role/scoreboard.md) | Fast-glance 6-category score tracker (target: 8/10 in all) |

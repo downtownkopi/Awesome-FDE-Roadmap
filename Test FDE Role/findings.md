@@ -1,12 +1,23 @@
 # FDE Interview Research — Findings
 
-Sources: Exponent, Perspective AI, Dataford, NodeFlair, Paraform, DataCamp (2026 guides), gaijineer.co (OpenAI + Cohere candidate accounts).
+Sources: Exponent, Perspective AI, Dataford, NodeFlair, Paraform, DataCamp (2026 guides), gaijineer.co (OpenAI + Cohere candidate accounts), Vibe Engines, Chillinterview, Educative, Glassdoor/Blind (Anthropic + xAI, compiled via web search — see note below).
 
-**Target companies: OpenAI, Cohere.** Where the generic cross-company
-findings below conflict with or under-specify the company-specific
-detail (see the OpenAI/Cohere breakdowns further down and
+**Target companies: OpenAI, Cohere, Anthropic, xAI.** Where the generic
+cross-company findings below conflict with or under-specify the
+company-specific detail (see the company breakdowns further down and
 [interview-stories/](interview-stories/)), the company-specific detail
 wins for question selection and difficulty calibration.
+
+**Confidence note (Anthropic, xAI):** r/OfferEngineering (the subreddit
+the user asked to crawl) is blocked at the network egress-policy level in
+this environment (confirmed via direct `curl` → 403, an org policy
+denial, not a tool limitation) — no subreddit content was retrievable.
+The primary candidate-account sites for Anthropic/xAI (gaijineer.co,
+vibeengines.com, getperspective.ai, tryexponent.com) also could not be
+fetched directly; the Anthropic and xAI breakdowns below are compiled
+from web-search-engine summaries of those pages, not verbatim single-
+candidate accounts like the OpenAI/Cohere ones. Treat them as lower
+confidence until corroborated by a directly-shared account/URL.
 
 ## Role summary
 
@@ -72,10 +83,19 @@ Use STAR (Situation, Task, Action, Result), keep concrete, quantify impact.
 - **OpenAI**: faster loop (~3 wks), take-home-first (see detailed stage
   breakdown below), heavy weight on customer empathy + AI-specific
   technical depth + production judgment.
-- **Anthropic**: discovery-conversation w/ simulated buyer graded directly. Explicit safety/RSP screen. System design round focused on Claude-specific eval design.
+- **Anthropic**: discovery-conversation w/ simulated buyer graded directly
+  (filters ~60% of candidates who already passed coding — see detailed
+  breakdown below). Explicit safety/RSP screen. Values round weighted
+  equal to technical rounds. System design round focused on Claude-
+  specific eval design + MCP-based live-Claude scenarios.
 - **Cohere**: no LeetCode/coding round at all. Signature round is live,
   hint-free incident debugging (see detailed breakdown below). VP round
   wants specific customer-pain→product-change stories.
+- **xAI**: fastest loop of any company here (~1 wk full technical loop).
+  No behavioral/values/ethics round at all (see detailed breakdown
+  below) — "Exceptional Work Statement" + a defense-grilling deep-dive
+  round substitutes for it. FDE-specific process not clearly
+  differentiated from general SWE hiring in sources found.
 
 ## OpenAI FDE loop — detailed breakdown
 
@@ -176,6 +196,78 @@ evidence in the debugging round; picks the most relevant (not most
 impressive) project to present; specific, outcome-quantified customer-
 to-product stories.
 
+## Anthropic Applied AI Engineer (FDE) loop — detailed breakdown
+
+Source: [interview-stories/anthropic-fde-compiled.md](interview-stories/anthropic-fde-compiled.md)
+(compiled from web-search summaries — see confidence note above, no
+single verbatim candidate account like the OpenAI/Cohere files). Role
+called "Applied AI Engineer"; embeds w/ strategic customers to ship
+Claude-based production apps.
+
+1. **Recruiter screen** — standard fit/motivation.
+2. **Technical phone screen** — coding-oriented.
+3. **Take-home or live coding round** — live access to Claude + a Model
+   Context Protocol (MCP) scenario. Reasoning toward a reliable
+   *production* workflow weighted over a clean/optimal algorithm.
+4. **Customer-conversation simulation (60-90 min)** — highest-signal,
+   most underestimated round in the loop; candidates prepare for it like
+   a technical interview and fail because it isn't one. Reported to
+   filter ~60% of candidates who already passed the coding stages.
+5. **Onsite system design round** — Claude-specific eval design focus.
+6. **Values round** — counts as much as the technical stages. Probes
+   behavior when the honest answer is inconvenient; rewards specific
+   real situations with a genuine cost attached over well-phrased
+   general principles.
+
+**Timeline:** ~4-6 wks (slower than OpenAI's ~3 wks).
+
+**Fail signals:** treating the customer-conversation simulation as a
+technical interview; well-phrased values statements with no specific,
+costly real example; clean-algorithm thinking in the MCP round instead
+of production-reliability thinking.
+
+**Pass signals:** discovery-style behavior in the customer simulation
+(understand the buyer's problem before proposing a solution — same
+shape as OpenAI's "customer questions before architecture" pattern);
+concrete, costly values anecdotes; MCP scenario handled with production
+reliability in mind.
+
+## xAI Forward Deployed / Exceptional Engineer loop — detailed breakdown
+
+Source: [interview-stories/xai-fde-compiled.md](interview-stories/xai-fde-compiled.md)
+(compiled from web-search summaries — see confidence note above). No
+FDE-specific process found separate from xAI's general "Exceptional
+Engineer" SWE loop; postings for "Forward Deployed AI Engineer" appear to
+share it.
+
+1. **Application filter** — written "Exceptional Work Statement":
+   candidate's single most technically complex, high-impact work.
+   Treated as a technical document, primary filter before any call.
+2. **Initial screen (~15 min)** — recruiter/engineer call vetting the
+   statement; rapid-fire (e.g. strongest languages, production C++/Rust
+   work).
+3. **Main loop — four technical interviews**, targeted to finish within
+   **one week**. Applied/practical coding (class design, OOP) over
+   pattern-matched LeetCode style. **No dedicated behavioral, values, or
+   ethics round.**
+4. **Project deep-dive / presentation round** — standout round;
+   interviewers have read the Exceptional Work Statement beforehand and
+   grill on specific decisions, exact metrics, every tradeoff mentioned.
+
+**Timeline:** ~19 days average (Glassdoor, all titles) — consistent with
+a 1-week main loop plus screen/offer overhead. Fastest of any company
+documented here.
+
+**Fail signals:** Exceptional Work Statement that reads like a resume
+bullet instead of a defensible technical claim; pattern-matching coding
+instead of applied class/system design; low-ownership framing of past
+work in the deep-dive.
+
+**Pass signals:** statement built around one real, defensible piece of
+work including where it fell short; comfort being cross-examined on
+tradeoffs/metrics; strong production-language depth (C++/Rust or
+equivalent) beyond algorithmic fluency.
+
 ## Core skills checklist
 
 - Strong SWE fundamentals (production code, testing, debugging).
@@ -199,3 +291,19 @@ to-product stories.
 - https://www.paraform.com/blog/forward-deployed-engineer-vs-solutions-engineer-vs-customer-engineer
 - https://gaijineer.co/openai-forward-deployed-engineer-interview-process (OpenAI-specific loop detail, captured in interview-stories/openai-fde-gaijineer.md)
 - https://gaijineer.co/cohere-forward-deployed-engineer-interview-process (Cohere-specific loop detail, captured in interview-stories/cohere-fde-gaijineer.md)
+- https://getperspective.ai/blog/anthropic-applied-ai-engineer-interview-process-frontier-lab-2026 (Anthropic Applied AI/FDE, captured in interview-stories/anthropic-fde-compiled.md)
+- https://vibeengines.com/handbook/fde-interview-anthropic (Anthropic, same file)
+- https://www.tryexponent.com/guides/anthropic-forward-deployed-engineer-interview (Anthropic, same file)
+- https://gaijineer.co/xai-software-engineer-interview-process (xAI, captured in interview-stories/xai-fde-compiled.md)
+- https://www.tryexponent.com/guides/xai-exceptional-engineer-swe-interview-guide (xAI, same file)
+- https://vibeengines.com/handbook/fde-interview-openai (OpenAI, corroborating detail only — page itself blocked for direct fetch in this environment; summarized via web search)
+
+**On r/OfferEngineering specifically:** the user's original ask was to
+crawl this subreddit directly. reddit.com is blocked at the network
+egress-policy level in this session (a direct `curl` to it returns a 403
+from the proxy — confirmed org policy denial, not a missing feature), so
+no subreddit posts could be retrieved at all. Everything above came from
+web-search-engine indexing of other sites instead. If subreddit access
+is enabled for this environment in the future, or the user pastes post
+content directly, re-run this research to capture real candidate
+accounts rather than compiled secondary-source summaries.
