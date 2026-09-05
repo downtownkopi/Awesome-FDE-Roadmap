@@ -80,11 +80,15 @@ score view; this file is the detailed log behind those scores.
 | BJ6 UAT as definition of done | Business/product judgment | — | — | — | — | Untested |
 | BJ7 The Case Study Rubric | Business/product judgment | — | — | — | — | Untested |
 | T9 Production LLM/RAG engineering craft | Technical depth | — | — | — | — | Untested |
+| T10 Defensible technical narrative under grilling | Technical depth | — | — | — | — | Untested |
 | S18 "Is it actually working?" differentiator | System design | — | — | — | — | Untested |
 | S19 Hypothesis-driven live incident debugging | System design | — | — | — | — | Untested |
+| S20 MCP-based production-reliability scenario | System design | — | — | — | — | Untested |
 | CJ8 Customer-first solution-design opener | Customer-facing judgment | — | — | — | — | Untested |
+| CJ9 Discovery-first customer-conversation simulation | Customer-facing judgment | — | — | — | — | Untested |
 | B4 Framing constraints/timelines to execs | Behavioral | — | — | — | — | Untested |
 | B5 Customer-pain-to-product-change story | Behavioral | — | — | — | — | Untested |
+| B6 Costed-example values round | Behavioral | — | — | — | — | Untested |
 | BJ8 Demo vs. production-business-system | Business/product judgment | — | — | — | — | Untested |
 
 *(Glossary/Definitions terms from knowledge-map.md are tracked ad hoc within Knowledge Gaps and the Question Log as they come up, rather than pre-listed here.)*

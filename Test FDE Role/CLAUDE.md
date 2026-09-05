@@ -4,9 +4,13 @@ Files in this folder:
 - `findings.md` — interview-process research (recruiter/loop format,
   company differences, sources). Read-mostly; edit only when new
   interview-prep facts surface (see step 5 below). Target companies
-  (currently OpenAI, Cohere) are called out at the top — their
-  company-specific detail overrides the generic cross-company findings
-  for question selection.
+  (currently OpenAI, Cohere, Anthropic, xAI) are called out at the top —
+  their company-specific detail overrides the generic cross-company
+  findings for question selection. The Anthropic/xAI detail is flagged
+  lower-confidence (compiled from web-search summaries, not verbatim
+  candidate accounts — r/OfferEngineering and the primary source sites
+  are blocked in this environment); prefer OpenAI/Cohere-sourced concepts
+  when calibrating difficulty until corroborated.
 - `interview-stories/` — one file per real candidate interview account
   (per company), plus a `README.md` index. This is the evidence behind
   `findings.md`/`knowledge-map.md`; when picking questions or judging

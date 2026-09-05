@@ -23,6 +23,7 @@ note: >
 - T7. **Local/offline inference runtimes** — Ollama, vLLM, llama.cpp, TensorRT-LLM for running quantized open-weight models on constrained hardware (CPU-only or single-GPU).
 - T8. **Safe model-weight handling** — `safetensors` (not pickle — pickle is an RCE risk) + SHA-256 verification + signed provenance records (source, license, training-data attestation) for offline-delivered weights.
 - T9. *(from interview-stories/openai-fde-gaijineer.md)* **Production LLM/RAG engineering craft** — embedding selection, chunking strategy, retrieval method choice, reranking, API rate limiting, retry patterns; prompt engineering treated as an engineering discipline, not just wording. OpenAI technical-screen/deep-dive bar: explain *why*, not just *what*, and reason about what happens under the hood, not "I just call the API."
+- T10. *(from interview-stories/xai-fde-compiled.md — compiled/lower-confidence, see findings.md note)* **Defensible technical narrative under grilling** — pick one real piece of work you can justify line-by-line: exact metrics, every tradeoff, including where it fell short — not a resume-bullet summary. xAI's "Exceptional Work Statement" + deep-dive round tests this directly and substitutes for a behavioral/values round entirely. Close cousin of Cohere's "pick the defensible project, not the flashy one" pattern (findings.md's Cohere Architecture Presentation round) but framed around personal technical ownership rather than reliability tradeoffs.
 
 # Category 2 — System Design (end-to-end architecture, GCP-centric)
 
@@ -45,6 +46,7 @@ note: >
 - S17. **Emergency bulk-ingestion pattern** — physical transfer appliance for PB-scale on-prem→cloud moves when network bandwidth is the hard bottleneck.
 - S18. *(from interview-stories/openai-fde-gaijineer.md)* **"Is it actually working?" — the AI-quality differentiator question** — OpenAI's signature deep-dive question. A single-metric answer fails; needs automated metrics + human evaluation + feedback loops combined. Ties directly to S9-S11 (eval framework, RAG Triad, Pairwise Eval) — this is where those get applied under interview pressure.
 - S19. *(from interview-stories/cohere-fde-gaijineer.md)* **Hypothesis-driven live incident debugging** — Cohere's signature round: architecture diagram + "requests are failing, debug it," no hints. Must request specific logs/metrics/traces, narrate the leading hypothesis and *why*, and visibly pivot when evidence contradicts it. Fail mode: reciting a generic checklist (load balancer, database, cache) instead of evidence-driven narrowing. Distinct from D1 (C.A.S.E.) — this is live/reactive incident triage, not upfront scoping.
+- S20. *(from interview-stories/anthropic-fde-compiled.md — compiled/lower-confidence, see findings.md note)* **MCP-based production-reliability scenario** — Anthropic's technical round gives live access to Claude plus a Model Context Protocol (MCP) scenario; graded on reasoning toward a reliable *production* workflow, not producing a clean/optimal algorithm. Same underlying skill as T9/S9-S11 (production LLM engineering + eval judgment) applied to Anthropic's specific tool-use protocol instead of OpenAI's RAG-centric framing.
 
 # Category 3 — Problem Decomposition (ambiguity)
 
@@ -64,6 +66,7 @@ note: >
 - CJ6. *(from README interview Q&A)* Handling a hostile/resistant stakeholder — reframe as a trust problem, not a technical one; understand the fear (e.g. job displacement); give them ownership (co-author the deployment scripts).
 - CJ7. **The Site Survey (Discovery Report) artifact** — what it captures: data landscape/ground truth, technical & security constraints, the Delta/product gap, the Week-2 quick win.
 - CJ8. *(from interview-stories/openai-fde-gaijineer.md)* **Customer-first solution-design opener** — OpenAI's Solution Design round: before any architecture, ask "Who uses this? What decisions do they make? What does success look like?" Skipping this and jumping to tech triggers an explicit interviewer reset — the single most direct fail signal in that round.
+- CJ9. *(from interview-stories/anthropic-fde-compiled.md — compiled/lower-confidence, see findings.md note)* **Discovery-first customer-conversation simulation** — Anthropic's 60-90 min customer-conversation round is reported to filter ~60% of candidates who already passed the coding stages, because candidates prep for it like a technical interview instead of a discovery/translation exercise. Strongest empirical signal in this whole set that Customer-Facing Judgment, not raw technical skill, is the hardest bar to clear at a given company — same underlying skill as CJ1/CJ8, just the sharpest documented failure rate.
 
 # Category 5 — Behavioral (STAR / ownership)
 
@@ -72,6 +75,7 @@ note: >
 - B3. **The FDE end-state ethos** — "the FDE's goal is to become obsolete at a client site" (the system is good enough it runs itself); frames ownership stories around building for handoff, not personal indispensability.
 - B4. *(from interview-stories/openai-fde-gaijineer.md)* **Framing technical constraints/timelines to execs** — OpenAI hiring-manager round tests this directly: story-ready answer for how you told an executive a timeline was unrealistic, without just saying no.
 - B5. *(from interview-stories/cohere-fde-gaijineer.md)* **Customer-pain-to-product-change story** — Cohere's VP round wants a specific story: spotted a recurring customer pain pattern, distinguished it from a one-off local symptom, and drove a durable fix through product/eng (not just patched the one customer). Prep 2-3 of these with quantified outcomes.
+- B6. *(from interview-stories/anthropic-fde-compiled.md — compiled/lower-confidence, see findings.md note)* **Costed-example values round** — Anthropic's values interview is weighted equal to the technical rounds, not a formality. Probes behavior when the honest answer is inconvenient; rewards a specific real situation with a genuine cost attached over a well-phrased general principle. Prep concrete "it cost me something and I did it anyway" stories, distinct from B1's ambiguity/ownership themes.
 
 # Category 6 — Business / Product Judgment
 
@@ -99,6 +103,7 @@ note: >
 - The Delta Concept (CJ4) → before "Solve" in C.A.S.E. (D1) and the Site Survey artifact's "Product Gap" section (CJ7) are fully meaningful — they're the same idea applied at different stages.
 - Use-case risk tiers (BJ2) → before 80/20 Value Scoping (BJ1) — you can't prioritize features without first knowing why the project matters at all.
 - MECE (D2) → useful before the Discovery Checklist (CJ1), since the checklist is itself a MECE breakdown of what to verify pre-build.
+- Two-loop eval framework + RAG Triad + Pairwise Eval (S9-S11) → before S18 (OpenAI) and S20 (Anthropic) are answerable as anything more than a slogan — both are the same eval judgment applied under a specific company's technical-round framing.
 
 ---
 # Importance Legend
