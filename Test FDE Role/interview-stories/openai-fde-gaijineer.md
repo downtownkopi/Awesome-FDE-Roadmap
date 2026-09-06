@@ -103,7 +103,7 @@ step.
   any human technical round.
 - Explicit differentiator question on AI eval ("how do you know it's
   working") — sharper than the general "case study" framing in
-  findings.md; ties directly to knowledge-map.md S9-S11.
+  findings.md; ties directly to ../system-design/knowledge-map.md S9-S11.
 - Solution design round's customer-first opener is closer to CJ1
   (Discovery Checklist) than to D1 (C.A.S.E.) — worth testing under
   Customer-Facing Judgment, not just Problem Decomposition.

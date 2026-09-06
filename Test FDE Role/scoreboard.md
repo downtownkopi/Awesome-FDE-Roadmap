@@ -2,7 +2,12 @@
 
 Goal: score 8/10+ in EVERY category. Retry new questions until all categories hit target. Update after each grilled question.
 
-Fast-glance view only. For the full question-by-question record (question, your answer, model answer, gap analysis) see [knowledge-tracker.md](knowledge-tracker.md); for the concept list questions are drawn from see [knowledge-map.md](knowledge-map.md).
+Fast-glance view only. Each category below has its own subfolder
+(`technical-depth/`, `system-design/`, `problem-decomposition/`,
+`customer-facing-judgment/`, `behavioral/`, `business-judgment/`) with
+a `knowledge-map.md` (concept list questions are drawn from) and
+`knowledge-tracker.md` (full question-by-question record: question,
+your answer, model answer, gap analysis).
 
 ## Categories (score 1-10 each)
 

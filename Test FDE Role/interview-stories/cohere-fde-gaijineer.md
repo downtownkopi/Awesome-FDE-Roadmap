@@ -108,5 +108,5 @@ standard SWE-interview expectation.
   not as puzzle-style coding).
 - The VP round's "customer pain → product change" story requirement is
   a distinct behavioral pattern from the generic B1 themes in
-  knowledge-map.md — more specific than "ambiguous problem" or
+  ../behavioral/knowledge-map.md — more specific than "ambiguous problem" or
   "deployment went badly."

@@ -2,11 +2,12 @@
 
 Sources: Exponent, Perspective AI, Dataford, NodeFlair, Paraform, DataCamp (2026 guides), gaijineer.co (OpenAI + Cohere candidate accounts).
 
-**Target companies: OpenAI, Cohere.** Where the generic cross-company
-findings below conflict with or under-specify the company-specific
-detail (see the OpenAI/Cohere breakdowns further down and
-[interview-stories/](interview-stories/)), the company-specific detail
-wins for question selection and difficulty calibration.
+**Target companies: OpenAI, Cohere, Anthropic.** Where the generic
+cross-company findings below conflict with or under-specify the
+company-specific detail (see the OpenAI/Cohere/Anthropic breakdowns
+further down and [interview-stories/](interview-stories/)), the
+company-specific detail wins for question selection and difficulty
+calibration.
 
 ## Role summary
 
@@ -72,7 +73,7 @@ Use STAR (Situation, Task, Action, Result), keep concrete, quantify impact.
 - **OpenAI**: faster loop (~3 wks), take-home-first (see detailed stage
   breakdown below), heavy weight on customer empathy + AI-specific
   technical depth + production judgment.
-- **Anthropic**: discovery-conversation w/ simulated buyer graded directly. Explicit safety/RSP screen. System design round focused on Claude-specific eval design.
+- **Anthropic**: discovery-conversation w/ simulated buyer graded directly. Explicit safety/RSP screen. System design round focused on Claude-specific eval design. See detailed stage breakdown below — also has an explicit values round (reported hardest stage), not captured by this one-liner.
 - **Cohere**: no LeetCode/coding round at all. Signature round is live,
   hint-free incident debugging (see detailed breakdown below). VP round
   wants specific customer-pain→product-change stories.
@@ -176,6 +177,68 @@ evidence in the debugging round; picks the most relevant (not most
 impressive) project to present; specific, outcome-quantified customer-
 to-product stories.
 
+## Anthropic Applied AI Engineer / FDE loop — detailed breakdown
+
+Source: [interview-stories/anthropic-fde-multisource.md](interview-stories/anthropic-fde-multisource.md)
+(multi-source synthesis — no single first-person candidate account found
+yet, unlike OpenAI/Cohere; re-derive if a real account surfaces). Role
+is ~40% building, ~30% customer-facing, ~30% internal feedback loop.
+4-6 wks typical.
+
+1. **Recruiter screen (30 min)** — background, motivation, level;
+   explicit fit check against Anthropic's Responsible Scaling Policy
+   (RSP) — candidates report being grilled on safety reasoning this
+   early. Fail signal: generic "frontier AI" motivation.
+2. **Technical phone screen (60 min, or ~90 min CodeSignal-style)** —
+   practical Python, LLM-adjacent (retrieval scorers, token budgets,
+   tool orchestration; escalating-constraint problems like LRU cache
+   where each new part invalidates the prior approach). Not
+   LeetCode-hard — pragmatic fluency over algorithmic cleverness. Prep
+   tactic: write a simple correct version first, keep it extensible.
+3. **Take-home or extended live build (3-4 hrs)** — build a
+   Claude-powered app from a fictional customer brief. Graded on
+   shipped behavior, API hygiene, independent handling of ambiguity.
+   Fail signal: excessive clarification-seeking instead of stating
+   reasonable assumptions.
+4. **Customer-conversation simulation (60-90 min)** — **Signature
+   round.** Run a ~45 min discovery call, interviewer plays an
+   enterprise buyer. Pass: layered questions, notes, no pitching. Fail:
+   opening a code editor or demoing instead of discovering.
+   **Filters ~60% of candidates who already passed the coding stages** —
+   highest-leverage round in this loop.
+5. **Virtual onsite / final loop (4-5 hrs, multiple sessions):**
+   - **Technical/applied-AI conversation** — retrieval over customer
+     docs, agent design, tool schemas, guardrails, production failure
+     modes. Come with one specific "agent failed in an interesting way"
+     story.
+   - **System design** — multi-tenant Claude deployment; graded on
+     **evaluation-harness design, not RAG architecture**.
+   - **Deployment case / customer scenario** — unclear success
+     criteria, security concerns, disagreeing domain experts.
+     Differentiator: negotiate an eval (measure inter-expert agreement
+     first) rather than picking a metric unilaterally.
+   - **Values round** — reported hardest, highest-failure stage. Tests
+     honesty under inconvenience (FDEs discover model limits before
+     the customer does). Patterns: unsuitable customer use case;
+     personal being-wrong story; refusal conditions; disagreeing with
+     a company position; a flagged inconvenient risk. Pass: specific
+     stakes/names/outcomes, consistency with your technical answers,
+     one genuine mind-change, acknowledged real cost. Fail: principles-
+     only, rehearsed-sounding, cost-free idealism.
+
+**Weighting:** Highest = customer-conversation judgment, values/ethics
+under inconvenience. High = agent/MCP fluency, eval-harness design.
+Medium = coding (a gate, not the differentiator).
+
+**Fail signals:** generic safety motivation; over-clarifying the
+take-home; pitching during the customer sim; cost-free/rehearsed values
+answers; no concrete agent-failure story.
+
+**Pass signals:** RSP-specific motivation tied to applied work;
+ambiguity-tolerant shipped take-home; discovery-only customer call;
+eval-harness-first system design; values stories with named stakes and
+real cost.
+
 ## Core skills checklist
 
 - Strong SWE fundamentals (production code, testing, debugging).
@@ -199,3 +262,6 @@ to-product stories.
 - https://www.paraform.com/blog/forward-deployed-engineer-vs-solutions-engineer-vs-customer-engineer
 - https://gaijineer.co/openai-forward-deployed-engineer-interview-process (OpenAI-specific loop detail, captured in interview-stories/openai-fde-gaijineer.md)
 - https://gaijineer.co/cohere-forward-deployed-engineer-interview-process (Cohere-specific loop detail, captured in interview-stories/cohere-fde-gaijineer.md)
+- https://getperspective.ai/blog/anthropic-applied-ai-engineer-interview-process-frontier-lab-2026 (Anthropic loop detail)
+- https://vibeengines.com/handbook/fde-interview-anthropic (Anthropic values-round detail)
+- https://www.tryexponent.com/guides/anthropic-forward-deployed-engineer-interview (Anthropic loop detail, sample questions)
