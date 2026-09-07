@@ -37,9 +37,9 @@ Can you solve it better than O(n²) time?
 
 ---
 
-Solve in `solution.py`, then run:
+Solve in `solution.js`, then run:
 ```
-python3 tests.py
+node tests.js
 ```
 When tests pass, say so and I'll check the approach's time/space
 complexity and log the result to `../../knowledge-tracker.md`.

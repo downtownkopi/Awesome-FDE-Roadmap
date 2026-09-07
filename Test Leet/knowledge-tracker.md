@@ -10,28 +10,29 @@ optimal solution, gap). Mirrors the same tracker shape used for book
 chapters and FDE-role prep.
 
 ## Overall Progress
-- Problems attempted: 0 / 150
-- Solved independently (no hints): 0
-- Solved with hints: 0
+- Problems attempted: 2 / 150
+- Solved independently (no hints): 1
+- Solved with hints: 1
 - Solved after seeing approach/walkthrough: 0
 - Attempted, not solved: 0
-- Overall demonstrated mastery: Not started
-- Current weak areas: N/A — nothing tested yet
+- Overall demonstrated mastery: Just started
+- Current weak areas: syntax discipline (const vs let in loop counters, seen once on AH1) — watch for repeats
 
 ---
 # Knowledge Gaps
 
 | ID | Problem | Pattern/Technique Gap | Category | Severity | Status | Attempts | Solved |
 |---|---|---|---|---|---|---:|---:|
-| | | | | | | | |
+| AH1 | Contains Duplicate | `const` vs `let` for a mutating loop counter | Arrays & Hashing | Low | Open — watch for repeat | 1 | Yes |
+| AH2 | Valid Anagram | `for...in` vs `for...of` over a `Map.keys()` iterator — `for...in` silently iterates zero times, no error thrown | Arrays & Hashing | Medium | Open — watch for repeat | 1 | Yes |
 
 ---
 # Concept Mastery
 
 | ID | Problem | Category | Difficulty | Recognized pattern | Solved independently | Optimal complexity | Overall |
 |---|---|---|---|---|---|---|---|
-| AH1 | Contains Duplicate | Arrays & Hashing | Easy | — | — | — | Untested |
-| AH2 | Valid Anagram | Arrays & Hashing | Easy | — | — | — | Untested |
+| AH1 | Contains Duplicate | Arrays & Hashing | Easy | Yes | With hints | Yes (O(n)/O(n)) | Solved with hints |
+| AH2 | Valid Anagram | Arrays & Hashing | Easy | Yes | Independent | Yes (O(n+m)/O(1)) | Solved independently |
 | AH3 | Two Sum | Arrays & Hashing | Easy | — | — | — | Untested |
 | AH4 | Group Anagrams | Arrays & Hashing | Medium | — | — | — | Untested |
 | AH5 | Top K Frequent Elements | Arrays & Hashing | Medium | — | — | — | Untested |
@@ -184,7 +185,106 @@ chapters and FDE-role prep.
 ---
 # Question Log
 
-*(No problems attempted yet. New entries appended below, following this structure per problem:)*
+## Q001
+**Date:** 2026-09-07
+**Problem:** AH1 — Contains Duplicate
+**Category:** Arrays & Hashing
+**Difficulty:** Easy
+**Mode:** Self-attempt, with hints
+
+### My Approach
+> Hash set: iterate nums, check `set.has(n)` before `set.add(n)`, return
+> true on first repeat, false if loop completes.
+
+### Assessment
+Solved with hints
+
+### What I Got Right
+- Correct pattern on first try — hash set for O(1) membership check,
+  no need to reach for sort or nested loops.
+- Correct early-exit logic (return true immediately on duplicate).
+
+### What I Missed
+- Declared the loop counter with `const i = 0` instead of `let`,
+  causing `Assignment to constant variable` on `i++`. Needed a Socratic
+  hint ("what kind of variable... what happens when a loop increments
+  it") to catch it. Algorithm was right the whole time — this was a
+  syntax slip, not a conceptual gap.
+
+### Optimal Approach
+> Hash Set — Time O(n), Space O(n). (Matches NeetCode's optimal
+> approach; alternative: sort-based O(n log n) time / O(1) space.)
+
+### Achieved Complexity
+> Time O(n), Space O(n) — matches optimal.
+
+### Knowledge Gap
+None on the pattern. Minor: `const` vs `let` habit in loop counters —
+flag if this repeats across future problems.
+
+### Memory Priority
+Low — algorithm was solid, only a syntax fix needed.
+
+### Follow-up Required
+No — Pass 2 (blind reimplementation, `solution_pass2.js`) completed
+2026-09-07, 3/3 clean, same optimal hash-set approach, no bugs. Pass 3
+recall #1 scheduled 2026-09-08 (see review-schedule.md).
+
+---
+
+## Q002
+**Date:** 2026-09-07
+**Problem:** AH2 — Valid Anagram
+**Category:** Arrays & Hashing
+**Difficulty:** Easy
+**Mode:** Self-attempt, independent
+
+### My Approach
+> Length check first (early exit if different). Build a frequency Map
+> for `s` and a frequency Map for `t` in one combined pass. Then check
+> every key in `sMap` exists in `tMap` with matching count.
+
+### Assessment
+Solved independently
+
+### What I Got Right
+- Early length-mismatch exit.
+- Single combined pass to build both frequency maps (not two separate
+  passes).
+- Correct equality check across both maps.
+
+### What I Missed
+- Nothing — no bugs, no hints needed.
+
+### Optimal Approach
+> Frequency count — Time O(n+m), Space O(1) (bounded by fixed
+> alphabet size for lowercase English letters). Canonical version uses
+> one fixed-size count array (increment for s, decrement for t, check
+> all-zero) instead of two Maps — same Big-O, less constant-factor
+> overhead.
+
+### Achieved Complexity
+> Time O(n+m), Space O(1) — matches recommended (neetcode.io:
+> O(n+m) time, O(1) space).
+
+### Knowledge Gap
+None on the pattern. Style note: two-Map approach works but the
+single-count-array version is the more idiomatic optimal — worth
+knowing for interviews.
+
+### Memory Priority
+Low — clean solve, optimal complexity.
+
+### Follow-up Required
+No — Pass 2 (blind reimplementation, `solution_pass2.js`) completed
+2026-09-07, 2/3 first try (used `for...in` instead of `for...of` over
+`sMap.keys()`, so the comparison loop silently never ran — self-caught
+after a hint), 3/3 after fix. Pass 3 recall #1 scheduled 2026-09-08
+(see review-schedule.md).
+
+---
+
+*(New entries appended below, following this structure per problem:)*
 
 <!--
 ## Qnnn

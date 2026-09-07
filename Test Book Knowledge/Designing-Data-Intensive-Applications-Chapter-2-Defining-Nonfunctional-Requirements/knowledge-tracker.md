@@ -5,13 +5,13 @@
 **Chapter:** 2 — Defining Nonfunctional Requirements
 
 ## Overall Progress
-- Questions attempted: 67
+- Questions attempted: 70
 - Correct: 31
 - Mostly correct: 12
-- Partially correct: 21
-- Incorrect: 0
+- Partially correct: 22
+- Incorrect: 1
 - Don't know: 3
-- Overall demonstrated mastery: Strong — 67 questions attempted, all 32 chapter concepts touched at least once (breadth complete); all 10 Critical concepts fully mastered. Note: an earlier Q023 entry (H13, chaos engineering) was logged as answered/Correct but the user confirmed they did not actually submit that answer — entry removed, H13 reverted to Untested, then genuinely retested at Q024. Grading correction at Q064 (H4): prior grading (Q014/Q033/Q055) held the "sharpness" answer to a nonlinear-queueing-math standard not actually present in this chapter's source.md (lines 87-94). Re-graded against the actual source depth.
+- Overall demonstrated mastery: Strong — 68 questions attempted, all 32 chapter concepts touched at least once (breadth complete); all 10 Critical concepts fully mastered. 1 High concept (H15) remains genuinely sticky after two failed attempts on the same specific sub-point. Note: an earlier Q023 entry (H13, chaos engineering) was logged as answered/Correct but the user confirmed they did not actually submit that answer — entry removed, H13 reverted to Untested, then genuinely retested at Q024. Grading correction at Q064 (H4): prior grading (Q014/Q033/Q055) held the "sharpness" answer to a nonlinear-queueing-math standard not actually present in this chapter's source.md (lines 87-94). Re-graded against the actual source depth.
 
 ---
 # Knowledge Gaps
@@ -35,7 +35,7 @@
 | G015 | Reliability | Single-server alternative to rolling upgrades (H11) | Resolved (Q049 retest): correctly names the single-server-forced-downtime alternative this time, instead of substituting a different multi-server scenario. | Medium | Low | ✅ Resolved | 2 | 1 |
 | G016 | Reliability | Post Office Horizon scandal — legal-presumption angle (H14) | Resolved (Q068 retest): correctly states English law presumed computer evidence correct unless proven otherwise, matching source.md lines 273-277 exactly. | High | Low | ✅ Resolved | 2 | 1 |
 | G017 | Reliability | Chaos engineering — specific mechanism (H13) | Resolved (Q060 retest): correctly identifies the specific thing being validated — the system's ability to handle faults gracefully (fault-tolerance mechanisms actually working), not generic "find bugs early." | High | Low | ✅ Resolved | 2 | 1 |
-| G018 | Scalability | Describing current load concretely (H15) | Retest (Q066): case-study numbers now correct (5,800/150,000). "Other load characteristics" answer pulled from the adjacent list in source.md ("requests per second, new data per day, checkouts per hour" — examples of describing load) instead of the actual answer (read/write ratio, cache hit rate, items per user). A within-section confusion, not a blank gap anymore. | High | Low | 🟡 Developing | 3 | 0 |
+| G018 | Scalability | Describing current load concretely (H15) | Retest (Q070): recall now correct — read/write ratio, cache hit rate, items per user, finally the right list. But question also asked "why each matters" and that half wasn't attempted at all. Recall fixed; explanation still untested. | High | Low | 🟡 Developing | 5 | 0 |
 | G019 | Maintainability | Essential vs. accidental complexity — why it matters (H20) | Resolved (Q062 retest): correctly states effort shouldn't go toward removing essential complexity since it's inherent to the business problem. | High | Low | ✅ Resolved | 3 | 1 |
 | G020 | Maintainability | Abstraction — reusability across applications (H21) | Resolved (Q067 retest): correctly states reuse-across-applications and deployment-across-servers are not the same thing, with the exact book examples (programming languages abstracting machine code, SQL abstracting storage/retrieval). | Medium | Low | ✅ Resolved | 3 | 1 |
 | G021 | Maintainability | Evolvability's dependencies + why irreversibility matters (H22) | Resolved (Q063 retest): "data interfaces" correctly captures the abstraction-quality dependency, with an accurate explanation (good interface = less rework to enhance). | High | Low | ✅ Resolved | 3 | 1 |
@@ -69,7 +69,7 @@
 | H12 Software fault categories | High | 🟢 good | 🟢 good | — | — | Strong |
 | H13 Chaos engineering / fault injection | High | 🟢 good | 🟢 good | — | — | Strong |
 | H14 The Post Office Horizon scandal | High | 🟢 good | 🟢 good | — | — | Strong |
-| H15 Understanding load | High | 🟢 good (case-study numbers) | 🔴 weak (three "other load characteristics" pulled from the wrong list in the same section) | — | — | Developing |
+| H15 Understanding load | High | 🟢 good (case-study numbers, and now the right "other characteristics" list) | 🟡 untested (the "why each matters" half has never actually been answered — two attempts skipped it entirely) | — | — | Developing |
 | H16 Two ways to study load increase | High | 🟢 good | 🟢 good | — | — | Strong |
 | H17 Linear scalability | High | 🟢 good | 🟢 good | — | — | Strong |
 | H18 Principles for scalability | High | 🟢 good | 🟢 good | — | — | Strong |
@@ -96,6 +96,13 @@
 **Correct understanding:** The chapter's point is that a good abstraction's interface can be reused across many different *applications* (e.g. SQL hides storage/concurrency/crash-recovery detail and gets reused across countless different apps; high-level languages hide machine code the same way) — not about how many servers something runs on. Reuse-across-applications and multi-server deployment are unrelated concepts.
 **Detected:** 2026-09-04 (Q058)
 **Resolved:** 2026-09-05 (Q067) — retest correctly distinguished the two concepts with the exact book examples.
+
+## M003
+**Concept:** Understanding load — "other load characteristics" (H15)
+**My misconception:** Believe the three "other load characteristics" are requests/sec, new data/day, checkouts/hour (plus, on the second attempt, "simultaneous online users" — not sourced at all).
+**Correct understanding:** Those three (requests/sec, new data/day, checkouts/hour) are source.md's examples of *describing load with numbers* (line 298). The actual "other load characteristics" (line 300) are: read/write ratio, cache hit rate, data items per user. Two separate lists in the same section — the wrong one keeps getting reached for.
+**Detected:** 2026-09-05 (Q066)
+**Resolved:** Partially — the names were finally correct at Q070 (2026-09-06), after repeating identically at Q069. The list-mixup itself is fixed; the "why each matters" explanation has still never been attempted.
 
 ---
 # Mastered Concepts
@@ -137,7 +144,7 @@ None currently.
 
 ---
 # Concepts Requiring Review
-1. H15 — The three "other load characteristics" specifically: read/write ratio, cache hit rate, items per user — not the "describing load with numbers" list (requests/sec, new data/day, checkouts/hour)
+1. H15 — Recall (the three names: read/write ratio, cache hit rate, items per user) is now correct as of Q070. Still untested: *why* each one matters — never actually attempted across three tries.
 
 ---
 # Question Log
@@ -2221,3 +2228,65 @@ Low
 
 ### Follow-up Required
 No.
+
+## Q069 (Retest)
+**Date:** 2026-09-06
+**Topic:** Scalability
+**Concept:** H15 — Understanding load
+**Difficulty:** Level 2 (Explanation)
+**Question:** Besides raw numbers like "requests per second," the chapter names three *other* load characteristics worth tracking. Name them, and say why each matters (not just "requests/sec"-style volume metrics — think ratio/hit-rate/per-user angle).
+
+### My Answer
+> "new data per day, checkouts per hour, simulteneous online users"
+
+### Assessment
+🔴 Incorrect
+
+### What I Got Right
+Nothing on-target — "new data per day" and "checkouts per hour" are the wrong list again (source.md line 298, describing-load-with-numbers examples), and "simultaneous online users" isn't in either source list at all.
+
+### What I Missed
+The actual three (source.md line 300): read/write ratio, cache hit rate, data items per user. Same specific mixup as Q066 — reaching for the adjacent numeric-examples list instead of the ratio/rate/per-user list, word-for-word the same failure mode.
+
+### Model Answer
+> Read/write ratio — matters because a read-heavy workload (caching, read replicas) needs a different architecture than a write-heavy one (write-optimized storage, sharding by write key). Cache hit rate — matters because a low hit rate means most requests fall through to the slower backing store, telling you whether your caching strategy is actually working or just adding overhead. Data items per user — matters because it affects per-user data size and fan-out cost (a user with 10,000 followed accounts or items generates a very different load shape than one with 10), and skew from power users can break assumptions built on the average case.
+
+### Knowledge Gap
+G018 / M003 — second straight failure on the identical sub-point. Now flagged Sticky, moved into Weak Concepts. Needs a real spaced retest (different day, ideally reworded to force distinguishing the two lists), not another immediate attempt.
+
+### Memory Priority
+High
+
+### Follow-up Required
+Yes — spaced retest, explicitly contrast the two lists side by side before re-asking.
+
+## Q070 (Retest)
+**Date:** 2026-09-06
+**Topic:** Scalability
+**Concept:** H15 — Understanding load
+**Difficulty:** Level 2 (Explanation)
+**Question:** Besides raw numbers like "requests per second," the chapter names three *other* load characteristics worth tracking. Name them, and say why each matters.
+
+### My Answer
+> "The three 'other load characteristics' specifically: read/write ratio, cache hit rate, items per user — not the 'describing load with numbers' list (requests/sec, new data/day, checkouts/hour)."
+
+### Assessment
+🟠 Partially Correct
+
+### What I Got Right
+Names finally correct — read/write ratio, cache hit rate, items per user — and correctly distinguished from the other list this time. The M003 mixup is fixed.
+
+### What I Missed
+The "why each matters" half of the question was not attempted at all, third time this specific gap has gone unanswered.
+
+### Model Answer
+> Read/write ratio — a read-heavy workload wants caching/read replicas; a write-heavy one wants write-optimized storage/sharding by write key — different architecture depending on which dominates. Cache hit rate — a low hit rate means most requests fall through to the slower backing store, telling you whether the caching strategy is actually working. Data items per user — affects per-user data size and fan-out cost; a user with far more items/follows than average (skew, power users) can break assumptions built on the average case.
+
+### Knowledge Gap
+G018/M003 — recall now fixed. New, narrower gap: the explanation half of H15 has literally never been attempted across three tries (Q066, Q069, Q070) — worth asking as its own standalone question next time rather than bundled with recall.
+
+### Memory Priority
+Medium
+
+### Follow-up Required
+Yes — ask the "why" half standalone next time, not bundled with the name-recall.

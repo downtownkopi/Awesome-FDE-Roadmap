@@ -26,6 +26,30 @@ Two file templates in use, now structurally aligned:
 
 ---
 
+## Daily Schedule (FDE ASAP — full send)
+
+Repeatable daily template, not a monthly calendar. Content rotates by
+simple rule (round-robin/sequential backlog), not fixed dates. Day 1 =
+2026-09-08.
+
+| Time | Block | What fills it |
+|---|---|---|
+| 7:30–9:00 | Leetcode (1.5h) | Spaced-rep reviews due today first (`Test Leet/review-schedule.md`). Then new problems, sequential NeetCode 150 order. |
+| 9:00–11:00 | FDE Role drills (2h) | Round-robin 6 categories, 1/day: tech-depth → system-design → problem-decomp → customer-facing → behavioral → business, repeat. Day 1 override: technical-depth first. |
+| 11:00–12:30 | Book study (1.5h) | Alternate DDIA next chapter / AI Eng next chapter. Retest flagged weak concepts first (H8, H15, C5), then new material. |
+| — nap + Dhuhr 12:30–1:30 — | | |
+| 1:30–3:30 | Test Builds (2h) | Fixed order P5→P1→P4→P3→P2. Stay on one project till built + story logged in `interview-stories/`, then move on. |
+| 3:30–4:30 | Behavioral (1h) | Day 1-3 override: fill `star-stories.md` completely (B1a-d, B4a, B5a-c, B6a-g). After filled: drill recall against it. |
+| — Asr 4:30–5:00 — | | |
+| 5:00–6:45 | GPU Lab (1.75h) | Fixed order G1→G12. One experiment/session till done + story logged. |
+| — nap + Maghrib 6:45–7:45 — | | |
+| 7:45–8:15 | Job Search (30min) | Non-negotiable daily minimum: 1 application sent OR 1 networking touch. Started day 1, doesn't wait for full prep. |
+| — Isha 8:15–8:45 — | | |
+| 8:45–10:45 | FDE mock practice (2h) | Once all 6 categories have ≥1 pass: scenario-bank / mock-loop / take-home-practice rotation. Until then: extra rep on today's weakest category. |
+| 10:45–midnight | Wrap (1h15) | Update this file's rows touched today (see Maintenance note). Re-skim today's weak flags once. Queue tomorrow's due items. |
+
+---
+
 ## 1. FDE Role — Interview Prep
 
 Folder: [`Test FDE Role/`](Test%20FDE%20Role/)
@@ -88,7 +112,7 @@ Tracking: [`Test Book Knowledge/`](Test%20Book%20Knowledge/)
 | # | Chapter | Tracking folder | Status |
 |---|---|---|---|
 | 1 | Trade-Offs in Data Systems Architecture | [Designing-Data-Intensive-Applications-Chapter-1-Trade-Offs-in-Data-Systems-Architecture](Test%20Book%20Knowledge/Designing-Data-Intensive-Applications-Chapter-1-Trade-Offs-in-Data-Systems-Architecture/) | 20/24 concepts Mastered/Strong, 0 Weak. 3 low-priority items remain (H2, H8 genuinely sticky after 2 attempts each; H7 one clause short) — flagged for spaced future checks, not urgent. 36 questions total. |
-| 2 | Defining Nonfunctional Requirements | [Designing-Data-Intensive-Applications-Chapter-2-Defining-Nonfunctional-Requirements](Test%20Book%20Knowledge/Designing-Data-Intensive-Applications-Chapter-2-Defining-Nonfunctional-Requirements/) | 67 questions attempted (Q051 skipped/uncounted), all 32 concepts touched. 31 mastered (all 10 Critical + 21 High), 1 developing (H15 — small list-mixup, one more check away from mastered), 0 weak. |
+| 2 | Defining Nonfunctional Requirements | [Designing-Data-Intensive-Applications-Chapter-2-Defining-Nonfunctional-Requirements](Test%20Book%20Knowledge/Designing-Data-Intensive-Applications-Chapter-2-Defining-Nonfunctional-Requirements/) | Closed out — 70 questions attempted (Q051 skipped/uncounted), all 32 concepts touched. 31 mastered (all 10 Critical + 21 High), 1 developing (H15 — recall now correct, but "why it matters" half never actually answered across 3 tries). |
 | 3 | Data Models and Query Languages | source.md + knowledge-map.md ready (ASD-STE100) | Not started — 0 questions asked |
 | 4 | Storage and Retrieval | [Designing-Data-Intensive-Applications-Chapter-4-Storage-and-Retrieval](Test%20Book%20Knowledge/Designing-Data-Intensive-Applications-Chapter-4-Storage-and-Retrieval/) | Not started — source.md and knowledge-map.md ready (16 Critical + 34 High concepts), 0 questions asked. |
 | 5 | Encoding and Evolution | — not started | Not started |
@@ -114,7 +138,7 @@ Tracking: [`Test Leet/`](Test%20Leet/)
 | [knowledge-tracker.md](Test%20Leet/knowledge-tracker.md) | Full problem-by-problem log, gaps, mastery, misconceptions |
 | [session-log.md](Test%20Leet/session-log.md) | Session history |
 
-**Status:** Not started. 0/150 attempted. Breakdown: 28 Easy, 101 Medium, 21 Hard across Arrays & Hashing (9), Two Pointers (5), Sliding Window (6), Stack (7), Binary Search (7), Linked List (11), Trees (15), Tries (3), Heap/Priority Queue (7), Backtracking (9), Graphs (13), Advanced Graphs (6), 1-D DP (12), 2-D DP (11), Greedy (8), Intervals (6), Math & Geometry (8), Bit Manipulation (7).
+**Status:** 2/150 attempted, both pass1+pass2 done, both optimal complexity. AH1 Contains Duplicate (O(n)/O(n)) and AH2 Valid Anagram (O(n+m)/O(1)) both have pass3 recall #1 due 2026-09-08. Breakdown: 28 Easy, 101 Medium, 21 Hard across Arrays & Hashing (9), Two Pointers (5), Sliding Window (6), Stack (7), Binary Search (7), Linked List (11), Trees (15), Tries (3), Heap/Priority Queue (7), Backtracking (9), Graphs (13), Advanced Graphs (6), 1-D DP (12), 2-D DP (11), Greedy (8), Intervals (6), Math & Geometry (8), Bit Manipulation (7).
 
 ---
 
