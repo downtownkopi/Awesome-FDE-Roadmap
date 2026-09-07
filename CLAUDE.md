@@ -15,6 +15,12 @@ This repo has two purposes:
      shared reference files). Protocol: `Test FDE Role/CLAUDE.md`.
    - `Test Book Knowledge/<Book>-Chapter-N-<Title>/` — per-chapter book study
      testing. Protocol: `Test Book Knowledge/CLAUDE.md`.
+   - `Test System Design/<Article-Title>/` — per-article testing on
+     system-design articles pasted from Hello Interview
+     (hellointerview.com). Same per-chapter template shape as
+     `Test Book Knowledge/`, distinct from the GCP-centric
+     `Test FDE Role/system-design/` category. Protocol:
+     `Test System Design/CLAUDE.md`.
    - `Test Leet/` — NeetCode 150 coding-practice testing (via the
      `leetcode-teacher` skill). Protocol: `Test Leet/CLAUDE.md`.
    - `Test Builds/` — hands-on project builds (MCP servers, RAG eval
@@ -32,11 +38,12 @@ This repo has two purposes:
 ## Global rule
 
 Whenever a testing/quiz session updates any file inside `Test FDE Role/`,
-`Test Book Knowledge/`, `Test Leet/`, `Test Builds/`, or `GPU Lab/`, also
-update the corresponding row in `PROGRESS.md` with a short status line
-(e.g. "3/6 categories passing", "4 questions, weak on X", "12/150
-attempted", "2/5 projects built", "3/12 GPU experiments run"). Only
-touch the affected row — don't rewrite the whole file. `Job Search/` follows the same rule but on real-world events
+`Test Book Knowledge/`, `Test System Design/`, `Test Leet/`,
+`Test Builds/`, or `GPU Lab/`, also update the corresponding row in
+`PROGRESS.md` with a short status line (e.g. "3/6 categories passing",
+"4 questions, weak on X", "12/150 attempted", "2/5 projects built",
+"3/12 GPU experiments run"). Only touch the affected row — don't
+rewrite the whole file. `Job Search/` follows the same rule but on real-world events
 (application sent, status change, referral) rather than test sessions —
 see `Job Search/CLAUDE.md`.
 
@@ -50,3 +57,10 @@ book-chapter-template files, copying the structure from
 `Test Book Knowledge/AI-Engineering-Chapter-1-Introduction/` (currently populated,
 for reference on what a filled-in `source.md`/`knowledge-map.md` looks
 like). Then add a row for it in `PROGRESS.md`.
+
+## New system-design article setup
+
+When the user pastes a new Hello Interview article not yet under
+`Test System Design/`, follow `Test System Design/CLAUDE.md`'s "New
+article setup" section: create `Test System Design/<Article-Title>/`
+with the four template files, then add a row for it in `PROGRESS.md`.

@@ -23,6 +23,13 @@ Two file templates in use, now structurally aligned:
   `knowledge-map.md` (full 150-problem checklist), `knowledge-tracker.md`
   (mastery state, gaps, question log, misconceptions), `session-log.md`
   (session history).
+- **System-design-article template** (`Test System Design/<Article-Title>/`):
+  identical shape to the book-chapter template — `source.md` (condensed
+  capture of a pasted Hello Interview article), `knowledge-map.md`
+  (target concepts), `knowledge-tracker.md` (mastery state, gaps,
+  question log, misconceptions), `session-log.md` (session history).
+  Distinct from `Test FDE Role/system-design/`, which stays GCP-centric
+  Category 2 of the FDE scoreboard.
 
 ---
 
@@ -104,7 +111,24 @@ Tracking: [`Test Book Knowledge/`](Test%20Book%20Knowledge/)
 
 ---
 
-## 4. NeetCode 150 — Coding Practice
+## 4. System Design (Hello Interview) — Testing
+
+Source: articles pasted from [hellointerview.com](https://www.hellointerview.com/) —
+System Design Fundamentals lessons, deep-dive patterns, and
+company-style problem breakdowns.
+Tracking: [`Test System Design/`](Test%20System%20Design/)
+
+| Article | Tracking folder | Status |
+|---|---|---|
+
+**Status:** Not started. 0 articles captured. Waiting on the user to
+paste the first Hello Interview article — see
+`Test System Design/CLAUDE.md`'s "New article setup" for how a new
+row/folder gets created.
+
+---
+
+## 5. NeetCode 150 — Coding Practice
 
 Tracking: [`Test Leet/`](Test%20Leet/)
 
@@ -118,7 +142,7 @@ Tracking: [`Test Leet/`](Test%20Leet/)
 
 ---
 
-## 5. Hands-On Builds
+## 6. Hands-On Builds
 
 Tracking: [`Test Builds/`](Test%20Builds/)
 
@@ -132,7 +156,7 @@ stories logged.
 
 ---
 
-## 6. GPU Lab — Local ML Hands-On (RTX 3070, 8GB VRAM)
+## 7. GPU Lab — Local ML Hands-On (RTX 3070, 8GB VRAM)
 
 Tracking: [`GPU Lab/`](GPU%20Lab/)
 
@@ -147,7 +171,7 @@ inference/training vs. API/agent-level).
 
 ---
 
-## 7. Job Search — Applications & Networking
+## 8. Job Search — Applications & Networking
 
 Tracking: [`Job Search/`](Job%20Search/)
 
