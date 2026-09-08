@@ -5,13 +5,13 @@
 **Chapter:** 1 — Introduction to Building AI Applications with Foundation Models
 
 ## Overall Progress
-- Questions attempted: 1
-- Correct: 0
+- Questions attempted: 2
+- Correct: 1
 - Mostly correct: 0
 - Partially correct: 1
 - Incorrect: 0
 - Don't know: 0
-- Overall demonstrated mastery: Very early — 1 question attempted, chapter mostly untested
+- Overall demonstrated mastery: Very early — 2 questions attempted, chapter mostly untested
 - Current weak areas: Self-supervision terminology (conflated with reinforcement learning); precision on why it enables scale (labels vs. data volume)
 
 ---
@@ -26,7 +26,7 @@
 
 | Concept | Importance | Recall | Explanation | Connection | Application | Overall |
 |---|---|---|---|---|---|---|
-| C1 Language model definition | Critical | — | — | — | — | Untested |
+| C1 Language model definition | Critical | 🟢 correct | — | — | — | Mastered |
 | C2 Token/tokenization/vocabulary | Critical | — | — | — | — | Untested |
 | C3 Autoregressive vs masked LM | Critical | 🟡 partial (via C5 discussion) | — | — | — | Developing |
 | C4 Completion machine framing | Critical | — | — | — | — | Untested |
@@ -98,6 +98,40 @@ Critical
 Yes — retest with a different question type (e.g., explanation or comparison: self-supervision vs. supervised vs. unsupervised vs. reinforcement learning) after other material, not immediately.
 
 ---
+
+## Q002
+**Date:** 2026-09-08
+**Topic:** Language modeling foundations
+**Concept:** C1 — Language model definition
+**Difficulty:** Level 1 (Recall)
+**Question:** What is a language model, at its core? Define it precisely — what does it encode, and about what?
+
+### My Answer
+> "a language model encodes statistical info about a language - how likely a word / token is to appear given a context."
+
+### Assessment
+🟢 Correct
+
+### What I Got Right
+- Named the core mechanism precisely: statistical likelihood of a token, conditioned on context.
+- Used "token" (not just "word"), matching the chapter's precise unit.
+
+### What I Missed
+- Nothing material for a Level 1 recall question.
+
+### Model Answer
+> A language model encodes statistical information about the likelihood of tokens occurring given a context — i.e., a probability distribution over what token comes next (or is masked), learned from a large body of text.
+
+### Knowledge Gap
+None — clean pass.
+
+### Memory Priority
+Critical
+
+### Follow-up Required
+No.
+
+---
 # Misconceptions
 
 ## M001
@@ -109,7 +143,7 @@ Yes — retest with a different question type (e.g., explanation or comparison: 
 
 ---
 # Mastered Concepts
-- (none yet)
+- C1 Language model definition (2026-09-08, Q002, clean pass)
 
 ---
 # Weak Concepts

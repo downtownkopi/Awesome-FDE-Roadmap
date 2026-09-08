@@ -14,8 +14,9 @@ note: >
 
 | ID | Problem | Pass | Last Attempt | Next Due | Interval | Streak | Result |
 |---|---|---|---|---|---|---|---|
-| AH1 | Contains Duplicate | 3 | 2026-09-07 | 2026-09-08 | 1 day | 0 | pass2-done, awaiting recall #1 |
-| AH2 | Valid Anagram | 3 | 2026-09-07 | 2026-09-08 | 1 day | 0 | pass2-done, awaiting recall #1 |
+| AH1 | Contains Duplicate | 3 | 2026-09-08 | 2026-09-11 | 3 days | 1 | recall #1 pass |
+| AH2 | Valid Anagram | 3 | 2026-09-08 | 2026-09-09 | 1 day | 0 | recall #1 failed clean (repeat `for...in`/`for...of` bug), fixed with hint |
+| AH3 | Two Sum | 2 | 2026-09-08 | - | - | 0 | pass1-done (heavy hints), awaiting Pass 2 study |
 
 # Mastered
 

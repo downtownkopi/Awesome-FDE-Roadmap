@@ -1,6 +1,6 @@
 ---
 title: "Chapter 1 — Introduction to Building AI Applications with Foundation Models"
-book: "AI Engineering: Building Applications with Foundation Models" (Chip Huyen)
+book: "AI Engineering: Building Applications with Foundation Models"
 original_file: "Book - AI Engineering - Building Applications with Foundational Models/1. Introduction-to-Building-AI-Applications-with-Foundation-Models.pdf"
 status: source reference — do not edit
 ---
@@ -81,16 +81,16 @@ the source of truth in the project folder.
 - Eloundou et al. (2023), "GPTs are GPTs": defines a task as **exposed** if AI/AI-powered software can cut the time needed to complete it by ≥50%. An occupation's exposure % = % of its tasks that are exposed. Highest-exposure occupations (near/at 100%): interpreters/translators, tax preparers, web/digital interface designers, writers/authors, mathematicians, financial quantitative analysts. Occupations with ~no exposure: cooks, stonemasons, athletes.
 - The author's own analysis: interviewed 50 companies + 100+ case studies (enterprise) and examined 205 open-source AI apps with ≥500 GitHub stars (consumer), grouped into **8 categories** (Table 1-3):
 
-| Category | Consumer examples | Enterprise examples |
-|---|---|---|
-| Coding | Coding | Coding |
-| Image & video production | Photo/video editing, design | Presentation, ad generation |
-| Writing | Email, social/blog posts | Copywriting/SEO, reports/memos/design docs |
-| Education | Tutoring, essay grading | Employee onboarding, upskilling |
-| Conversational bots | General chatbot, AI companion | Customer support, product copilots |
-| Information aggregation | Summarization, talk-to-your-docs | Summarization, market research |
-| Data organization | Image search, Memex | Knowledge management, document processing |
-| Workflow automation | Travel/event planning | Data extraction/entry/annotation, lead generation |
+| Category                 | Consumer examples                | Enterprise examples                               |
+| ------------------------ | -------------------------------- | ------------------------------------------------- |
+| Coding                   | Coding                           | Coding                                            |
+| Image & video production | Photo/video editing, design      | Presentation, ad generation                       |
+| Writing                  | Email, social/blog posts         | Copywriting/SEO, reports/memos/design docs        |
+| Education                | Tutoring, essay grading          | Employee onboarding, upskilling                   |
+| Conversational bots      | General chatbot, AI companion    | Customer support, product copilots                |
+| Information aggregation  | Summarization, talk-to-your-docs | Summarization, market research                    |
+| Data organization        | Image search, Memex              | Knowledge management, document processing         |
+| Workflow automation      | Travel/event planning            | Data extraction/entry/annotation, lead generation |
 
 - Distribution across the 205 open-source repos (Figure 1-7): Coding 30.4%, Conversational bots 26.5%, Image & video production 12.7%, Info aggregation 12.7%, Workflow automation 11.3%, Writing 3.4%, Data organization 1.5%, Education 1.5%. Low % ≠ unpopular — just less commonly open-sourced (more likely enterprise/proprietary).
 - Enterprises generally prefer **lower-risk** applications: 2024 a16z Growth report shows companies deploy internal-facing apps (text summarization 62%, enterprise knowledge management 60%) to production faster than external-facing ones (external chatbot 39%, recommendation algorithm 39%). Internal apps build AI expertise while limiting data-privacy/compliance/catastrophic-failure risk. Close-ended tasks (e.g., classification) are also easier to evaluate/risk-estimate than open-ended ones.

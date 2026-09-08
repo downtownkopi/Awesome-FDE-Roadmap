@@ -4,7 +4,7 @@ name: Two Sum
 category: Arrays & Hashing
 difficulty: Easy
 leetcode: https://leetcode.com/problems/two-sum/
-status: not started
+status: pass1-done
 ---
 
 # Two Sum
@@ -34,6 +34,11 @@ indices of the two numbers that add up to `target`.
 ## Follow-up
 
 Can you solve it better than O(n²) time?
+
+## Recommended Time & Space Complexity
+
+You should aim for a solution with O(n) time and O(n) space, where n
+is the size of the input array. (Source: neetcode.io)
 
 ---
 

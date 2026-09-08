@@ -10,13 +10,13 @@ optimal solution, gap). Mirrors the same tracker shape used for book
 chapters and FDE-role prep.
 
 ## Overall Progress
-- Problems attempted: 2 / 150
+- Problems attempted: 3 / 150
 - Solved independently (no hints): 1
-- Solved with hints: 1
+- Solved with hints: 2
 - Solved after seeing approach/walkthrough: 0
 - Attempted, not solved: 0
 - Overall demonstrated mastery: Just started
-- Current weak areas: syntax discipline (const vs let in loop counters, seen once on AH1) — watch for repeats
+- Current weak areas: syntax discipline (const vs let in loop counters, seen once on AH1); `for...in` vs `for...of` over Map iterators (AH2, repeated twice — real pattern); pattern selection under pressure — reached for sort-based two-pointer on AH3 (index-recovery + duplicate-key dead ends) before landing on single-pass hash map
 
 ---
 # Knowledge Gaps
@@ -24,7 +24,8 @@ chapters and FDE-role prep.
 | ID | Problem | Pattern/Technique Gap | Category | Severity | Status | Attempts | Solved |
 |---|---|---|---|---|---|---:|---:|
 | AH1 | Contains Duplicate | `const` vs `let` for a mutating loop counter | Arrays & Hashing | Low | Open — watch for repeat | 1 | Yes |
-| AH2 | Valid Anagram | `for...in` vs `for...of` over a `Map.keys()` iterator — `for...in` silently iterates zero times, no error thrown | Arrays & Hashing | Medium | Open — watch for repeat | 1 | Yes |
+| AH2 | Valid Anagram | `for...in` vs `for...of` over a `Map.keys()` iterator — `for...in` silently iterates zero times, no error thrown | Arrays & Hashing | High | Open — repeated on Pass 3 recall #1 (2 occurrences), same exact mistake | 2 | Yes (with hint 2nd time) |
+| AH3 | Two Sum | Reached for sort-based two-pointer first (default `.sort()` is lexicographic; sorting also destroys the original index mapping needed for the answer; recovering indices via a value→index map then breaks on duplicate values). Needed a full hint sequence to pivot to single-pass hash map (check complement before insert) | Arrays & Hashing | Medium | Open — watch pattern-recognition speed on future array problems needing original indices | 1 | Yes (heavy hints) |
 
 ---
 # Concept Mastery
@@ -33,7 +34,7 @@ chapters and FDE-role prep.
 |---|---|---|---|---|---|---|---|
 | AH1 | Contains Duplicate | Arrays & Hashing | Easy | Yes | With hints | Yes (O(n)/O(n)) | Solved with hints |
 | AH2 | Valid Anagram | Arrays & Hashing | Easy | Yes | Independent | Yes (O(n+m)/O(1)) | Solved independently |
-| AH3 | Two Sum | Arrays & Hashing | Easy | — | — | — | Untested |
+| AH3 | Two Sum | Arrays & Hashing | Easy | Eventually (after hints) | With heavy hints | Yes (O(n)/O(n)) | Solved with hints |
 | AH4 | Group Anagrams | Arrays & Hashing | Medium | — | — | — | Untested |
 | AH5 | Top K Frequent Elements | Arrays & Hashing | Medium | — | — | — | Untested |
 | AH6 | Product of Array Except Self | Arrays & Hashing | Medium | — | — | — | Untested |
@@ -228,7 +229,9 @@ Low — algorithm was solid, only a syntax fix needed.
 ### Follow-up Required
 No — Pass 2 (blind reimplementation, `solution_pass2.js`) completed
 2026-09-07, 3/3 clean, same optimal hash-set approach, no bugs. Pass 3
-recall #1 scheduled 2026-09-08 (see review-schedule.md).
+recall #1 completed 2026-09-08, 3/3 clean, same hash-set approach, no
+bugs. Interval advances to 3 days, next due 2026-09-11 (see
+review-schedule.md).
 
 ---
 
@@ -276,11 +279,83 @@ knowing for interviews.
 Low — clean solve, optimal complexity.
 
 ### Follow-up Required
-No — Pass 2 (blind reimplementation, `solution_pass2.js`) completed
+Yes — Pass 2 (blind reimplementation, `solution_pass2.js`) completed
 2026-09-07, 2/3 first try (used `for...in` instead of `for...of` over
 `sMap.keys()`, so the comparison loop silently never ran — self-caught
-after a hint), 3/3 after fix. Pass 3 recall #1 scheduled 2026-09-08
-(see review-schedule.md).
+after a hint), 3/3 after fix. Pass 3 recall #1 on 2026-09-08 repeated
+the identical `for...in`/`for...of` mistake (2/3, same failure mode),
+fixed after the same hint. Two occurrences of the exact same slip —
+real pattern, not a fluke. Interval reset to 1 day, next due
+2026-09-09 (see review-schedule.md). Watch this specifically on the
+next recall.
+
+---
+
+## Q003
+**Date:** 2026-09-08
+**Problem:** AH3 — Two Sum
+**Category:** Arrays & Hashing
+**Difficulty:** Easy
+**Mode:** Self-attempt, with heavy hints
+
+### My Approach
+> First attempt: sort `nums`, two-pointer from both ends toward the
+> middle, return `[left, right]` when the sum hit target.
+
+### Assessment
+Solved with hints (heavy — 4+ rounds of hints before landing on the
+optimal pattern)
+
+### What I Got Right
+- Two-pointer pattern itself was executed correctly once the array
+  was actually numerically sorted (no off-by-one, correct pointer
+  movement toward the sum).
+- Iteratively debugged each failure using the actual test output
+  rather than guessing.
+
+### What I Missed
+- Round 1: `.sort()` with no comparator sorts lexicographically
+  (string order) — `[2,7,11,15]` doesn't stay numerically sorted.
+  Needed a hint to recall the `(a,b) => a-b` comparator.
+- Round 2: even with numeric sort, returned `[left, right]` — indices
+  into the *sorted* array, not the original `nums`. Problem requires
+  original indices. Sorting destroys that mapping.
+- Round 3: tried recovering original indices via a `value -> index`
+  map built before sorting. Broke on duplicate values (`[3,3]` — map
+  overwrites to `{3: 1}`, both pointers resolve to the same index).
+- Never independently recognized that sorting is fundamentally the
+  wrong tool here (no full ordering needed, and it's actively
+  destructive to the index information the answer requires). Needed a
+  full 4-step hint sequence to pivot to single-pass hash map
+  (check `target - nums[i]` against the map *before* inserting
+  `nums[i]`, which naturally handles duplicates since the check
+  happens before the current value is ever inserted).
+
+### Optimal Approach
+> Single-pass hash map — Time O(n), Space O(n). For each `i`, check if
+> `target - nums[i]` is already a key in the map; if so, return
+> `[i, map.get(complement)]`; otherwise insert `nums[i] -> i` and
+> continue. (Matches NeetCode's optimal approach.)
+
+### Achieved Complexity
+> Time O(n), Space O(n) — matches optimal, after the pivot.
+
+### Knowledge Gap
+Pattern-selection speed: reached for sort + two-pointer (a Two Pointers
+pattern) on a problem that actually needs original-index preservation,
+which sorting destroys — a signal to check "does this problem need
+original positions?" before reaching for sort-based approaches.
+Secondary: default `.sort()` numeric-comparator habit (same family as
+general JS-array-method gotchas seen on AH1/AH2).
+
+### Memory Priority
+High — the pattern-selection gap (recognizing when sorting is
+disqualifying) is more valuable to fix than the syntax slips, since
+it'll recur on any "return original indices/positions" problem.
+
+### Follow-up Required
+Yes — Pass 2 (blind reimplementation of the single-pass hash-map
+approach) not yet done. Schedule next session.
 
 ---
 

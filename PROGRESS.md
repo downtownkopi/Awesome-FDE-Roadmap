@@ -73,7 +73,12 @@ Folder: [`Test FDE Role/`](Test%20FDE%20Role/)
 | [take-home-practice/](Test%20FDE%20Role/take-home-practice/) | Timed take-home-build reps (OpenAI ~5hr+video / Anthropic 3-4hr style briefs) — 0 attempted |
 | [mock-loop/](Test%20FDE%20Role/mock-loop/) | Full chained multi-round simulation per company — 0 runs |
 
-**Status:** Not started. All 6 categories (technical depth, system design,
+**Status:** 1/6 categories started. Technical depth: 3 questions attempted.
+T3 Medallion Architecture — don't-know (1/10) then retest 5/10 (correct
+on layers/immutability, missing recovery mechanism). T1 Advanced SQL —
+6/10 (correct seq-scan/index diagnosis, single-cause thinking, missed
+stale stats/function-wrapped predicates/join strategy). Both flagged for
+retest. Other 5 categories (system design,
 problem decomposition, customer-facing judgment, behavioral, business
 judgment) at 0 attempts. Anthropic added as a target company + interview
 story 2026-09-06; `star-stories.md` needs personal stories filled in
@@ -138,7 +143,7 @@ Tracking: [`Test Leet/`](Test%20Leet/)
 | [knowledge-tracker.md](Test%20Leet/knowledge-tracker.md) | Full problem-by-problem log, gaps, mastery, misconceptions |
 | [session-log.md](Test%20Leet/session-log.md) | Session history |
 
-**Status:** 2/150 attempted, both pass1+pass2 done, both optimal complexity. AH1 Contains Duplicate (O(n)/O(n)) and AH2 Valid Anagram (O(n+m)/O(1)) both have pass3 recall #1 due 2026-09-08. Breakdown: 28 Easy, 101 Medium, 21 Hard across Arrays & Hashing (9), Two Pointers (5), Sliding Window (6), Stack (7), Binary Search (7), Linked List (11), Trees (15), Tries (3), Heap/Priority Queue (7), Backtracking (9), Graphs (13), Advanced Graphs (6), 1-D DP (12), 2-D DP (11), Greedy (8), Intervals (6), Math & Geometry (8), Bit Manipulation (7).
+**Status:** 3/150 attempted, all optimal complexity. AH1 Contains Duplicate (O(n)/O(n)): pass3 recall #1 clean 2026-09-08, interval→3d, next due 2026-09-11. AH2 Valid Anagram (O(n+m)/O(1)): pass3 recall #1 failed clean 2026-09-08 — repeated the same `for...in`/`for...of` bug from Pass 2 (2nd occurrence, now High severity gap), fixed with hint, interval reset to 1d, next due 2026-09-09. AH3 Two Sum (O(n)/O(n)): pass1-done 2026-09-08 with heavy hints — dead-ended on sort-based two-pointer (destroys original indices, breaks on duplicates) before pivoting to single-pass hash map; pattern-selection gap flagged High priority; Pass 2 not yet done. Breakdown: 28 Easy, 101 Medium, 21 Hard across Arrays & Hashing (9), Two Pointers (5), Sliding Window (6), Stack (7), Binary Search (7), Linked List (11), Trees (15), Tries (3), Heap/Priority Queue (7), Backtracking (9), Graphs (13), Advanced Graphs (6), 1-D DP (12), 2-D DP (11), Greedy (8), Intervals (6), Math & Geometry (8), Bit Manipulation (7).
 
 ---
 
