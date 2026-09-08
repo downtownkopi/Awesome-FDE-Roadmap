@@ -156,8 +156,10 @@ Tracking: [`Test Builds/`](Test%20Builds/)
 | [knowledge-map.md](Test%20Builds/knowledge-map.md) | Project list (MCP server, RAG eval harness, sub-agent decomposition, guardrails, rate-limit hardening) — generates real interview stories, not just conceptual knowledge |
 | [knowledge-tracker.md](Test%20Builds/knowledge-tracker.md) | Project-by-project log: what was built, what broke, extractable stories |
 
-**Status:** Not started. 0/5 projects built, 0 extractable interview
-stories logged.
+**Status:** 2/5 projects built (P5 — rate-limit/retry wrapper, P1 — MCP
+server + hand-rolled agent loop), 3 extractable interview stories
+logged. Spaced blind recall for both due ~2026-09-15. Next up: P4
+(production guardrails).
 
 ---
 
