@@ -1,6 +1,6 @@
 ---
 title: "Knowledge Map — Category 1: Technical Depth"
-sources: "README.md, findings.md, interview-stories/, ../anthropic-openai-stack.md"
+sources: "AWESOME-FDE-RESOURCES.md, findings.md, interview-stories/, ../anthropic-openai-stack.md"
 status: living document — updated as testing reveals structure gaps, otherwise stable
 note: >
   Category 1 of ../scoreboard.md's 6. Two halves: generic coding/data

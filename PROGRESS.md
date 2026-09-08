@@ -7,7 +7,7 @@ Two file templates in use, now structurally aligned:
 
 - **Interview-prep template** (`Test FDE Role/`): `findings.md` (research,
   ~ `source.md`), `knowledge-map.md` (target concepts, sourced from
-  README.md's curriculum/glossary + findings.md), `knowledge-tracker.md`
+  AWESOME-FDE-RESOURCES.md's curriculum/glossary + findings.md), `knowledge-tracker.md`
   (mastery state, gaps, full question log, misconceptions), `scoreboard.md`
   (fast-glance 6-category scores + session log + pass/fail rule — no
   `session-log.md` equivalent needed since scoreboard's own session table
@@ -59,7 +59,7 @@ Folder: [`Test FDE Role/`](Test%20FDE%20Role/)
 | [findings.md](Test%20FDE%20Role/findings.md) | Research on FDE role/interview process (target companies: OpenAI, Cohere, Anthropic) |
 | [interview-stories/](Test%20FDE%20Role/interview-stories/) | Real candidate interview accounts per company (OpenAI, Cohere, Anthropic), used to calibrate question difficulty/framing |
 | [scoreboard.md](Test%20FDE%20Role/scoreboard.md) | Fast-glance 6-category score tracker (target: 8/10 in all) |
-| [anthropic-openai-stack.md](Test%20FDE%20Role/anthropic-openai-stack.md) | Curriculum reference: Claude API/Agent SDK/MCP + OpenAI Responses API/Agents SDK (README.md's curriculum is GCP-centric, doesn't cover this) |
+| [anthropic-openai-stack.md](Test%20FDE%20Role/anthropic-openai-stack.md) | Curriculum reference: Claude API/Agent SDK/MCP + OpenAI Responses API/Agents SDK (AWESOME-FDE-RESOURCES.md's curriculum is GCP-centric, doesn't cover this) |
 | [glossary-and-dependencies.md](Test%20FDE%20Role/glossary-and-dependencies.md) | Glossary terms + dependencies that span more than one category |
 | [technical-depth/](Test%20FDE%20Role/technical-depth/) | Category 1: generic coding/data + AI-specific (RAG, evals, agent/MCP) — knowledge-map.md + knowledge-tracker.md |
 | [system-design/](Test%20FDE%20Role/system-design/) | Category 2: GCP-centric architecture — knowledge-map.md + knowledge-tracker.md |

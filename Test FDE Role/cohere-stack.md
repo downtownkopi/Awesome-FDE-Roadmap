@@ -19,7 +19,7 @@ note: >
 
 # Why this file exists
 
-`README.md`'s curriculum is GCP-centric; `anthropic-openai-stack.md`
+`AWESOME-FDE-RESOURCES.md`'s curriculum is GCP-centric; `anthropic-openai-stack.md`
 covers OpenAI/Anthropic's first-party stacks. Cohere is a third target
 company (`findings.md`) with its own stack — kept separate since its
 interview weighting is different (system-design debugging + on-prem

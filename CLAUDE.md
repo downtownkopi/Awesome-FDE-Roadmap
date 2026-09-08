@@ -2,15 +2,20 @@
 
 This repo has two purposes:
 
-1. `README.md` — the public "awesome list" of FDE resources. Do not treat
-   this as a tracker; only edit it for content curation requests. It also
-   doubles as a curriculum/glossary source for `Test FDE Role/`'s
-   per-category `knowledge-map.md` files (`Test FDE Role/technical-depth/`,
-   `system-design/`, `problem-decomposition/`, `customer-facing-judgment/`,
-   `behavioral/`, `business-judgment/`) — if `README.md` changes, those
-   maps can go stale.
+1. `AWESOME-FDE-RESOURCES.md` — the public "awesome list" of FDE
+   resources (originally this repo's `README.md`, renamed once the repo
+   pivoted to primarily being a personal tracker — see below). Do not
+   treat this as a tracker; only edit it for content curation requests.
+   It also doubles as a curriculum/glossary source for `Test FDE
+   Role/`'s per-category `knowledge-map.md` files (`Test FDE
+   Role/technical-depth/`, `system-design/`, `problem-decomposition/`,
+   `customer-facing-judgment/`, `behavioral/`, `business-judgment/`) —
+   if `AWESOME-FDE-RESOURCES.md` changes, those maps can go stale.
 2. Personal FDE interview prep + book study + coding practice + hands-on
    build tracker, split across:
+   - `README.md` — overview of this repo's actual current purpose (the
+     tracker below), not the awesome list. Edit when the repo's
+     structure or purpose changes, not for routine tracker updates.
    - `Test FDE Role/` — interview-prep testing (6 category subfolders +
      shared reference files). Protocol: `Test FDE Role/CLAUDE.md`.
    - `Test Book Knowledge/<Book>-Chapter-N-<Title>/` — per-chapter book study

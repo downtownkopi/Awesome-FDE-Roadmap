@@ -114,7 +114,7 @@ and system-design rounds.
 Critical
 
 ### Follow-up Required
-Yes — restudy (README.md's data-architecture section, or ask me to
+Yes — restudy (AWESOME-FDE-RESOURCES.md's data-architecture section, or ask me to
 re-explain), then retest this same concept in a future session before
 moving to a harder application-level question on it.
 

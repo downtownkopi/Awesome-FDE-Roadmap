@@ -1,6 +1,6 @@
 ---
 title: "Knowledge Map — Category 6: Business / Product Judgment"
-sources: "README.md, findings.md, interview-stories/"
+sources: "AWESOME-FDE-RESOURCES.md, findings.md, interview-stories/"
 status: living document — updated as testing reveals structure gaps, otherwise stable
 note: >
   Category 6 of ../scoreboard.md's 6.

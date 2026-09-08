@@ -1,6 +1,6 @@
 ---
 title: "Knowledge Map — Category 2: System Design"
-sources: "README.md, findings.md, interview-stories/"
+sources: "AWESOME-FDE-RESOURCES.md, findings.md, interview-stories/"
 status: living document — updated as testing reveals structure gaps, otherwise stable
 note: >
   Category 2 of ../scoreboard.md's 6. GCP-centric end-to-end

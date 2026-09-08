@@ -13,12 +13,12 @@ last-checked: 2026-09-06
 
 # Why this file exists
 
-`README.md`'s Master Curriculum leans GCP/Palantir (ADK, Vertex/Gemini
+`AWESOME-FDE-RESOURCES.md`'s Master Curriculum leans GCP/Palantir (ADK, Vertex/Gemini
 Enterprise, BigQuery, GKE) — solid FDE fundamentals, but not what
 OpenAI or Anthropic FDE loops actually probe technically. Both
 companies' interview stories (see `interview-stories/`) grill on their
 own first-party API/agent stack instead. This file is that stack,
-kept separate from README.md so it doesn't collide with the public
+kept separate from AWESOME-FDE-RESOURCES.md so it doesn't collide with the public
 awesome-list's curation scope.
 
 # Anthropic Stack

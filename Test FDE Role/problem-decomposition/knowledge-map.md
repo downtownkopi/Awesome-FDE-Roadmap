@@ -1,6 +1,6 @@
 ---
 title: "Knowledge Map — Category 3: Problem Decomposition"
-sources: "findings.md, README.md, interview-stories/"
+sources: "findings.md, AWESOME-FDE-RESOURCES.md, interview-stories/"
 status: living document — add a scenario whenever the user shares/finds one
 note: >
   Category 3 of ../scoreboard.md's 6. findings.md flags this round as
@@ -34,11 +34,11 @@ watch for.
   can't trust the dashboard. Diagnose the problem and plan a fix."
 - CS3. **Hospital readmissions** — "A hospital system: 5 hospitals,
   10k beds, 18% readmission rate. They want AI to reduce readmissions.
-  What do you build?" (README.md has a full worked 30-day answer to
+  What do you build?" (AWESOME-FDE-RESOURCES.md has a full worked 30-day answer to
   this one under "The Delta Case Study" — use it as the model answer
   only after attempting cold, not before.)
 
-## High-frequency prompts *(from README.md's Interview Blackbook)*
+## High-frequency prompts *(from AWESOME-FDE-RESOURCES.md's Interview Blackbook)*
 
 - CS4. **Emergency bulk ingestion** — "A client has 5PB of data
   on-prem and needs it in [warehouse] within 48 hours for an emergency
@@ -67,7 +67,7 @@ watch for.
 ## Additional scenarios to add over time
 
 *(Add here as the user encounters new ones — from mock interviews, from
-new interview-stories/ entries, or from README.md updates. Keep the
+new interview-stories/ entries, or from AWESOME-FDE-RESOURCES.md updates. Keep the
 "from X" source tag on each.)*
 
 ---

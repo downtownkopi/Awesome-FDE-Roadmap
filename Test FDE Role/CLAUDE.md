@@ -36,8 +36,9 @@ multiple subfolders):
   user shares a new interview-process URL/account.
 - `anthropic-openai-stack.md` — curriculum reference for the
   OpenAI/Anthropic-specific technical stack (Claude API/Agent SDK/MCP,
-  OpenAI Responses API/Agents SDK) that README.md's GCP-centric
-  curriculum doesn't cover. Read-mostly reference, not a tracker.
+  OpenAI Responses API/Agents SDK) that AWESOME-FDE-RESOURCES.md's
+  GCP-centric curriculum doesn't cover. Read-mostly reference, not a
+  tracker.
 - `glossary-and-dependencies.md` — glossary terms and dependency
   relationships that span more than one category subfolder.
   Category-local glossary/dependency entries live inside that
@@ -114,8 +115,8 @@ business/product judgment).
    already in `findings.md` (new format detail, new company difference,
    new source), append them under the relevant section with the source
    URL. If it surfaces a curriculum/glossary concept not yet in the
-   relevant category's `knowledge-map.md` (i.e. `README.md` changed or
-   was under-mapped), add it there too.
+   relevant category's `knowledge-map.md` (i.e. `AWESOME-FDE-RESOURCES.md`
+   changed or was under-mapped), add it there too.
 
 ## Session rule
 
