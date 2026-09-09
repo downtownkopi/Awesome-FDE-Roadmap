@@ -14,7 +14,7 @@ your answer, model answer, gap analysis).
 | # | Category | What it measures | Latest score | Best score | Attempts | Status |
 |---|----------|-------------------|---------------|------------|----------|--------|
 | 1 | Technical depth (coding/Python/SQL) | Production-quality code, correctness, data pipelines | 6 | 6 | 3 | IN PROGRESS |
-| 2 | System design | End-to-end data workflow / architecture design | - | - | 0 | NOT STARTED |
+| 2 | System design | End-to-end data workflow / architecture design | 9 | 9 | 2 | PASS |
 | 3 | Problem decomposition (ambiguity) | Clarify first, decompose, prioritize, tradeoffs, narrate | - | - | 0 | NOT STARTED |
 | 4 | Customer-facing judgment | Discovery, translating business<->tech, empathy | - | - | 0 | NOT STARTED |
 | 5 | Behavioral (STAR/ownership) | Concrete stories, ownership, conflict handling, results | - | - | 0 | NOT STARTED |
@@ -37,6 +37,8 @@ Target: 8/10 in all 6. Status values: NOT STARTED / IN PROGRESS / PASS.
 | 2026-09-08 | Technical depth | 1 | T3 Medallion Architecture — don't know, no prior exposure. Full model answer logged, needs restudy + retest. |
 | 2026-09-08 | Technical depth | 5 | T3 Medallion Architecture retest (Level 3 scenario) — correct on layers affected + immutability's purpose, missing concrete recovery mechanism (partition-level replay). One more retest needed. |
 | 2026-09-08 | Technical depth | 6 | T1 Advanced SQL & query tuning — correct seq-scan/index diagnosis and fix, but single-cause thinking (missed stale stats, function-wrapped predicates, join strategy). Retest needed. |
+| 2026-09-09 | System design | 7 | S20 Eval-harness-first (healthcare triage scenario) — strong architecture/security instincts (tool-scoped API boundaries, PHI-local-hosting, cross-patient leakage guardrail), but negotiating stakeholder agreement on ground truth arrived last/narrow instead of leading. Retest needed. |
+| 2026-09-09 | System design | 9 | S20 retest (fintech SAR-triage scenario) — led with negotiated-rubric move first this time, sequencing gap fixed, audit checkpoint correctly preserved. Score revised 7->9 (not 8) after retracting an assistant misread (no review-collapse actually proposed). Residual: lenient-launch regulatory risk tradeoff not surfaced explicitly. PASS. |
 
 ## Rule
 

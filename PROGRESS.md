@@ -73,19 +73,26 @@ Folder: [`Test FDE Role/`](Test%20FDE%20Role/)
 | [take-home-practice/](Test%20FDE%20Role/take-home-practice/) | Timed take-home-build reps (OpenAI ~5hr+video / Anthropic 3-4hr style briefs) — 0 attempted |
 | [mock-loop/](Test%20FDE%20Role/mock-loop/) | Full chained multi-round simulation per company — 0 runs |
 
-**Status:** 1/6 categories started. Technical depth: 3 questions attempted.
+**Status:** 2/6 categories started, 1/6 PASS (system design). Technical depth: 3 questions attempted.
 T3 Medallion Architecture — don't-know (1/10) then retest 5/10 (correct
 on layers/immutability, missing recovery mechanism). T1 Advanced SQL —
 6/10 (correct seq-scan/index diagnosis, single-cause thinking, missed
 stale stats/function-wrapped predicates/join strategy). Both flagged for
-retest. Other 5 categories (system design,
-problem decomposition, customer-facing judgment, behavioral, business
-judgment) at 0 attempts. Anthropic added as a target company + interview
-story 2026-09-06; `star-stories.md` needs personal stories filled in
-before real loops. New pieces added 2026-09-06 (cohere-stack.md,
-architecture-presentation.md, primary-sources/, take-home-practice/,
-mock-loop/) — all at 0 attempts/empty, structural coverage only, no
-reps yet.
+retest. System design: PASS (9/10) — 2 questions attempted, both S20
+Eval-harness-first. Q1 (healthcare triage) 7/10 — negotiating
+stakeholder agreement arrived last/narrow instead of leading. Q2
+retest (fintech SAR-triage) 9/10 — led with the negotiation move
+first, sequencing gap fixed, audit checkpoint correctly preserved
+(score revised up from an initial 8 after retracting an assistant
+misread). Residual narrow gap: surfacing launch-time risk tradeoffs
+explicitly. Other 4
+categories (problem decomposition, customer-facing judgment,
+behavioral, business judgment) at 0 attempts. Anthropic added as a
+target company + interview story 2026-09-06; `star-stories.md` needs
+personal stories filled in before real loops. New pieces added
+2026-09-06 (cohere-stack.md, architecture-presentation.md,
+primary-sources/, take-home-practice/, mock-loop/) — all at 0
+attempts/empty, structural coverage only, no reps yet.
 
 ---
 
