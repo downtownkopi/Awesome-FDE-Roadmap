@@ -160,13 +160,26 @@ Tracking: [`Test Builds/`](Test%20Builds/)
 
 | File | Purpose |
 |---|---|
-| [knowledge-map.md](Test%20Builds/knowledge-map.md) | Project list (MCP server, RAG eval harness, sub-agent decomposition, guardrails, rate-limit hardening) — generates real interview stories, not just conceptual knowledge |
+| [knowledge-map.md](Test%20Builds/knowledge-map.md) | Project list, 22 projects + 1 extension (P1-P22, plus a P4 hardened-retest; P14-P22 are an opportunistic second-tier backlog, not core sequence) — generates real interview stories, not just conceptual knowledge |
 | [knowledge-tracker.md](Test%20Builds/knowledge-tracker.md) | Project-by-project log: what was built, what broke, extractable stories |
 
-**Status:** 2/5 projects built (P5 — rate-limit/retry wrapper, P1 — MCP
-server + hand-rolled agent loop), 3 extractable interview stories
-logged. Spaced blind recall for both due ~2026-09-15. Next up: P4
-(production guardrails).
+**Status:** 3/22 projects built (P5 — rate-limit/retry wrapper, P1 — MCP
+server + hand-rolled agent loop, P4 — structured-output guardrails), 5
+extractable interview stories logged. Spaced blind recall for all three
+due ~2026-09-15. P4's retry loop was self-built/self-debugged (5-bug
+trace, good story); the pre-filter/fallback/red-team layer was built as
+a reference under time pressure and studied, not independently derived
+— noted honestly in its NOTES.md. List expanded 2026-09-09 with 17 new
+projects: P6-P13 (Palantir Build Challenge, rate limiter, retry queue,
+tool-call dispatcher, RAG chunker, general eval runner, job scheduler,
+streaming event processor — web research + user-supplied) plus P14-P22
+(retrieval comparison, reranker, golden-dataset builder, latency/cost
+benchmarking, data-quality circuit breaker, distributed-processing
+skew debugging, worker pool, multi-tenant scaffold, metadata-filtered
+vector DB — filled from curriculum gaps in AWESOME-FDE-RESOURCES.md not
+yet exercised by any project), plus a P4 hardened-retest extension.
+P14-P22 are an opportunistic backlog, not core sequence. Next up: P7
+(rate limiter).
 
 ---
 

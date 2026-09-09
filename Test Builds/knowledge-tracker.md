@@ -1,12 +1,60 @@
 # Project Tracker — Hands-On Builds
 
 ## Overall Progress
-- Projects started: 2
-- Projects completed: 2
-- Extractable interview stories logged: 3
+- Projects started: 3
+- Projects completed: 3
+- Extractable interview stories logged: 5
 
 ---
 # Project Log
+
+## P4 — Production guardrails on a structured-output endpoint
+**Date started:** 2026-09-09
+**Date completed:** 2026-09-09
+**Concepts exercised:** AI15 (production guardrails)
+
+### What Was Built
+> Support-ticket triage endpoint (tool-use forced JSON schema) with
+> layered guardrails (Option C): heuristic input pre-filter, bounded
+> Zod-validated repair loop, hard fallback to a safe default. Retry
+> loop hand-built and self-debugged in `attempt/endpoint.js`; full
+> guardrail layering in `reference/endpoint.js` + `reference/redteam.js`
+> (assistant-written under time pressure, then read and understood).
+> Full detail: `projects/p4-structured-output-guardrails/NOTES.md` and
+> `retrospective.md`.
+
+### What Broke
+> 5 sequential bugs while self-building the retry loop, all variants
+> of one root cause (state not threaded through each loop iteration):
+> assistant's tool_use turn never recorded in message history, wrong
+> value pushed as that turn, stale response reused across iterations,
+> validation step dropped entirely on retry, off-by-one retry cap.
+> Separately, a bug in the assistant's own reference code: a "run
+> directly" guard silently failed (no error, no output) due to an
+> unencoded space in the project path.
+
+### What Changed As A Result
+> Retry loop fixed to push the assistant's turn every iteration and
+> re-validate the newest response, not a stale one. Reference code's
+> guard fixed with `fileURLToPath` instead of raw string-matching a
+> `file://` URL.
+
+### Extractable Story? (Y/N)
+> Y — two candidates: (1) debugging the retry loop through 5 successive
+> bugs, each exposing the next layer of the same root cause. (2) the
+> assistant's own silent-failure guard bug — a concrete "zero errors,
+> does nothing" example tied to why guardrail code needs to be run, not
+> just reviewed.
+
+### Memory Priority
+High — the "push assistant turn before validating" tool-use mechanic is
+fundamental and likely to be asked about directly.
+
+### Follow-up
+Spaced blind recall ~2026-09-15 (batch with P1/P5): rebuild the
+retry/repair loop and the 4-layer guardrail structure from memory.
+
+---
 
 ## P1 — MCP server for a legacy system
 **Date started:** 2026-09-08
