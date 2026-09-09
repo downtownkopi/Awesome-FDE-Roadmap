@@ -70,6 +70,14 @@ Use STAR (Situation, Task, Action, Result), keep concrete, quantify impact.
 ## Company differences
 
 - **Palantir**: known for hardest decomposition case study. Coding round in CodePair.
+  Separately, Palantir runs a public **"Build Challenge"**
+  (`palantir.events/buildingchallenge`, `build.palantir.com`) — build a
+  functional Foundry/AIP workflow (provided prompt or self-chosen),
+  deliver a <4min unlisted-YouTube video demo. Explicitly "not an
+  analytics exercise" — software-building judgment over dashboards.
+  Free developer Foundry instance available via signup. High
+  confidence (official Palantir page, not a candidate account) — see
+  `Test Builds/knowledge-map.md` P6 for the practice-project version.
 - **OpenAI**: faster loop (~3 wks), take-home-first (see detailed stage
   breakdown below), heavy weight on customer empathy + AI-specific
   technical depth + production judgment.
@@ -195,6 +203,14 @@ is ~40% building, ~30% customer-facing, ~30% internal feedback loop.
    where each new part invalidates the prior approach). Not
    LeetCode-hard — pragmatic fluency over algorithmic cleverness. Prep
    tactic: write a simple correct version first, keep it extensible.
+   Additional detail (medium confidence, interviewing.io aggregated
+   candidate reports, not a single named account): structured as a
+   **CodeSignal assessment, ~90min-2hr, 4 progressive levels against a
+   spec**, graded by a **black-box evaluator** — pass/fail only, no
+   reason given on failure, forcing you to reverse-engineer the spec
+   from what fails rather than getting hints. One example cited
+   ("implement a bank with multiple transaction types") is flagged by
+   the source itself as widely-circulated, likely rotated out.
 3. **Take-home or extended live build (3-4 hrs)** — build a
    Claude-powered app from a fictional customer brief. Graded on
    shipped behavior, API hygiene, independent handling of ambiguity.
@@ -239,6 +255,41 @@ ambiguity-tolerant shipped take-home; discovery-only customer call;
 eval-harness-first system design; values stories with named stakes and
 real cost.
 
+## Low-confidence source note — Reddit synthesis (2026-09-09)
+
+A Reddit r/... post speculating on the Anthropic FDE/Applied AI loop
+was reviewed. Self-hedged throughout ("probably," "I'd expect," "my
+read is") and explicitly not a first-person account — author asks at
+the end if anyone's actually interviewed. Its loop breakdown and
+"common mistakes" section are coarser restatements of what's already
+in this file's Anthropic breakdown above (no new stage detail, doesn't
+mention the 60%-filter customer-sim round or the values round as
+hardest stage). Its coding-practice list was identical, same order, to
+one the user already had — likely the same origin. Two things pulled
+from it anyway, as low-confidence/practice-only material, tagged
+accordingly at point of use: enterprise access-control constraints
+(`system-design/knowledge-map.md` S22) and two decomposition scenario
+prompts (`problem-decomposition/knowledge-map.md` CS8-CS9). Treat
+these as practice reps, not verified interview content.
+
+## Google — informational, not a current target company
+
+Researched at user request (broader "tier-1 companies" curiosity), not
+promoted to target-company status — no company-specific tracker
+category exists for it. Google Cloud launched an FDE org in 2025-2026,
+explicitly built as a copy of Palantir's playbook (CIO Dive,
+MarkTechPost reporting; announced by Google Cloud CEO Thomas Kurian).
+~59 distinct FDE roles posted globally (e.g. NY/Atlanta postings,
+$127K-$183K base, up to ~$700K TC at senior level). High confidence on
+role-existence/comp (mainstream press).
+
+**No public take-home/build-brief content exists yet** — genuinely
+nothing to find, not a search gap: the role is too new for candidates
+to have posted detailed interview accounts. Closest historical analog:
+Google Cloud **Field Solutions Architect (GenAI)** — one Blind post
+confirms "build a demo and present it" format, no brief specifics.
+Revisit this section once real candidate accounts surface.
+
 ## Core skills checklist
 
 - Strong SWE fundamentals (production code, testing, debugging).
@@ -265,3 +316,8 @@ real cost.
 - https://getperspective.ai/blog/anthropic-applied-ai-engineer-interview-process-frontier-lab-2026 (Anthropic loop detail)
 - https://vibeengines.com/handbook/fde-interview-anthropic (Anthropic values-round detail)
 - https://www.tryexponent.com/guides/anthropic-forward-deployed-engineer-interview (Anthropic loop detail, sample questions)
+- https://palantir.events/buildingchallenge and https://build.palantir.com (Palantir's official public Build Challenge program — Foundry/AIP workflow build + video demo)
+- https://interviewing.io (Anthropic technical-phone-screen CodeSignal/4-level/black-box-evaluator detail — medium confidence, aggregated candidate reports)
+- Google FDE org: CIO Dive and MarkTechPost reporting on Google Cloud's 2025-2026 FDE launch (explicitly modeled on Palantir); one Blind post on Google Cloud Field Solutions Architect (GenAI) format
+- Vibe Engines "Ticket Triage Assistant" practice spec (third-party-authored, simulates an OpenAI/Anthropic-style take-home — not a leaked real brief) — used as the basis for `Test Builds/knowledge-map.md`'s P4 extension
+- Distyl AI take-home write-up via Vibe Engines (not a target company, flagged for its reusable "Autopilot/Default/Demo" anti-pattern rubric) — see `Test Builds/knowledge-map.md` self-check rubric

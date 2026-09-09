@@ -64,6 +64,20 @@ watch for.
   metric or architecture unilaterally. Ties to AI11 in
   `../technical-depth/knowledge-map.md`.
 
+## Low-confidence scenarios *(Reddit synthesis, not a verified candidate account — see findings.md sourcing note; useful as extra practice reps regardless)*
+
+- CS8. **Bank analyst-workflow automation** — "A bank wants to automate
+  analyst workflows. What do you build first?" Deliberately
+  under-specified (no data sources, no scope) — the test is whether
+  discovery questions come before any proposal.
+- CS9. **"The pilot doesn't work"** — "A customer says their Claude
+  pilot 'doesn't work.' How do you diagnose it?" Diagnostic, not
+  build-first — tests whether the instinct is to ask what "doesn't
+  work" means (which workflows, which failure mode, compared to what
+  expectation) before proposing a fix. Adjacent to S19 (Cohere's
+  live-incident-debugging pattern) but framed as a customer-reported
+  vague complaint rather than a technical failure with logs available.
+
 ## Additional scenarios to add over time
 
 *(Add here as the user encounters new ones — from mock interviews, from
