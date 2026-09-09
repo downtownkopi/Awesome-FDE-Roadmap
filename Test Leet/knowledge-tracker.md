@@ -10,13 +10,13 @@ optimal solution, gap). Mirrors the same tracker shape used for book
 chapters and FDE-role prep.
 
 ## Overall Progress
-- Problems attempted: 3 / 150
+- Problems attempted: 4 / 150
 - Solved independently (no hints): 1
-- Solved with hints: 2
+- Solved with hints: 3
 - Solved after seeing approach/walkthrough: 0
 - Attempted, not solved: 0
 - Overall demonstrated mastery: Just started
-- Current weak areas: syntax discipline (const vs let in loop counters, seen once on AH1); `for...in` vs `for...of` over Map iterators (AH2, repeated twice — real pattern); pattern selection under pressure — reached for sort-based two-pointer on AH3 (index-recovery + duplicate-key dead ends) before landing on single-pass hash map
+- Current weak areas: syntax discipline (const vs let in loop counters, seen once on AH1); loop-header correctness under blind recall on AH2 — Critical, 2 consecutive Pass 3 resets, different bug shape each time (for...in/for...of, then a missing `i <` comparison causing an infinite loop); pattern selection under pressure — reached for sort-based two-pointer on AH3 (index-recovery + duplicate-key dead ends) before landing on single-pass hash map; JS built-in method return-value confusion — recurring theme now (AH4: `Array.push()` return value (new length, a number) mistakenly fed into `Map.set()`, twice in a row with different exact mistakes) alongside AH1/AH2's iteration-protocol slips — same family: confident on the algorithm, imprecise on what a specific built-in actually returns/does under time pressure
 
 ---
 # Knowledge Gaps
@@ -24,8 +24,9 @@ chapters and FDE-role prep.
 | ID | Problem | Pattern/Technique Gap | Category | Severity | Status | Attempts | Solved |
 |---|---|---|---|---|---|---:|---:|
 | AH1 | Contains Duplicate | `const` vs `let` for a mutating loop counter | Arrays & Hashing | Low | Open — watch for repeat | 1 | Yes |
-| AH2 | Valid Anagram | `for...in` vs `for...of` over a `Map.keys()` iterator — `for...in` silently iterates zero times, no error thrown | Arrays & Hashing | High | Open — repeated on Pass 3 recall #1 (2 occurrences), same exact mistake | 2 | Yes (with hint 2nd time) |
+| AH2 | Valid Anagram | Loop-header correctness under blind recall — recall #1: `for...in` vs `for...of` over `Map.keys()` (2 occurrences). Recall #2: dropped `i < s.length` entirely (infinite loop, had to kill process) + undeclared `tKey` typo | Arrays & Hashing | Critical | Open — 2 consecutive Pass 3 resets, different surface bugs each time, same root signal | 3 | Recall #2: no (hard fail, not hint-recoverable — process killed) |
 | AH3 | Two Sum | Reached for sort-based two-pointer first (default `.sort()` is lexicographic; sorting also destroys the original index mapping needed for the answer; recovering indices via a value→index map then breaks on duplicate values). Needed a full hint sequence to pivot to single-pass hash map (check complement before insert) | Arrays & Hashing | Medium | Open — watch pattern-recognition speed on future array problems needing original indices | 1 | Yes (heavy hints) |
+| AH4 | Group Anagrams | Pass 1: (1) `map.set(map.get(sorted).push(strs[i]))` — fed `.push()`'s return value into `.set()` as a lone arg, spurious `undefined` entries. (2) `map.set(sorted, map.get(sorted).push(strs[i]))` — stored `.push()`'s return value (a number) as the map value, overwriting the array. (3) sort-based key O(n log n)/string, suboptimal. Pass 2 (count-key, fixes complexity): `else { map.set(key, []) }` dropped the first string of every new group — flagged once, didn't fix, had to repeat the identical hint before it landed | Arrays & Hashing | Medium | Resolved — Pass 2 clean 3/3, optimal complexity achieved. Watch: "new-branch forgets to include the current item" is now a 2nd distinct instance (Pass 1's `.push()`-in-`.set()` was arguably the same family: state-mutation bugs around map/array bookkeeping) | 2 (Pass 1 + Pass 2) | Yes, both passes eventually clean |
 
 ---
 # Concept Mastery
@@ -35,7 +36,7 @@ chapters and FDE-role prep.
 | AH1 | Contains Duplicate | Arrays & Hashing | Easy | Yes | With hints | Yes (O(n)/O(n)) | Solved with hints |
 | AH2 | Valid Anagram | Arrays & Hashing | Easy | Yes | Independent | Yes (O(n+m)/O(1)) | Solved independently |
 | AH3 | Two Sum | Arrays & Hashing | Easy | Eventually (after hints) | With heavy hints | Yes (O(n)/O(n)) | Solved with hints |
-| AH4 | Group Anagrams | Arrays & Hashing | Medium | — | — | — | Untested |
+| AH4 | Group Anagrams | Arrays & Hashing | Medium | Yes | With hints | Yes (O(m·n)/O(m), count-key, achieved Pass 2) | Solved with hints; Pass 1 suboptimal (sort-key), Pass 2 optimal (count-key) |
 | AH5 | Top K Frequent Elements | Arrays & Hashing | Medium | — | — | — | Untested |
 | AH6 | Product of Array Except Self | Arrays & Hashing | Medium | — | — | — | Untested |
 | AH7 | Valid Sudoku | Arrays & Hashing | Medium | — | — | — | Untested |
@@ -289,6 +290,29 @@ real pattern, not a fluke. Interval reset to 1 day, next due
 2026-09-09 (see review-schedule.md). Watch this specifically on the
 next recall.
 
+Pass 3 recall #2 on 2026-09-09: hard fail, not a hint-fixable slip this
+time. `for (let i = 0; s.length; i++)` — dropped the `i < s.length`
+comparison entirely, so the loop condition was just the (always-truthy,
+for non-empty strings) length itself. Infinite loop, had to kill the
+test process after 3+ minutes of real CPU time. Second bug in the same
+attempt: `tMap.get(tKey)` in the second loop — `tKey` never declared
+(should've been `sKey`), a `ReferenceError` waiting to fire the moment
+the first loop would've ended. Different surface bug than recall #1's
+`for...in`/`for...of` mix-up, but same underlying signal: loop-header
+correctness isn't reliable yet under blind recall pressure on this
+problem, specifically. Interval reset to 1 day (again), next due
+2026-09-10. Two resets in a row — if recall #3 fails too, escalate:
+stop and rebuild the mental model from scratch (re-derive the
+frequency-count approach on paper before touching code) rather than
+attempting a third blind recall cold.
+
+Same-day bonus rep (`solution_recall_20260909b.js`, unscheduled, does
+not count toward the official interval/streak): clean 3/3, no hints,
+correct loop header this time. Confirms the gap is real but shallow —
+fixable with a moment's more care, not a broken mental model. Official
+next-due (2026-09-10) stands regardless; the graded recall is what
+counts.
+
 ---
 
 ## Q003
@@ -354,8 +378,98 @@ disqualifying) is more valuable to fix than the syntax slips, since
 it'll recur on any "return original indices/positions" problem.
 
 ### Follow-up Required
-Yes — Pass 2 (blind reimplementation of the single-pass hash-map
-approach) not yet done. Schedule next session.
+No — Pass 2 (blind reimplementation, `solution_pass2.js`) completed
+2026-09-09, 3/3 clean, no hints, single-pass hash-map approach,
+correctly handled the duplicate-value case (`[3,3]`) via
+check-before-insert. Pattern-selection gap from Pass 1 didn't recur.
+Interval starts at 1 day, next due 2026-09-10 (see
+review-schedule.md).
+
+---
+
+## Q004
+**Date:** 2026-09-09
+**Problem:** AH4 — Group Anagrams
+**Category:** Arrays & Hashing
+**Difficulty:** Medium
+**Mode:** Self-attempt, with hints (implementation bugs, not pattern selection)
+
+### My Approach
+> Hash map keyed by each string's sorted-character signature
+> (`split('').sort().join('')`) — strings that are anagrams of each
+> other produce the same key, so pushing each string onto its key's
+> array groups them. Return `[...map.values()]`.
+
+### Assessment
+Solved with hints — pattern was correct from the first draft, two
+implementation bugs needed fixing.
+
+### What I Got Right
+- Correct pattern immediately: hash map keyed by a per-string
+  canonical signature, no false starts on approach.
+- Correctly handled the empty-string and single-char edge cases with
+  no changes needed.
+
+### What I Missed
+- Round 1: `map.set(map.get(sorted).push(strs[i]))` — called `.set()`
+  with only one argument (the return value of `.push()`, which is the
+  array's new length, a number). This silently created a spurious
+  extra map entry (key = that number, value = `undefined`) instead of
+  updating the existing group. Result: real groups were correct, but
+  `undefined` entries were interleaved into the output, crashing the
+  test harness (`undefined is not iterable`) when it tried to sort
+  those "groups."
+- Round 2 (after fixing the arg count): `map.set(sorted,
+  map.get(sorted).push(strs[i]))` — now the key was right, but the
+  *value* being stored was still `.push()`'s return value (a number),
+  overwriting the array itself. First repeat of a key worked (array
+  still there to push onto), but a third string sharing that key
+  failed (`map.get(...).push is not a function`) since the map now
+  held a number, not an array.
+- Complexity: didn't flag it unprompted, but the sort-based key is
+  O(n log n) per string (n = string length) → O(m · n log n) overall.
+  The recommended bar (neetcode.io) is O(m·n) — achievable with a
+  count-based key (e.g. a fixed-size letter-frequency array turned
+  into a string) instead of sorting, since counting is O(n).
+
+### Optimal Approach
+> Hash map keyed by a frequency-count signature instead of a sorted
+> string — for lowercase-only input, a 26-length count array (or
+> equivalent) built in one O(n) pass per string, joined into a
+> key. Time O(m·n), Space O(m) auxiliary (plus O(m·n) unavoidable for
+> the output itself).
+
+### Achieved Complexity
+> Time O(m · n log n), Space O(m·n) (via sort-based key) — correct
+> output, but not optimal on time.
+
+### Knowledge Gap
+Two things, worth keeping separate: (1) `Array.push()` return-value
+confusion — same family as AH1/AH2's built-in-method misuse under
+blind/timed pressure (`for...in` vs `for...of`, missing loop bound),
+now a third occurrence with a different specific method. (2)
+Complexity: didn't independently recognize sort-as-key is more
+expensive than count-as-key — worth deliberately reaching for
+"can I build this key in O(n) instead of O(n log n)" on future
+grouping/signature problems.
+
+### Memory Priority
+Medium — pattern recognition (hash map + canonical signature) is
+solid and transfers well; the two sub-gaps (built-in return-value
+care, sort-vs-count key complexity) are both real but narrower.
+
+### Follow-up Required
+No — Pass 2 (blind reimplementation, `solution_pass2.js`, count-based
+key) completed 2026-09-09. Took 3 rounds of hints before clean: (1)
+`charCodeAt(0)` never advanced with the inner loop index — always read
+the string's first character regardless of position, corrupting the
+per-string signature. (2, 3) the `else` branch (new-key case) set
+`map.set(key, [])` instead of `map.set(key, [strs[i]])` — dropped the
+first string of every new group; flagged once, fix didn't land, had to
+repeat the same hint before it stuck. Final: 3/3 clean, O(m·n) time /
+O(m) auxiliary space — matches optimal, fixes Pass 1's sort-key
+suboptimality. Interval starts at 1 day, next due 2026-09-10 (see
+review-schedule.md).
 
 ---
 

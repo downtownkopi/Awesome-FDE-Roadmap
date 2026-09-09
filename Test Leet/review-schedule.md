@@ -15,8 +15,9 @@ note: >
 | ID | Problem | Pass | Last Attempt | Next Due | Interval | Streak | Result |
 |---|---|---|---|---|---|---|---|
 | AH1 | Contains Duplicate | 3 | 2026-09-08 | 2026-09-11 | 3 days | 1 | recall #1 pass |
-| AH2 | Valid Anagram | 3 | 2026-09-08 | 2026-09-09 | 1 day | 0 | recall #1 failed clean (repeat `for...in`/`for...of` bug), fixed with hint |
-| AH3 | Two Sum | 2 | 2026-09-08 | - | - | 0 | pass1-done (heavy hints), awaiting Pass 2 study |
+| AH2 | Valid Anagram | 3 | 2026-09-09 | 2026-09-10 | 1 day | 0 | recall #2 failed — infinite loop (malformed `for` condition, missing `i < s.length`) + `tKey` ReferenceError typo. Different bug shape than recall #1, but same root cause: loop-header care under blind recall. |
+| AH3 | Two Sum | 3 | 2026-09-09 | 2026-09-10 | 1 day | 0 | pass2-done, 3/3 clean no hints, correct duplicate handling |
+| AH4 | Group Anagrams | 3 | 2026-09-09 | 2026-09-10 | 1 day | 0 | pass2-done, count-based key, O(m·n)/O(m) achieved (fixes Pass 1's suboptimal sort-key). 3 rounds of hints on implementation bugs (missing else-branch insert, twice) before clean |
 
 # Mastered
 

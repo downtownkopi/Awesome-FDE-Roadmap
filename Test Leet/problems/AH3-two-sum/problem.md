@@ -4,7 +4,7 @@ name: Two Sum
 category: Arrays & Hashing
 difficulty: Easy
 leetcode: https://leetcode.com/problems/two-sum/
-status: pass1-done
+status: pass2-done
 ---
 
 # Two Sum
