@@ -73,26 +73,17 @@ Folder: [`Test FDE Role/`](Test%20FDE%20Role/)
 | [take-home-practice/](Test%20FDE%20Role/take-home-practice/) | Timed take-home-build reps (OpenAI ~5hr+video / Anthropic 3-4hr style briefs) — 0 attempted |
 | [mock-loop/](Test%20FDE%20Role/mock-loop/) | Full chained multi-round simulation per company — 0 runs |
 
-**Status:** 2/6 categories started, 1/6 PASS (system design). Technical depth: 3 questions attempted.
-T3 Medallion Architecture — don't-know (1/10) then retest 5/10 (correct
-on layers/immutability, missing recovery mechanism). T1 Advanced SQL —
-6/10 (correct seq-scan/index diagnosis, single-cause thinking, missed
-stale stats/function-wrapped predicates/join strategy). Both flagged for
-retest. System design: PASS (9/10) — 2 questions attempted, both S20
-Eval-harness-first. Q1 (healthcare triage) 7/10 — negotiating
-stakeholder agreement arrived last/narrow instead of leading. Q2
-retest (fintech SAR-triage) 9/10 — led with the negotiation move
-first, sequencing gap fixed, audit checkpoint correctly preserved
-(score revised up from an initial 8 after retracting an assistant
-misread). Residual narrow gap: surfacing launch-time risk tradeoffs
-explicitly. Other 4
-categories (problem decomposition, customer-facing judgment,
-behavioral, business judgment) at 0 attempts. Anthropic added as a
-target company + interview story 2026-09-06; `star-stories.md` needs
-personal stories filled in before real loops. New pieces added
-2026-09-06 (cohere-stack.md, architecture-presentation.md,
-primary-sources/, take-home-practice/, mock-loop/) — all at 0
-attempts/empty, structural coverage only, no reps yet.
+**Status:** 2/6 categories started, 1/6 PASS (system design).
+
+- **System design** — PASS (9/10), 2 attempts, both S20 Eval-harness-first.
+  - Q1 (healthcare triage) 7/10 — negotiating stakeholder agreement arrived last/narrow instead of leading.
+  - Q2 retest (fintech SAR-triage) 9/10 — led with the negotiation move first, sequencing gap fixed, audit checkpoint correctly preserved (revised up from an initial 8 after retracting an assistant misread). Residual gap: surfacing launch-time risk tradeoffs explicitly.
+- **Technical depth** — IN PROGRESS, 3 questions attempted, both flagged for retest.
+  - T3 Medallion Architecture — don't-know (1/10) then retest 5/10 (correct layers/immutability, missing recovery mechanism).
+  - T1 Advanced SQL — 6/10 (correct seq-scan/index diagnosis, single-cause thinking, missed stale stats/function-wrapped predicates/join strategy).
+- **Other 4 categories** (problem decomposition, customer-facing judgment, behavioral, business judgment) — 0 attempts.
+- Anthropic added as a target company + interview story 2026-09-06; `star-stories.md` needs personal stories filled in before real loops.
+- New pieces added 2026-09-06 (`cohere-stack.md`, `architecture-presentation.md`, `primary-sources/`, `take-home-practice/`, `mock-loop/`) — all at 0 attempts/empty, structural coverage only, no reps yet.
 
 ---
 
@@ -150,7 +141,14 @@ Tracking: [`Test Leet/`](Test%20Leet/)
 | [knowledge-tracker.md](Test%20Leet/knowledge-tracker.md) | Full problem-by-problem log, gaps, mastery, misconceptions |
 | [session-log.md](Test%20Leet/session-log.md) | Session history |
 
-**Status:** 5/150 attempted, 4/5 optimal complexity. AH1 Contains Duplicate (O(n)/O(n)): pass3 recall #1 clean 2026-09-08, next due 2026-09-11. AH2 Valid Anagram (O(n+m)/O(1)): recall #3 clean 2026-09-10 (3/3, no hints) — broke a 2-consecutive-reset streak (recall #1: for...in/for...of mixup; recall #2: infinite loop + undeclared-var typo), downgraded Critical→Medium, interval→3d, next due 2026-09-13. AH3 Two Sum (O(n)/O(n)): recall #1 clean 2026-09-10 (3/3, no hints), Pass 1's pattern-selection gap continues not to recur, interval→3d, next due 2026-09-13. AH4 Group Anagrams (O(m·n)/O(m), count-key): recall #1 hard-failed 2026-09-10 — `.push()`'s return value fed into `Map.set()` again, **3rd occurrence** of the identical bug (Pass 1 had it twice); now the most concerning recurring gap, escalated to Critical, interval reset to 1d, next due 2026-09-11. AH5 Top K Frequent Elements (O(n)/O(n), bucket sort): pass1-done 2026-09-10 — attempt 1 was a wrong algorithm entirely (threshold-crossing, not true top-k), slipped past an initially-too-weak test suite; attempt 2, after one conceptual hint, landed the full bucket-sort technique including the Map-insertion-order-as-implicit-sort detail. Pass 2 not yet scheduled. Breakdown: 28 Easy, 101 Medium, 21 Hard across Arrays & Hashing (9), Two Pointers (5), Sliding Window (6), Stack (7), Binary Search (7), Linked List (11), Trees (15), Tries (3), Heap/Priority Queue (7), Backtracking (9), Graphs (13), Advanced Graphs (6), 1-D DP (12), 2-D DP (11), Greedy (8), Intervals (6), Math & Geometry (8), Bit Manipulation (7).
+**Status:** 5/150 attempted, 4/5 optimal complexity.
+
+- **AH1 Contains Duplicate** (O(n)/O(n)) — pass3 recall #1 clean 2026-09-08, next due 2026-09-11.
+- **AH2 Valid Anagram** (O(n+m)/O(1)) — recall #3 clean 2026-09-10 (3/3, no hints), broke a 2-consecutive-reset streak (recall #1: for...in/for...of mixup; recall #2: infinite loop + undeclared-var typo). Downgraded Critical→Medium, interval→3d, next due 2026-09-13.
+- **AH3 Two Sum** (O(n)/O(n)) — recall #1 clean 2026-09-10 (3/3, no hints), Pass 1's pattern-selection gap continues not to recur. Interval→3d, next due 2026-09-13.
+- **AH4 Group Anagrams** (O(m·n)/O(m), count-key) — recall #1 hard-failed 2026-09-10, `.push()`'s return value fed into `Map.set()` again — **3rd occurrence** of the identical bug (Pass 1 had it twice). Most concerning recurring gap right now, escalated to Critical, interval reset to 1d, next due 2026-09-11.
+- **AH5 Top K Frequent Elements** (O(n)/O(n), bucket sort) — pass1-done 2026-09-10. Attempt 1 used a wrong algorithm entirely (threshold-crossing, not true top-k), which slipped past an initially-too-weak test suite; attempt 2, after one conceptual hint, landed the full bucket-sort technique (incl. the Map-insertion-order-as-implicit-sort detail). Pass 2 not yet scheduled.
+- Breakdown: 28 Easy, 101 Medium, 21 Hard across Arrays & Hashing (9), Two Pointers (5), Sliding Window (6), Stack (7), Binary Search (7), Linked List (11), Trees (15), Tries (3), Heap/Priority Queue (7), Backtracking (9), Graphs (13), Advanced Graphs (6), 1-D DP (12), 2-D DP (11), Greedy (8), Intervals (6), Math & Geometry (8), Bit Manipulation (7).
 
 ---
 
@@ -163,23 +161,16 @@ Tracking: [`Test Builds/`](Test%20Builds/)
 | [knowledge-map.md](Test%20Builds/knowledge-map.md) | Project list, 22 projects + 1 extension (P1-P22, plus a P4 hardened-retest; P14-P22 are an opportunistic second-tier backlog, not core sequence) — generates real interview stories, not just conceptual knowledge |
 | [knowledge-tracker.md](Test%20Builds/knowledge-tracker.md) | Project-by-project log: what was built, what broke, extractable stories |
 
-**Status:** 3/22 projects built (P5 — rate-limit/retry wrapper, P1 — MCP
-server + hand-rolled agent loop, P4 — structured-output guardrails), 5
-extractable interview stories logged. Spaced blind recall for all three
-due ~2026-09-15. P4's retry loop was self-built/self-debugged (5-bug
-trace, good story); the pre-filter/fallback/red-team layer was built as
-a reference under time pressure and studied, not independently derived
-— noted honestly in its NOTES.md. List expanded 2026-09-09 with 17 new
-projects: P6-P13 (Palantir Build Challenge, rate limiter, retry queue,
-tool-call dispatcher, RAG chunker, general eval runner, job scheduler,
-streaming event processor — web research + user-supplied) plus P14-P22
-(retrieval comparison, reranker, golden-dataset builder, latency/cost
-benchmarking, data-quality circuit breaker, distributed-processing
-skew debugging, worker pool, multi-tenant scaffold, metadata-filtered
-vector DB — filled from curriculum gaps in AWESOME-FDE-RESOURCES.md not
-yet exercised by any project), plus a P4 hardened-retest extension.
-P14-P22 are an opportunistic backlog, not core sequence. Next up: P7
-(rate limiter).
+**Status:** 3/22 projects built, 5 extractable interview stories logged.
+
+- **Built:** P5 (rate-limit/retry wrapper), P1 (MCP server + hand-rolled agent loop), P4 (structured-output guardrails).
+  - Spaced blind recall for all three due ~2026-09-15.
+  - P4's retry loop was self-built/self-debugged (5-bug trace, good story); the pre-filter/fallback/red-team layer was built as a reference under time pressure and studied, not independently derived — noted honestly in its NOTES.md.
+- **List expanded 2026-09-09** with 17 new projects:
+  - P6-P13 (Palantir Build Challenge, rate limiter, retry queue, tool-call dispatcher, RAG chunker, general eval runner, job scheduler, streaming event processor) — web research + user-supplied.
+  - P14-P22 (retrieval comparison, reranker, golden-dataset builder, latency/cost benchmarking, data-quality circuit breaker, distributed-processing skew debugging, worker pool, multi-tenant scaffold, metadata-filtered vector DB) — filled from curriculum gaps in `AWESOME-FDE-RESOURCES.md` not yet exercised by any project. Opportunistic backlog, not core sequence.
+  - Plus a P4 hardened-retest extension.
+- Next up: **P7 (rate limiter)**.
 
 ---
 
