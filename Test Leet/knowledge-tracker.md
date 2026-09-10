@@ -10,13 +10,13 @@ optimal solution, gap). Mirrors the same tracker shape used for book
 chapters and FDE-role prep.
 
 ## Overall Progress
-- Problems attempted: 4 / 150
+- Problems attempted: 5 / 150
 - Solved independently (no hints): 1
-- Solved with hints: 3
+- Solved with hints: 4
 - Solved after seeing approach/walkthrough: 0
 - Attempted, not solved: 0
 - Overall demonstrated mastery: Just started
-- Current weak areas: syntax discipline (const vs let in loop counters, seen once on AH1); loop-header correctness under blind recall on AH2 — Critical, 2 consecutive Pass 3 resets, different bug shape each time (for...in/for...of, then a missing `i <` comparison causing an infinite loop); pattern selection under pressure — reached for sort-based two-pointer on AH3 (index-recovery + duplicate-key dead ends) before landing on single-pass hash map; JS built-in method return-value confusion — recurring theme now (AH4: `Array.push()` return value (new length, a number) mistakenly fed into `Map.set()`, twice in a row with different exact mistakes) alongside AH1/AH2's iteration-protocol slips — same family: confident on the algorithm, imprecise on what a specific built-in actually returns/does under time pressure
+- Current weak areas: syntax discipline (const vs let in loop counters, seen once on AH1); loop-header correctness under blind recall on AH2 — downgraded to Medium after recall #3 broke a 2-consecutive-reset streak clean (3/3, no hints), but want one more clean pass before trusting it fully; pattern selection under pressure — reached for sort-based two-pointer on AH3 (index-recovery + duplicate-key dead ends) before landing on single-pass hash map, now Low after 2 clean passes since; `Array.push()` return-value confusion on AH4 — Critical, 3rd occurrence of the identical mistake (`.push()`'s return value fed into `Map.set()`), now recurring under blind recall rather than just during initial hinted attempts — the single most concerning recurring gap right now, more so than AH2's (which broke its streak clean); AH5 attempt 1 used a fundamentally wrong algorithm (threshold-crossing instead of true top-k comparison) that a weak initial test suite failed to catch — a "tests passing isn't correctness" lesson, not a code-syntax gap
 
 ---
 # Knowledge Gaps
@@ -24,9 +24,9 @@ chapters and FDE-role prep.
 | ID | Problem | Pattern/Technique Gap | Category | Severity | Status | Attempts | Solved |
 |---|---|---|---|---|---|---:|---:|
 | AH1 | Contains Duplicate | `const` vs `let` for a mutating loop counter | Arrays & Hashing | Low | Open — watch for repeat | 1 | Yes |
-| AH2 | Valid Anagram | Loop-header correctness under blind recall — recall #1: `for...in` vs `for...of` over `Map.keys()` (2 occurrences). Recall #2: dropped `i < s.length` entirely (infinite loop, had to kill process) + undeclared `tKey` typo | Arrays & Hashing | Critical | Open — 2 consecutive Pass 3 resets, different surface bugs each time, same root signal | 3 | Recall #2: no (hard fail, not hint-recoverable — process killed) |
-| AH3 | Two Sum | Reached for sort-based two-pointer first (default `.sort()` is lexicographic; sorting also destroys the original index mapping needed for the answer; recovering indices via a value→index map then breaks on duplicate values). Needed a full hint sequence to pivot to single-pass hash map (check complement before insert) | Arrays & Hashing | Medium | Open — watch pattern-recognition speed on future array problems needing original indices | 1 | Yes (heavy hints) |
-| AH4 | Group Anagrams | Pass 1: (1) `map.set(map.get(sorted).push(strs[i]))` — fed `.push()`'s return value into `.set()` as a lone arg, spurious `undefined` entries. (2) `map.set(sorted, map.get(sorted).push(strs[i]))` — stored `.push()`'s return value (a number) as the map value, overwriting the array. (3) sort-based key O(n log n)/string, suboptimal. Pass 2 (count-key, fixes complexity): `else { map.set(key, []) }` dropped the first string of every new group — flagged once, didn't fix, had to repeat the identical hint before it landed | Arrays & Hashing | Medium | Resolved — Pass 2 clean 3/3, optimal complexity achieved. Watch: "new-branch forgets to include the current item" is now a 2nd distinct instance (Pass 1's `.push()`-in-`.set()` was arguably the same family: state-mutation bugs around map/array bookkeeping) | 2 (Pass 1 + Pass 2) | Yes, both passes eventually clean |
+| AH2 | Valid Anagram | Loop-header correctness under blind recall — recall #1: `for...in` vs `for...of` over `Map.keys()` (2 occurrences). Recall #2: dropped `i < s.length` entirely (infinite loop, had to kill process) + undeclared `tKey` typo. Recall #3: clean, neither bug recurred | Arrays & Hashing | Medium (downgraded from Critical — streak broken) | Open — 1 clean recall after 2 resets; want one more clean pass before calling it solid | 4 | Recall #3: yes, clean 3/3 no hints |
+| AH3 | Two Sum | Reached for sort-based two-pointer first (default `.sort()` is lexicographic; sorting also destroys the original index mapping needed for the answer; recovering indices via a value→index map then breaks on duplicate values). Needed a full hint sequence to pivot to single-pass hash map (check complement before insert) | Arrays & Hashing | Low (downgraded — Pass 2 and recall #1 both clean, gap hasn't recurred) | Open — 2 consecutive clean passes since Pass 1's gap; still watching pattern-recognition speed on future original-index problems | 3 | Yes (Pass 1 heavy hints; Pass 2 + recall #1 clean) |
+| AH4 | Group Anagrams | `.push()`-return-value confusion — Pass 1 twice (`map.set(map.get(sorted).push(strs[i]))` as a lone arg producing `undefined` entries; then `map.set(sorted, map.get(sorted).push(strs[i]))` overwriting the array with the return value), and now identically again on Pass 3 recall #1 (`map.set(anagramCount, map.get(anagramCount).push(str))`) — 3rd occurrence, hard fail (`TypeError`) | Arrays & Hashing | Critical (escalated — 3rd occurrence of the identical mistake, now under blind recall) | Open — reset after recall #1 fail; needs a clean recall before this can be called resolved | 4 | Recall #1: no (hard fail) |
 
 ---
 # Concept Mastery
@@ -37,7 +37,7 @@ chapters and FDE-role prep.
 | AH2 | Valid Anagram | Arrays & Hashing | Easy | Yes | Independent | Yes (O(n+m)/O(1)) | Solved independently |
 | AH3 | Two Sum | Arrays & Hashing | Easy | Eventually (after hints) | With heavy hints | Yes (O(n)/O(n)) | Solved with hints |
 | AH4 | Group Anagrams | Arrays & Hashing | Medium | Yes | With hints | Yes (O(m·n)/O(m), count-key, achieved Pass 2) | Solved with hints; Pass 1 suboptimal (sort-key), Pass 2 optimal (count-key) |
-| AH5 | Top K Frequent Elements | Arrays & Hashing | Medium | — | — | — | Untested |
+| AH5 | Top K Frequent Elements | Arrays & Hashing | Medium | No (attempt 1) / Yes (attempt 2, after hint) | With hints | Yes (O(n)/O(n), bucket sort) | Solved with hints; attempt 1 was a wrong algorithm entirely, not just suboptimal |
 | AH6 | Product of Array Except Self | Arrays & Hashing | Medium | — | — | — | Untested |
 | AH7 | Valid Sudoku | Arrays & Hashing | Medium | — | — | — | Untested |
 | AH8 | Encode and Decode Strings | Arrays & Hashing | Medium | — | — | — | Untested |
@@ -313,6 +313,15 @@ fixable with a moment's more care, not a broken mental model. Official
 next-due (2026-09-10) stands regardless; the graded recall is what
 counts.
 
+Pass 3 recall #3 on 2026-09-10 (`solution_recall_20260910.js`): clean
+3/3, no hints. Correct `i < s.length` loop bound and correct `sKey`
+reference throughout — neither of recall #2's bugs recurred. Breaks the
+2-consecutive-reset streak; the rebuild-from-scratch escalation is
+avoided. Interval advances 1 -> 3 days, next due 2026-09-13 (see
+review-schedule.md). Still worth one more clean recall before trusting
+this fully — two resets on the same problem is enough signal to want
+more than one good pass before calling it solid.
+
 ---
 
 ## Q003
@@ -383,6 +392,13 @@ No — Pass 2 (blind reimplementation, `solution_pass2.js`) completed
 correctly handled the duplicate-value case (`[3,3]`) via
 check-before-insert. Pattern-selection gap from Pass 1 didn't recur.
 Interval starts at 1 day, next due 2026-09-10 (see
+review-schedule.md).
+
+Pass 3 recall #1 on 2026-09-10 (`solution_recall_20260910.js`): clean
+3/3, no hints. Same single-pass hash-map approach reproduced exactly,
+duplicate-value case (`[3,3]`) still handled correctly via
+check-before-insert. Pattern-selection gap from Pass 1 continues to
+not recur. Interval advances 1 -> 3 days, next due 2026-09-13 (see
 review-schedule.md).
 
 ---
@@ -470,6 +486,96 @@ repeat the same hint before it stuck. Final: 3/3 clean, O(m·n) time /
 O(m) auxiliary space — matches optimal, fixes Pass 1's sort-key
 suboptimality. Interval starts at 1 day, next due 2026-09-10 (see
 review-schedule.md).
+
+Pass 3 recall #1 on 2026-09-10 (`solution_recall_20260910.js`): hard
+fail. `map.set(anagramCount, map.get(anagramCount).push(str))` —
+`.push()`'s return value (the array's new length, a number) stored as
+the map's value again, overwriting the actual array. Next time that
+key recurs, `map.get(...)` returns a number, and `.push` on a number
+throws `TypeError: ... is not a function`. This is the **3rd
+occurrence** of this exact bug (Pass 1 had it twice, now recall #1) —
+a genuinely recurring blind spot around what `.push()` returns, not a
+one-off. Interval reset to 1 day, next due 2026-09-11 (see
+review-schedule.md).
+
+Post-failure Socratic drill (same day, 2026-09-10): confirmed knows
+`.push()` returns the new length (a number), but initially answered
+"form the array first" when asked what the fix should be — didn't
+immediately land on the actual insight until prompted further. Landed
+once asked directly: since `map.get(key)` returns a *reference* to the
+same array already in the map, `.push()` mutates it in place — no
+`.set()` needed after. Fix is `map.get(key).push(str);` as its own
+statement. General rule surfaced: mutating array methods (`push`,
+`pop`, `splice`, `sort`, `reverse`) return something other than the
+array itself — if you already hold a reference, call the mutator as
+its own statement, don't wrap it in an assignment expecting the array
+back. Worth checking tomorrow's reset attempt specifically for whether
+this lands under blind-recall pressure, not just when asked directly.
+
+---
+
+## Q005
+**Date:** 2026-09-10
+**Problem:** AH5 — Top K Frequent Elements
+**Category:** Arrays & Hashing
+**Difficulty:** Medium
+**Mode:** Self-attempt, with hints (wrong algorithm on attempt 1, corrected on attempt 2 after one conceptual hint)
+
+### My Approach
+> Attempt 1: count each number's frequency in a map; whenever a
+> number's running count reached `>= k`, add it to a result set;
+> return the set. Attempt 2 (after hint): bucket sort — a
+> value→count map, plus a count→set-of-values map (bucket per count).
+> On each occurrence, move the value from its old count-bucket to its
+> new count-bucket. At the end, flatten the buckets (in ascending-count
+> order) and take the last `k` values.
+
+### Assessment
+Solved with hints — attempt 1 was fundamentally the wrong algorithm,
+not a suboptimal-but-correct one.
+
+### What I Got Right
+- Attempt 1: correct frequency-counting mechanics (map-based tally).
+- Attempt 2: landed on the full bucket-sort technique from one
+  conceptual nudge (no implementation-level hints needed) — including
+  the non-obvious detail that plain `Map` insertion order can substitute
+  for an explicit sort here, since a count-`c` bucket can only ever be
+  created after count-`(c-1)`'s bucket already exists.
+
+### What I Missed
+- Attempt 1's core idea — "add anything whose count crosses `k`" —
+  isn't the same claim as "return the k elements with the highest
+  count." It happened to pass my own first 2 test cases, which weren't
+  strong enough to expose the gap (both cases coincidentally had
+  exactly `k` elements crossing the threshold). Confirmed wrong via a
+  stronger counterexample (`k=1` with duplicates returned *every*
+  element; a 4-value case returned 3 elements when `k=2`).
+
+### Optimal Approach
+> Bucket sort by frequency — Time O(n), Space O(n). Matches what
+> attempt 2 implemented.
+
+### Achieved Complexity
+> Time O(n), Space O(n) — matches optimal (attempt 2).
+
+### Knowledge Gap
+Not a syntax/complexity gap this time — a correctness-reasoning gap:
+mistook "individually crosses a threshold" for "globally ranks in the
+top k," which are different claims that only coincide on cherry-picked
+inputs. Worth deliberately asking "does passing my test cases actually
+prove this claim, or just fail to disprove it on these specific
+inputs?" before trusting a passing test run, especially self-written
+ones.
+
+### Memory Priority
+High — the "top-k needs global comparison, not per-element thresholds"
+distinction generalizes to any top-k/kth-largest problem family
+(heap-based problems especially).
+
+### Follow-up Required
+No — Pass 1 complete, optimal complexity achieved on the corrected
+attempt. Pass 2 (blind reimplementation) not yet scheduled — do
+whenever ready to study+reimplement.
 
 ---
 

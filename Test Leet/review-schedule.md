@@ -14,10 +14,11 @@ note: >
 
 | ID | Problem | Pass | Last Attempt | Next Due | Interval | Streak | Result |
 |---|---|---|---|---|---|---|---|
+| AH4 | Group Anagrams | 3 | 2026-09-10 | 2026-09-11 | 1 day | 0 | recall #1 hard-failed — `map.set(key, map.get(key).push(str))` again, 3rd occurrence of the same `.push()`-return-value bug (Pass 1 had it twice). Reset. |
 | AH1 | Contains Duplicate | 3 | 2026-09-08 | 2026-09-11 | 3 days | 1 | recall #1 pass |
-| AH2 | Valid Anagram | 3 | 2026-09-09 | 2026-09-10 | 1 day | 0 | recall #2 failed — infinite loop (malformed `for` condition, missing `i < s.length`) + `tKey` ReferenceError typo. Different bug shape than recall #1, but same root cause: loop-header care under blind recall. |
-| AH3 | Two Sum | 3 | 2026-09-09 | 2026-09-10 | 1 day | 0 | pass2-done, 3/3 clean no hints, correct duplicate handling |
-| AH4 | Group Anagrams | 3 | 2026-09-09 | 2026-09-10 | 1 day | 0 | pass2-done, count-based key, O(m·n)/O(m) achieved (fixes Pass 1's suboptimal sort-key). 3 rounds of hints on implementation bugs (missing else-branch insert, twice) before clean |
+| AH3 | Two Sum | 3 | 2026-09-10 | 2026-09-13 | 3 days | 1 | recall #1 clean, 3/3 no hints, same single-pass hash-map approach reproduced, correct duplicate handling |
+| AH2 | Valid Anagram | 3 | 2026-09-10 | 2026-09-13 | 3 days | 1 | recall #3 clean, 3/3 no hints — correct loop bound + no typo this time, breaks the 2-consecutive-reset streak. |
+| AH5 | Top K Frequent Elements | 2 | 2026-09-10 | today | - | 0 | pass1-done, optimal O(n)/O(n) bucket sort achieved after correcting a wrong attempt-1 algorithm — ready for Pass 2 study + blind reimplementation |
 
 # Mastered
 
