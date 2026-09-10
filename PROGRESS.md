@@ -73,7 +73,7 @@ Folder: [`Test FDE Role/`](Test%20FDE%20Role/)
 | [take-home-practice/](Test%20FDE%20Role/take-home-practice/) | Timed take-home-build reps (OpenAI ~5hr+video / Anthropic 3-4hr style briefs) — 0 attempted |
 | [mock-loop/](Test%20FDE%20Role/mock-loop/) | Full chained multi-round simulation per company — 0 runs |
 
-**Status:** 2/6 categories started, 1/6 PASS (system design).
+**Status:** 3/6 categories started, 1/6 PASS (system design).
 
 - **System design** — PASS (9/10), 2 attempts, both S20 Eval-harness-first.
   - Q1 (healthcare triage) 7/10 — negotiating stakeholder agreement arrived last/narrow instead of leading.
@@ -81,7 +81,11 @@ Folder: [`Test FDE Role/`](Test%20FDE%20Role/)
 - **Technical depth** — IN PROGRESS, 3 questions attempted, both flagged for retest.
   - T3 Medallion Architecture — don't-know (1/10) then retest 5/10 (correct layers/immutability, missing recovery mechanism).
   - T1 Advanced SQL — 6/10 (correct seq-scan/index diagnosis, single-cause thinking, missed stale stats/function-wrapped predicates/join strategy).
-- **Other 4 categories** (problem decomposition, customer-facing judgment, behavioral, business judgment) — 0 attempts.
+- **Problem decomposition** — IN PROGRESS (7/10), 1 scenario attempted (CS1, 911 response times).
+  - Excellent clarifying-question phase (self-discovered the CAD batch-only/no-live-status constraint) and strong prioritization (quick-wins-first, correct travel-time triage).
+  - Gap: to-be architecture proposed AI dispatch without officer confirmation, contradicting that same self-discovered constraint; no rollout/evaluation plan for a high-stakes automation proposal.
+  - Follow-up discussion refined this live: correctly defended that a future system could have self-reported live status, then correctly re-affirmed acknowledgment should stay (self-reported status can go stale under duress). Score unchanged, but reclassified as "doesn't surface unprompted" rather than "doesn't understand."
+- **Other 3 categories** (customer-facing judgment, behavioral, business judgment) — 0 attempts.
 - Anthropic added as a target company + interview story 2026-09-06; `star-stories.md` needs personal stories filled in before real loops.
 - New pieces added 2026-09-06 (`cohere-stack.md`, `architecture-presentation.md`, `primary-sources/`, `take-home-practice/`, `mock-loop/`) — all at 0 attempts/empty, structural coverage only, no reps yet.
 

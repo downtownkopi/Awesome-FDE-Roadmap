@@ -15,7 +15,7 @@ your answer, model answer, gap analysis).
 |---|----------|-------------------|---------------|------------|----------|--------|
 | 1 | Technical depth (coding/Python/SQL) | Production-quality code, correctness, data pipelines | 6 | 6 | 3 | IN PROGRESS |
 | 2 | System design | End-to-end data workflow / architecture design | 9 | 9 | 2 | PASS |
-| 3 | Problem decomposition (ambiguity) | Clarify first, decompose, prioritize, tradeoffs, narrate | - | - | 0 | NOT STARTED |
+| 3 | Problem decomposition (ambiguity) | Clarify first, decompose, prioritize, tradeoffs, narrate | 7 | 7 | 1 | IN PROGRESS |
 | 4 | Customer-facing judgment | Discovery, translating business<->tech, empathy | - | - | 0 | NOT STARTED |
 | 5 | Behavioral (STAR/ownership) | Concrete stories, ownership, conflict handling, results | - | - | 0 | NOT STARTED |
 | 6 | Business/product judgment | Prioritization, MVP thinking, tradeoff reasoning | - | - | 0 | NOT STARTED |
@@ -39,6 +39,7 @@ Target: 8/10 in all 6. Status values: NOT STARTED / IN PROGRESS / PASS.
 | 2026-09-08 | Technical depth | 6 | T1 Advanced SQL & query tuning — correct seq-scan/index diagnosis and fix, but single-cause thinking (missed stale stats, function-wrapped predicates, join strategy). Retest needed. |
 | 2026-09-09 | System design | 7 | S20 Eval-harness-first (healthcare triage scenario) — strong architecture/security instincts (tool-scoped API boundaries, PHI-local-hosting, cross-patient leakage guardrail), but negotiating stakeholder agreement on ground truth arrived last/narrow instead of leading. Retest needed. |
 | 2026-09-09 | System design | 9 | S20 retest (fintech SAR-triage scenario) — led with negotiated-rubric move first this time, sequencing gap fixed, audit checkpoint correctly preserved. Score revised 7->9 (not 8) after retracting an assistant misread (no review-collapse actually proposed). Residual: lenient-launch regulatory risk tradeoff not surfaced explicitly. PASS. |
+| 2026-09-10 | Problem decomposition | 7 | CS1 911 response times — excellent clarifying-question phase (self-discovered the CAD batch-only/no-live-status constraint), strong prioritization (quick-wins-first, correct travel-time triage). Gap: to-be architecture proposed AI dispatch without officer confirmation, silently contradicting the self-discovered constraint; no rollout/evaluation plan for a high-stakes automation proposal. Follow-up discussion: correctly refined the claim when pushed (future system could have self-reported live status), then correctly re-affirmed acknowledgment should stay given self-reported status can go stale under duress — score unchanged (gap was real in the original answer), but reclassified as "doesn't surface unprompted" rather than "doesn't understand." Retest needed. |
 
 ## Rule
 
