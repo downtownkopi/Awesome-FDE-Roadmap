@@ -5,14 +5,14 @@
 **Chapter:** 1 — Introduction to Building AI Applications with Foundation Models
 
 ## Overall Progress
-- Questions attempted: 8
+- Questions attempted: 9
 - Correct: 1
 - Mostly correct: 3
-- Partially correct: 3
+- Partially correct: 4
 - Incorrect: 1
 - Don't know: 0
-- Overall demonstrated mastery: Very early — 8 questions attempted, chapter mostly untested
-- Current weak areas: RAG missing from adaptation-technique recall (substituted post-training instead); supervised-vs-reinforcement-learning definitions blurred (supervised described as live correctness feedback rather than pre-labeled dataset; RL described vaguely rather than reward-based); tokenization's "unknown word" rationale not yet surfaced cleanly; completion-machine's specific failure mode (question-answered-with-question) not yet surfaced; foundation model naming reason narrowed to multimodality only, missed "base for adaptation" + siloed-research-break framing; multimodal model vs. LMM distinction inverted (missed generative-vs-embedding split entirely)
+- Overall demonstrated mastery: Very early — 9 questions attempted, chapter mostly untested
+- Current weak areas: AI engineering definition missing the "why" (foundation models eliminating the need to train from scratch) and concrete skill-shift specifics vs. ML engineering/MLOps; RAG missing from adaptation-technique recall (substituted post-training instead); supervised-vs-reinforcement-learning definitions blurred (supervised described as live correctness feedback rather than pre-labeled dataset; RL described vaguely rather than reward-based); tokenization's "unknown word" rationale not yet surfaced cleanly; completion-machine's specific failure mode (question-answered-with-question) not yet surfaced; foundation model naming reason narrowed to multimodality only, missed "base for adaptation" + siloed-research-break framing; multimodal model vs. LMM distinction inverted (missed generative-vs-embedding split entirely)
 
 ---
 # Knowledge Gaps
@@ -25,6 +25,7 @@
 | G004 | Foundation models | Foundation model definition (C6) | Narrowed naming rationale to multimodality only. Missed "general-purpose base for adaptation" framing and the siloed-by-modality-research-break argument — the book's primary reasons for the term. | Critical | High | 🟠 Developing | 1 | 0 |
 | G006 | Language modeling foundations | Supervised vs. reinforcement learning (adjacent to C5) | Described supervised learning as "human indicating whether the prediction is correct or not" (live correctness feedback) rather than a pre-labeled input-output dataset. Described reinforcement learning as "giving the trained model samples to guess when given a prompt" — vague, missing the reward-signal framing (agent acts, receives scalar reward, no explicit correct label per input). The two got blurred together. | High | Medium | 🟡 Developing | 1 | 0 |
 | G007 | Foundation models | Three adaptation techniques (C8) | Named prompt engineering and finetuning correctly (right mechanism for both: prompt-only vs. weight-changing). Substituted "post-training" for the third technique instead of **RAG**. Post-training isn't an app-builder adaptation technique — it's done by model developers pre-release. | Critical | Medium | 🟠 Developing | 1 | 0 |
+| G008 | Foundation models | AI engineering definition (C9) | Got the core directional shift right (use/adapt models vs. train them), but missed the foundation-model-enabled "why" and concrete skill-shift specifics (less training/infra, more adaptation/eval/product-layer engineering) vs. ML engineering/MLOps. | Critical | Medium | 🟠 Developing | 1 | 0 |
 | G005 | Foundation models | Multimodal model / LMM (C7) | Inverted "multimodal" definition (said single-modality, correct is multi-modality); conflated LMM with "large language model"; missed generative-vs-non-generative axis; unaware CLIP is the book's non-generative counterexample. | Critical | High | 🔴 Weak | 1 | 0 |
 
 ---
@@ -40,7 +41,7 @@
 | C6 Foundation models definition | Critical | 🟠 partial | — | — | — | Developing |
 | C7 Multimodal models / LMM | Critical | 🔴 incorrect | — | — | — | Weak |
 | C8 Three adaptation techniques | Critical | 🟠 partial (2/3, missed RAG) | — | — | — | Developing |
-| C9 AI engineering definition | Critical | — | — | — | — | Untested |
+| C9 AI engineering definition | Critical | 🟠 partial (core shift right, "why" + specifics missing) | — | — | — | Developing |
 | C10 Three growth factors | Critical | — | — | — | — | Untested |
 | C11 Three layers of AI stack | Critical | — | — | — | — | Untested |
 | C12 AI eng vs ML eng (3 diffs) | Critical | — | — | — | — | Untested |
@@ -343,6 +344,39 @@ Critical
 ### Follow-up Required
 Yes — retest, pair with C13 (prompt-based vs. finetuning) since RAG sits under the "prompt-based" umbrella in that comparison.
 
+## Q009
+**Date:** 2026-09-10
+**Topic:** Foundation models
+**Concept:** C9 — AI engineering definition
+**Difficulty:** Level 1 (Recall)
+**Question:** Chapter defines "AI engineering" as its own thing, distinct from ML engineering / MLOps. What's the definition, and what are the key differences from traditional ML engineering?
+
+### My Answer
+> "ai engineering is really about using the ai models that the ml engineers have built and applying that to problems."
+
+### Assessment
+🟠 Partially Correct
+
+### What I Got Right
+- Correct core directional shift: AI engineers use/adapt existing models rather than training them from scratch.
+
+### What I Missed
+- The "why": foundation models are what made this a distinct discipline — they made it possible to build powerful AI applications without needing ML training expertise or infrastructure at all.
+- Concrete skill/workflow differences from ML engineering/MLOps: less model-training math and training infra, more prompt engineering, evaluation design, and adaptation techniques (prompting/RAG/finetuning); faster iteration cycles; lower entry barrier since no need to train compute-hungry models.
+- Didn't name "foundation models" explicitly as the enabling factor, or connect back to C6/C8 (already-tested adjacent concepts).
+
+### Model Answer
+> AI engineering is the practice of building applications on top of existing foundation models — via prompt engineering, RAG, and finetuning — rather than training models from scratch. It's distinct from traditional ML engineering/MLOps because the hard part shifts: less about model training/algorithms/training infra, more about adaptation, evaluation, and product-layer engineering around a model someone else already built. Foundation models are *why* this split exists — they made it possible to build serious AI products without ML training expertise.
+
+### Knowledge Gap
+Has the right directional intuition but not yet the precise definition — missing the foundation-model-enabled "why" and the concrete list of what shifts (training/infra-heavy -> adaptation/eval-heavy).
+
+### Memory Priority
+Critical
+
+### Follow-up Required
+Yes — retest, ideally paired with C12 (AI eng vs. ML eng, 3 differences) since they're the same comparison at different depth.
+
 ---
 # Misconceptions
 
@@ -384,4 +418,5 @@ Yes — retest, pair with C13 (prompt-based vs. finetuning) since RAG sits under
 5. C6 — Foundation model naming rationale (general-purpose base for adaptation; siloed-research-break), beyond just multimodality
 6. C7 — Multimodal model vs. LMM (generative-vs-non-generative axis; CLIP as non-generative example) — High priority, retest soon
 7. C8 — Three adaptation techniques (missed RAG, substituted post-training) — pair with C13
-8. Everything else in the chapter — not yet tested
+8. C9 — AI engineering definition (right direction, missing the "why" + concrete specifics) — pair with C12
+9. Everything else in the chapter — not yet tested

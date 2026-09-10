@@ -103,7 +103,7 @@ Tracking: [`Test Book Knowledge/`](Test%20Book%20Knowledge/)
 
 | # | Chapter | Tracking folder | Status |
 |---|---|---|---|
-| 1 | Introduction | [AI-Engineering-Chapter-1-Introduction](Test%20Book%20Knowledge/AI-Engineering-Chapter-1-Introduction/) | In progress — 8 questions. C5 self-supervision term/mechanism now correct (M001 resolved), gap: supervised-vs-RL definitions blurred. C8 adaptation techniques 2/3 (missed RAG, subbed post-training). C7 (multimodal/LMM) still weak |
+| 1 | Introduction | [AI-Engineering-Chapter-1-Introduction](Test%20Book%20Knowledge/AI-Engineering-Chapter-1-Introduction/) | In progress — 9 questions. C5 self-supervision term/mechanism now correct (M001 resolved), gap: supervised-vs-RL definitions blurred. C8 adaptation techniques 2/3 (missed RAG, subbed post-training). C9 AI-eng definition right direction, missing "why" + specifics. C7 (multimodal/LMM) still weak |
 | 2 | Understanding Foundation Models | — not started | Not started |
 | 3 | Evaluation Methodology | — not started | Not started |
 | 4 | Evaluate AI Systems | — not started | Not started |
