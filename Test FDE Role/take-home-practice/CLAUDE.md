@@ -43,7 +43,7 @@ Trigger: user asks to practice a take-home / build a take-home project
    way" moment, flag it — that's exactly the kind of story
    `../technical-depth/knowledge-map.md` AI21 and Anthropic's
    technical-conversation round want. Suggest logging it in
-   `../behavioral/star-stories.md` or `../../Test Builds/` as source
+   `../behavioral/star-stories.md` or `../../Builds/` as source
    material.
 
 ## After updating

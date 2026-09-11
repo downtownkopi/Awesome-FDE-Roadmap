@@ -3,6 +3,25 @@
 Personal tracker for FDE interview prep + book study. Not part of the
 public README (that's the awesome-list). Updated as sessions happen.
 
+## Current vs Target
+
+![Progress radar chart: current score vs target across 7 tracker folders](assets/progress-radar.png)
+
+Snapshot as of 2026-09-11. Scores (0-10 scale) pulled from this file's
+status rows, shown as current/target and %:
+- FDE Role 3.6/8 (45%)
+- AI Eng book 0.6/10 (6%)
+- DDIA book 1.6/10 (16%)
+- NeetCode 0.3/10 (3%)
+- Builds 1.4/10 (14%)
+- GPU Lab 0/10 (0%)
+- Job Search 0/10 (0%)
+- **Overall: 12%**
+
+Stale after every session that touches a row below — regen with
+`python3 assets/progress-radar.py` after updating the `current` list
+in that script to match new numbers.
+
 Two file templates in use, now structurally aligned:
 
 - **Interview-prep template** (`Test FDE Role/`): `findings.md` (research,
@@ -38,7 +57,7 @@ simple rule (round-robin/sequential backlog), not fixed dates. Day 1 =
 | 9:00–11:00 | FDE Role drills (2h) | Round-robin 6 categories, 1/day: tech-depth → system-design → problem-decomp → customer-facing → behavioral → business, repeat. Day 1 override: technical-depth first. |
 | 11:00–12:30 | Book study (1.5h) | Alternate DDIA next chapter / AI Eng next chapter. Retest flagged weak concepts first (H8, H15, C5), then new material. |
 | — nap + Dhuhr 12:30–1:30 — | | |
-| 1:30–3:30 | Test Builds (2h) | Fixed order P5→P1→P4→P3→P2. Stay on one project till built + story logged in `interview-stories/`, then move on. |
+| 1:30–3:30 | Builds (2h) | Fixed order P5→P1→P4→P3→P2. Stay on one project till built + story logged in `interview-stories/`, then move on. |
 | 3:30–4:30 | Behavioral (1h) | Day 1-3 override: fill `star-stories.md` completely (B1a-d, B4a, B5a-c, B6a-g). After filled: drill recall against it. |
 | — Asr 4:30–5:00 — | | |
 | 5:00–6:45 | GPU Lab (1.75h) | Fixed order G1→G12. One experiment/session till done + story logged. |
@@ -98,7 +117,7 @@ Tracking: [`Test Book Knowledge/`](Test%20Book%20Knowledge/)
 
 | # | Chapter | Tracking folder | Status |
 |---|---|---|---|
-| 1 | Introduction | [AI-Engineering-Chapter-1-Introduction](Test%20Book%20Knowledge/AI-Engineering-Chapter-1-Introduction/) | In progress — 9 questions. C5 self-supervision term/mechanism now correct (M001 resolved), gap: supervised-vs-RL definitions blurred. C8 adaptation techniques 2/3 (missed RAG, subbed post-training). C9 AI-eng definition right direction, missing "why" + specifics. C7 (multimodal/LMM) still weak |
+| 1 | Introduction | [AI-Engineering-Chapter-1-Introduction](Test%20Book%20Knowledge/AI-Engineering-Chapter-1-Introduction/) | In progress — 15 questions, all 13 Critical concepts touched at least once, now starting High-priority (H-series). C12 and H1 mastered. C13 weight-update mechanism correct (resolves C11's confusion), but tradeoffs (data/complexity/ceiling) not yet covered. C5 self-supervision term/mechanism now correct (M001 resolved), gap: supervised-vs-RL definitions blurred. C8 adaptation techniques 2/3 (missed RAG, subbed post-training). C9 AI-eng definition right direction, missing "why" + specifics. C7 (multimodal/LMM) upgraded to Developing — generative-vs-classification axis now correct, but LMM/LLM naming slip recurred 2nd time (M002 still open). C10 growth factors 2/3 solid, investment factor circular. C11 AI stack layers named correctly but prompting/RAG and scaling misassigned across layers |
 | 2 | Understanding Foundation Models | — not started | Not started |
 | 3 | Evaluation Methodology | — not started | Not started |
 | 4 | Evaluate AI Systems | — not started | Not started |
@@ -150,7 +169,7 @@ Tracking: [`Test Leet/`](Test%20Leet/)
 - **AH1 Contains Duplicate** (O(n)/O(n)) — pass3 recall #1 clean 2026-09-08, next due 2026-09-11.
 - **AH2 Valid Anagram** (O(n+m)/O(1)) — recall #3 clean 2026-09-10 (3/3, no hints), broke a 2-consecutive-reset streak (recall #1: for...in/for...of mixup; recall #2: infinite loop + undeclared-var typo). Downgraded Critical→Medium, interval→3d, next due 2026-09-13.
 - **AH3 Two Sum** (O(n)/O(n)) — recall #1 clean 2026-09-10 (3/3, no hints), Pass 1's pattern-selection gap continues not to recur. Interval→3d, next due 2026-09-13.
-- **AH4 Group Anagrams** (O(m·n)/O(m), count-key) — recall #1 hard-failed 2026-09-10, `.push()`'s return value fed into `Map.set()` again — **3rd occurrence** of the identical bug (Pass 1 had it twice). Most concerning recurring gap right now, escalated to Critical, interval reset to 1d, next due 2026-09-11.
+- **AH4 Group Anagrams** (O(m·n)/O(m), count-key) — 4 attempts, still no clean Pass 3 recall, different bug each time: Pass 1 had 2 `.push()`-return-value bugs, recall #1 repeated that a 3rd time, recall #2 (2026-09-11, drilled fix held) placed the grouping logic inside the wrong loop level instead. Most concerning recurring gap right now — the pattern itself, not any single bug. Escalated to Critical, interval reset to 1d, next due 2026-09-12.
 - **AH5 Top K Frequent Elements** (O(n)/O(n), bucket sort) — pass1-done 2026-09-10. Attempt 1 used a wrong algorithm entirely (threshold-crossing, not true top-k), which slipped past an initially-too-weak test suite; attempt 2, after one conceptual hint, landed the full bucket-sort technique (incl. the Map-insertion-order-as-implicit-sort detail). Pass 2 not yet scheduled.
 - Breakdown: 28 Easy, 101 Medium, 21 Hard across Arrays & Hashing (9), Two Pointers (5), Sliding Window (6), Stack (7), Binary Search (7), Linked List (11), Trees (15), Tries (3), Heap/Priority Queue (7), Backtracking (9), Graphs (13), Advanced Graphs (6), 1-D DP (12), 2-D DP (11), Greedy (8), Intervals (6), Math & Geometry (8), Bit Manipulation (7).
 
@@ -158,12 +177,12 @@ Tracking: [`Test Leet/`](Test%20Leet/)
 
 ## 5. Hands-On Builds
 
-Tracking: [`Test Builds/`](Test%20Builds/)
+Tracking: [`Builds/`](Builds/)
 
 | File | Purpose |
 |---|---|
-| [knowledge-map.md](Test%20Builds/knowledge-map.md) | Project list, 22 projects + 1 extension (P1-P22, plus a P4 hardened-retest; P14-P22 are an opportunistic second-tier backlog, not core sequence) — generates real interview stories, not just conceptual knowledge |
-| [knowledge-tracker.md](Test%20Builds/knowledge-tracker.md) | Project-by-project log: what was built, what broke, extractable stories |
+| [knowledge-map.md](Builds/knowledge-map.md) | Project list, 22 projects + 1 extension (P1-P22, plus a P4 hardened-retest; P14-P22 are an opportunistic second-tier backlog, not core sequence) — generates real interview stories, not just conceptual knowledge |
+| [knowledge-tracker.md](Builds/knowledge-tracker.md) | Project-by-project log: what was built, what broke, extractable stories |
 
 **Status:** 3/22 projects built, 5 extractable interview stories logged.
 
@@ -188,7 +207,7 @@ Tracking: [`GPU Lab/`](GPU%20Lab/)
 | [knowledge-tracker.md](GPU%20Lab/knowledge-tracker.md) | Experiment-by-experiment log: config, VRAM used, what broke, extractable stories |
 
 **Status:** Not started. 0/12 experiments run, 0 extractable interview
-stories logged. One layer below `Test Builds/` in the stack (local
+stories logged. One layer below `Builds/` in the stack (local
 inference/training vs. API/agent-level).
 
 ---

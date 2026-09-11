@@ -22,11 +22,11 @@ This repo has two purposes:
      testing. Protocol: `Test Book Knowledge/CLAUDE.md`.
    - `Test Leet/` — NeetCode 150 coding-practice testing (via the
      `leetcode-teacher` skill). Protocol: `Test Leet/CLAUDE.md`.
-   - `Test Builds/` — hands-on project builds (MCP servers, RAG eval
+   - `Builds/` — hands-on project builds (MCP servers, RAG eval
      harnesses, agents) for generating real interview stories, not just
-     conceptual knowledge. Protocol: `Test Builds/CLAUDE.md`.
+     conceptual knowledge. Protocol: `Builds/CLAUDE.md`.
    - `GPU Lab/` — local ML hands-on (inference, quantization,
-     fine-tuning) on the user's own GPU, one layer below `Test Builds/`
+     fine-tuning) on the user's own GPU, one layer below `Builds/`
      in the stack. Protocol: `GPU Lab/CLAUDE.md`.
    - `Job Search/` — operational tracking (applications, networking,
      resume positioning), not a testing/quiz loop. Protocol:
@@ -37,7 +37,7 @@ This repo has two purposes:
 ## Global rule
 
 Whenever a testing/quiz session updates any file inside `Test FDE Role/`,
-`Test Book Knowledge/`, `Test Leet/`, `Test Builds/`, or `GPU Lab/`, also
+`Test Book Knowledge/`, `Test Leet/`, `Builds/`, or `GPU Lab/`, also
 update the corresponding row in `PROGRESS.md` with a short status line
 (e.g. "3/6 categories passing", "4 questions, weak on X", "12/150
 attempted", "2/5 projects built", "3/12 GPU experiments run"). Only

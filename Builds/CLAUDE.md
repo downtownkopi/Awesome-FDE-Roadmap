@@ -1,4 +1,4 @@
-# Test Builds — Hands-On Project Protocol
+# Builds — Hands-On Project Protocol
 
 Everything in `Test FDE Role/` is conceptual (Q&A, live scenarios,
 mock interviews) or a timed one-shot artifact (`take-home-practice/`).
@@ -96,5 +96,5 @@ me something to build" / "I want hands-on agent experience."
 
 ## After updating
 
-Refresh the Test Builds row in root `PROGRESS.md`, e.g. "2/5 projects
+Refresh the Builds row in root `PROGRESS.md`, e.g. "2/5 projects
 built, 1 extractable interview story logged."

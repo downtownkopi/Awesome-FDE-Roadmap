@@ -36,7 +36,7 @@
 ...
 
 ### Story Extracted? (Y/N)
-If yes, logged to: ../behavioral/star-stories.md or ../../Test Builds/
+If yes, logged to: ../behavioral/star-stories.md or ../../Builds/
 
 ### Memory Priority
 Critical / High / Medium / Low

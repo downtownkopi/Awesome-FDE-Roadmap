@@ -77,7 +77,7 @@ Use STAR (Situation, Task, Action, Result), keep concrete, quantify impact.
   analytics exercise" — software-building judgment over dashboards.
   Free developer Foundry instance available via signup. High
   confidence (official Palantir page, not a candidate account) — see
-  `Test Builds/knowledge-map.md` P6 for the practice-project version.
+  `Builds/knowledge-map.md` P6 for the practice-project version.
 - **OpenAI**: faster loop (~3 wks), take-home-first (see detailed stage
   breakdown below), heavy weight on customer empathy + AI-specific
   technical depth + production judgment.
@@ -319,5 +319,5 @@ Revisit this section once real candidate accounts surface.
 - https://palantir.events/buildingchallenge and https://build.palantir.com (Palantir's official public Build Challenge program — Foundry/AIP workflow build + video demo)
 - https://interviewing.io (Anthropic technical-phone-screen CodeSignal/4-level/black-box-evaluator detail — medium confidence, aggregated candidate reports)
 - Google FDE org: CIO Dive and MarkTechPost reporting on Google Cloud's 2025-2026 FDE launch (explicitly modeled on Palantir); one Blind post on Google Cloud Field Solutions Architect (GenAI) format
-- Vibe Engines "Ticket Triage Assistant" practice spec (third-party-authored, simulates an OpenAI/Anthropic-style take-home — not a leaked real brief) — used as the basis for `Test Builds/knowledge-map.md`'s P4 extension
-- Distyl AI take-home write-up via Vibe Engines (not a target company, flagged for its reusable "Autopilot/Default/Demo" anti-pattern rubric) — see `Test Builds/knowledge-map.md` self-check rubric
+- Vibe Engines "Ticket Triage Assistant" practice spec (third-party-authored, simulates an OpenAI/Anthropic-style take-home — not a leaked real brief) — used as the basis for `Builds/knowledge-map.md`'s P4 extension
+- Distyl AI take-home write-up via Vibe Engines (not a target company, flagged for its reusable "Autopilot/Default/Demo" anti-pattern rubric) — see `Builds/knowledge-map.md` self-check rubric

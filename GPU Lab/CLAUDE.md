@@ -1,6 +1,6 @@
 # GPU Lab — Local ML Hands-On Protocol
 
-`Test Builds/` is API/cloud-agent-level (MCP, agent orchestration,
+`Builds/` is API/cloud-agent-level (MCP, agent orchestration,
 hosted models). This folder is one layer down the stack: local
 inference, quantization, and fine-tuning on the user's own 3070
 (8GB VRAM). Purpose: real intuition for questions that are usually

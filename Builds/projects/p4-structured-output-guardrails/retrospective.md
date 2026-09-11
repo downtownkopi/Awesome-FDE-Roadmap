@@ -31,7 +31,7 @@
 > (`import.meta.url === \`file://${process.argv[1]}\``) failed silently
 > — no error, no output, `main()` just never ran. Cause: `process.argv[1]`
 > was a relative, non-URL-encoded path, and the project directory
-> contains a space (`Test Builds`) that `import.meta.url` encodes as
+> contains a space (`Builds`) that `import.meta.url` encodes as
 > `%20`. The two strings could never match.
 
 ## What Changed As A Result
