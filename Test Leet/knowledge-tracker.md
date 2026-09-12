@@ -16,17 +16,17 @@ chapters and FDE-role prep.
 - Solved after seeing approach/walkthrough: 0
 - Attempted, not solved: 0
 - Overall demonstrated mastery: Just started
-- Current weak areas: syntax discipline (const vs let in loop counters, seen once on AH1); loop-header correctness under blind recall on AH2 — downgraded to Medium after recall #3 broke a 2-consecutive-reset streak clean (3/3, no hints), but want one more clean pass before trusting it fully; pattern selection under pressure — reached for sort-based two-pointer on AH3 (index-recovery + duplicate-key dead ends) before landing on single-pass hash map, now Low after 2 clean passes since; `Array.push()` return-value confusion on AH4 — Critical, 3rd occurrence of the identical mistake (`.push()`'s return value fed into `Map.set()`), now recurring under blind recall rather than just during initial hinted attempts — the single most concerning recurring gap right now, more so than AH2's (which broke its streak clean); AH5 attempt 1 used a fundamentally wrong algorithm (threshold-crossing instead of true top-k comparison) that a weak initial test suite failed to catch — a "tests passing isn't correctness" lesson, not a code-syntax gap
+- Current weak areas: AH1's const/let loop-counter gap resolved (recall #2 clean); loop-header correctness under blind recall on AH2 — downgraded to Medium after recall #3 broke a 2-consecutive-reset streak clean (3/3, no hints), but want one more clean pass before trusting it fully; pattern selection under pressure — reached for sort-based two-pointer on AH3 (index-recovery + duplicate-key dead ends) before landing on single-pass hash map, now Low after 2 clean passes since; AH4 — Critical, 4 attempts without a clean Pass 3 recall, a different implementation bug each time (`.push()`-return-value twice, then a scoping bug placing grouping logic inside the wrong loop level) — the pattern is no longer any one fixable bug, it's *some* slip surviving to the test run every time under blind recall; the single most concerning recurring gap right now; AH5 — "tests passing isn't correctness" recurred a 2nd time: Pass 1 attempt 1 used a wrong algorithm entirely (threshold-crossing), Pass 2's collection step (join+Number) broke on ties-in-frequency, both times the bug slipped past the existing test cases and needed a targeted counterexample to expose
 
 ---
 # Knowledge Gaps
 
 | ID | Problem | Pattern/Technique Gap | Category | Severity | Status | Attempts | Solved |
 |---|---|---|---|---|---|---:|---:|
-| AH1 | Contains Duplicate | `const` vs `let` for a mutating loop counter | Arrays & Hashing | Low | Open — watch for repeat | 1 | Yes |
+| AH1 | Contains Duplicate | `const` vs `let` for a mutating loop counter | Arrays & Hashing | Low | Resolved — recall #2 (2026-09-11) clean, correct `let` usage, gap didn't recur | 2 | Yes |
 | AH2 | Valid Anagram | Loop-header correctness under blind recall — recall #1: `for...in` vs `for...of` over `Map.keys()` (2 occurrences). Recall #2: dropped `i < s.length` entirely (infinite loop, had to kill process) + undeclared `tKey` typo. Recall #3: clean, neither bug recurred | Arrays & Hashing | Medium (downgraded from Critical — streak broken) | Open — 1 clean recall after 2 resets; want one more clean pass before calling it solid | 4 | Recall #3: yes, clean 3/3 no hints |
 | AH3 | Two Sum | Reached for sort-based two-pointer first (default `.sort()` is lexicographic; sorting also destroys the original index mapping needed for the answer; recovering indices via a value→index map then breaks on duplicate values). Needed a full hint sequence to pivot to single-pass hash map (check complement before insert) | Arrays & Hashing | Low (downgraded — Pass 2 and recall #1 both clean, gap hasn't recurred) | Open — 2 consecutive clean passes since Pass 1's gap; still watching pattern-recognition speed on future original-index problems | 3 | Yes (Pass 1 heavy hints; Pass 2 + recall #1 clean) |
-| AH4 | Group Anagrams | `.push()`-return-value confusion — Pass 1 twice (`map.set(map.get(sorted).push(strs[i]))` as a lone arg producing `undefined` entries; then `map.set(sorted, map.get(sorted).push(strs[i]))` overwriting the array with the return value), and now identically again on Pass 3 recall #1 (`map.set(anagramCount, map.get(anagramCount).push(str))`) — 3rd occurrence, hard fail (`TypeError`) | Arrays & Hashing | Critical (escalated — 3rd occurrence of the identical mistake, now under blind recall) | Open — reset after recall #1 fail; needs a clean recall before this can be called resolved | 4 | Recall #1: no (hard fail) |
+| AH4 | Group Anagrams | 4 attempts, 4 different implementation bugs, still no clean Pass 3 recall: Pass 1 had 2 `.push()`-return-value bugs; recall #1 repeated that bug a 3rd time; recall #2 (drilled fix held) placed the key/grouping block inside the inner char-loop instead of after it, inserting multi-char strings repeatedly at partial-signature keys. Pattern is no longer any one specific bug — it's *some* implementation slip surviving to the test run under blind-recall pressure, every time. | Arrays & Hashing | Critical (escalated — 4th attempt without a clean recall, different bug each time) | Open — reset after recall #2 fail; needs a genuinely clean recall, and a pre-submission "trace state at each loop level" habit, not just fixing bugs one at a time | 5 | Recall #2: no (hard fail) |
 
 ---
 # Concept Mastery
@@ -37,7 +37,7 @@ chapters and FDE-role prep.
 | AH2 | Valid Anagram | Arrays & Hashing | Easy | Yes | Independent | Yes (O(n+m)/O(1)) | Solved independently |
 | AH3 | Two Sum | Arrays & Hashing | Easy | Eventually (after hints) | With heavy hints | Yes (O(n)/O(n)) | Solved with hints |
 | AH4 | Group Anagrams | Arrays & Hashing | Medium | Yes | With hints | Yes (O(m·n)/O(m), count-key, achieved Pass 2) | Solved with hints; Pass 1 suboptimal (sort-key), Pass 2 optimal (count-key) |
-| AH5 | Top K Frequent Elements | Arrays & Hashing | Medium | No (attempt 1) / Yes (attempt 2, after hint) | With hints | Yes (O(n)/O(n), bucket sort) | Solved with hints; attempt 1 was a wrong algorithm entirely, not just suboptimal |
+| AH5 | Top K Frequent Elements | Arrays & Hashing | Medium | No (attempt 1) / Yes (attempt 2, after hint) | With hints | Yes (O(n)/O(n), bucket sort — both Pass 1 and Pass 2) | Solved with hints across both passes; Pass 1 attempt 1 was a wrong algorithm, Pass 2's bucketing was self-reimplemented but the collection step needed a direct fix |
 | AH6 | Product of Array Except Self | Arrays & Hashing | Medium | — | — | — | Untested |
 | AH7 | Valid Sudoku | Arrays & Hashing | Medium | — | — | — | Untested |
 | AH8 | Encode and Decode Strings | Arrays & Hashing | Medium | — | — | — | Untested |
@@ -233,6 +233,12 @@ No — Pass 2 (blind reimplementation, `solution_pass2.js`) completed
 recall #1 completed 2026-09-08, 3/3 clean, same hash-set approach, no
 bugs. Interval advances to 3 days, next due 2026-09-11 (see
 review-schedule.md).
+
+Pass 3 recall #2 on 2026-09-11 (`solution_recall_20260911.js`): clean
+3/3, no hints, same hash-set approach. Correct `let` usage for the
+loop counter this time — the const/let gap flagged after Pass 1 didn't
+recur, now resolved. Interval advances 3 -> 7 days, streak 2, next due
+2026-09-18 (see review-schedule.md).
 
 ---
 
@@ -512,6 +518,42 @@ its own statement, don't wrap it in an assignment expecting the array
 back. Worth checking tomorrow's reset attempt specifically for whether
 this lands under blind-recall pressure, not just when asked directly.
 
+Pass 3 recall #2 on 2026-09-11 (`solution_recall_20260911.js`): hard
+fail again, but the drilled fix held — no `.push()`-return-value bug
+this time. New bug instead: the key-computation + `map.get/set/push`
+block was placed **inside** the inner character loop instead of after
+it. Each character processed recomputed a partial (incomplete)
+signature and inserted the *whole string* into the map at that
+partial key — so a 3-char string like "eat" got inserted 3 times, at
+3 different partial-signature keys, instead of once at the final
+complete signature. Symmetric failure on the empty-string case: since
+the inner loop never runs for `""`, the grouping block never executes
+at all, so nothing gets inserted. Single-character strings passed by
+coincidence (exactly one inner-loop iteration, so the "partial"
+signature happens to already be the final one).
+
+This is the **4th total attempt** on this problem without a clean Pass
+3 recall (Pass 1 had 2 different bugs, recall #1 had the `.push()`
+bug, recall #2 has this scoping bug) — a different specific mistake
+each time, but a consistent pattern of *some* implementation slip
+surviving to the test run under blind-recall conditions. The pattern
+itself (not any single bug) is now the real signal: worth explicitly
+rehearsing "trace through what state exists at each loop level before
+writing to it" as a pre-submission check, not just fixing bugs
+one at a time as they're found. Interval reset to 1 day, next due
+2026-09-12.
+
+Post-failure repair (same day, 2026-09-11): first fix attempt was
+purely cosmetic (`arr[i]++` rewritten as `arr[i] = arr[i] + 1`,
+functionally identical) — the actual bug (block placement) wasn't
+touched, same 1/3 result. Only after the specific issue was pointed
+out directly (block needs to move outside the inner loop) did the fix
+land: 3/3 clean. **This was hint-assisted, not a blind pass** — same
+precedent as AH2's same-day bonus rep: the graded recall result (hard
+fail, reset above) is what counts officially; this repair confirms the
+concept is fixable quickly once identified, not that the recall itself
+passed.
+
 ---
 
 ## Q005
@@ -576,6 +618,30 @@ distinction generalizes to any top-k/kth-largest problem family
 No — Pass 1 complete, optimal complexity achieved on the corrected
 attempt. Pass 2 (blind reimplementation) not yet scheduled — do
 whenever ready to study+reimplement.
+
+**Pass 2 (2026-09-11, `solution_pass2.js`):** studied the reference
+(array-indexed bucket-sort, `arr[value+1]`-style), then reimplemented
+blind using a `valueToCountMap` + array-of-arrays bucket structure —
+the counting and bucketing logic was genuinely self-reimplemented,
+independent of the reference's exact shape. Bug in the final
+collection step: `countArr.filter(...).map(arr => arr.join()).map(Number).splice(-k)`
+— `.join()` collapses a bucket holding more than one value (two
+different numbers tied at the same frequency) into a comma string
+like `"1,2"`, and `Number("1,2")` is `NaN`. All 4 existing test cases
+passed anyway, because none of them had two different numbers share a
+frequency count — same "tests passing isn't correctness" pattern as
+Pass 1's attempt 1. Caught by constructing a targeted counterexample
+(`nums=[1,1,2,2,3,3,3], k=3`) that produced `[NaN, 3]` instead of all
+three values. After one Socratic prompt, asked for the fix directly
+rather than continuing to reason it out — fix applied on request:
+`countArr.flatMap((arr) => arr).slice(-k)`, verified against all 4
+cases plus the counterexample. Complexity confirmed O(n)/O(n),
+matches optimal. **Honest note:** the bucketing/counting core was
+independently recalled — good retention signal — but the collection
+step's fix was handed over directly, not self-derived, so this Pass 2
+is not a fully independent clean pass. Pass 3 recall #1 scheduled for
+2026-09-12; that recall is the real test of whether the *whole*
+approach (including the collection step) has actually stuck.
 
 ---
 

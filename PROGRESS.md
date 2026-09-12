@@ -169,11 +169,11 @@ Tracking: [`Test Leet/`](Test%20Leet/)
 
 **Status:** 5/150 attempted, 4/5 optimal complexity.
 
-- **AH1 Contains Duplicate** (O(n)/O(n)) — pass3 recall #1 clean 2026-09-08, next due 2026-09-11.
+- **AH1 Contains Duplicate** (O(n)/O(n)) — recall #2 clean 2026-09-11 (3/3, no hints), const/let loop-counter gap resolved. Interval→7d, next due 2026-09-18.
 - **AH2 Valid Anagram** (O(n+m)/O(1)) — recall #3 clean 2026-09-10 (3/3, no hints), broke a 2-consecutive-reset streak (recall #1: for...in/for...of mixup; recall #2: infinite loop + undeclared-var typo). Downgraded Critical→Medium, interval→3d, next due 2026-09-13.
 - **AH3 Two Sum** (O(n)/O(n)) — recall #1 clean 2026-09-10 (3/3, no hints), Pass 1's pattern-selection gap continues not to recur. Interval→3d, next due 2026-09-13.
 - **AH4 Group Anagrams** (O(m·n)/O(m), count-key) — 4 attempts, still no clean Pass 3 recall, different bug each time: Pass 1 had 2 `.push()`-return-value bugs, recall #1 repeated that a 3rd time, recall #2 (2026-09-11, drilled fix held) placed the grouping logic inside the wrong loop level instead. Most concerning recurring gap right now — the pattern itself, not any single bug. Escalated to Critical, interval reset to 1d, next due 2026-09-12.
-- **AH5 Top K Frequent Elements** (O(n)/O(n), bucket sort) — pass1-done 2026-09-10. Attempt 1 used a wrong algorithm entirely (threshold-crossing, not true top-k), which slipped past an initially-too-weak test suite; attempt 2, after one conceptual hint, landed the full bucket-sort technique (incl. the Map-insertion-order-as-implicit-sort detail). Pass 2 not yet scheduled.
+- **AH5 Top K Frequent Elements** (O(n)/O(n), bucket sort) — pass2-done 2026-09-11. Pass 1 attempt 1 used a wrong algorithm entirely (threshold-crossing), attempt 2 landed bucket sort after a hint. Pass 2 self-reimplemented the bucketing/counting core independently, but the collection step (join+Number, breaks on frequency ties) needed a direct fix after Socratic prompting — 2nd time a real bug slipped past the existing test cases undetected. Pass 3 recall #1 due 2026-09-12.
 - Breakdown: 28 Easy, 101 Medium, 21 Hard across Arrays & Hashing (9), Two Pointers (5), Sliding Window (6), Stack (7), Binary Search (7), Linked List (11), Trees (15), Tries (3), Heap/Priority Queue (7), Backtracking (9), Graphs (13), Advanced Graphs (6), 1-D DP (12), 2-D DP (11), Greedy (8), Intervals (6), Math & Geometry (8), Bit Manipulation (7).
 
 ---

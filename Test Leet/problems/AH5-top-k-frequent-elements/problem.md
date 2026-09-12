@@ -4,7 +4,7 @@ name: Top K Frequent Elements
 category: Arrays & Hashing
 difficulty: Medium
 leetcode: https://leetcode.com/problems/top-k-frequent-elements/
-status: pass1-done
+status: pass2-done
 ---
 
 # Top K Frequent Elements
