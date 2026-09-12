@@ -31,6 +31,11 @@ This repo has two purposes:
    - `Job Search/` — operational tracking (applications, networking,
      resume positioning), not a testing/quiz loop. Protocol:
      `Job Search/CLAUDE.md`.
+   - `Sourcing/` — ongoing external research pipeline (interview
+     accounts, job descriptions, resources), twice-weekly cloud
+     routine feeding a staging inbox, triaged by hand into
+     `Test FDE Role/interview-stories/`, knowledge-maps, and
+     `AWESOME-FDE-RESOURCES.md`. Protocol: `Sourcing/CLAUDE.md`.
    - `PROGRESS.md` — root index, one row per chapter/category/problem-set/
      project with a one-line status.
 
@@ -41,9 +46,10 @@ Whenever a testing/quiz session updates any file inside `Test FDE Role/`,
 update the corresponding row in `PROGRESS.md` with a short status line
 (e.g. "3/6 categories passing", "4 questions, weak on X", "12/150
 attempted", "2/5 projects built", "3/12 GPU experiments run"). Only
-touch the affected row — don't rewrite the whole file. `Job Search/` follows the same rule but on real-world events
-(application sent, status change, referral) rather than test sessions —
-see `Job Search/CLAUDE.md`.
+touch the affected row — don't rewrite the whole file. `Job Search/` and `Sourcing/` follow the same rule but on
+real-world events (application sent, status change, referral; or
+scrape run, item triaged) rather than test sessions — see
+`Job Search/CLAUDE.md` and `Sourcing/CLAUDE.md`.
 
 ## New chapter setup
 

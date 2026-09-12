@@ -229,6 +229,22 @@ Tracking: [`Job Search/`](Job%20Search/)
 
 ---
 
+## 8. Sourcing — External Research Pipeline
+
+Tracking: [`Sourcing/`](Sourcing/)
+
+| File | Purpose |
+|---|---|
+| [sources.md](Sourcing/sources.md) | Target list: sites/queries the scheduled routine searches each run |
+| [inbox.md](Sourcing/inbox.md) | Raw finds, unreviewed, newest on top |
+| [triage-log.md](Sourcing/triage-log.md) | Audit trail: what got merged where, or rejected and why |
+
+**Status:** Not started. Cloud routine not yet set up (twice-weekly
+cadence agreed 2026-09-11, `/schedule` setup still pending). 0 runs,
+0 items triaged.
+
+---
+
 ## Maintenance note
 
 When starting a new chapter: create
