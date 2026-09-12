@@ -120,7 +120,7 @@ Tracking: [`Test Book Knowledge/`](Test%20Book%20Knowledge/)
 
 | # | Chapter | Tracking folder | Status |
 |---|---|---|---|
-| 1 | Introduction | [AI-Engineering-Chapter-1-Introduction](Test%20Book%20Knowledge/AI-Engineering-Chapter-1-Introduction/) | In progress — 15 questions, all 13 Critical concepts touched at least once, now starting High-priority (H-series). C12 and H1 mastered. C13 weight-update mechanism correct (resolves C11's confusion), but tradeoffs (data/complexity/ceiling) not yet covered. C5 self-supervision term/mechanism now correct (M001 resolved), gap: supervised-vs-RL definitions blurred. C8 adaptation techniques 2/3 (missed RAG, subbed post-training). C9 AI-eng definition right direction, missing "why" + specifics. C7 (multimodal/LMM) upgraded to Developing — generative-vs-classification axis now correct, but LMM/LLM naming slip recurred 2nd time (M002 still open). C10 growth factors 2/3 solid, investment factor circular. C11 AI stack layers named correctly but prompting/RAG and scaling misassigned across layers |
+| 1 | Introduction | [AI-Engineering-Chapter-1-Introduction](Test%20Book%20Knowledge/AI-Engineering-Chapter-1-Introduction/) | First full pass complete, now retesting flagged gaps — 32 questions, all 29 concepts touched. 7 Mastered (C1, C12, H1, H5, H7, H8, H16), 22 Developing. C3 retest clean (8 Mastered now). C5 retest resolved the core supervised-vs-RL blur (M003), surfaced a narrower one (supervised learning conflated with finetuning's timing). Full detail in `knowledge-tracker.md`. |
 | 2 | Understanding Foundation Models | — not started | Not started |
 | 3 | Evaluation Methodology | — not started | Not started |
 | 4 | Evaluate AI Systems | — not started | Not started |
