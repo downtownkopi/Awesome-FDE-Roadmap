@@ -245,6 +245,21 @@ cadence agreed 2026-09-11, `/schedule` setup still pending). 0 runs,
 
 ---
 
+## 9. Applied AI Engineer — Master Revision & MCQ Bank
+
+Tracking: [`Test Book Knowledge/Applied-AI-Engineer-MCQ-Bank/`](Test%20Book%20Knowledge/Applied-AI-Engineer-MCQ-Bank/)
+
+| File | Purpose |
+|---|---|
+| [source.md](Test%20Book%20Knowledge/Applied-AI-Engineer-MCQ-Bank/source.md) | Imported 92-question revision bank (12 topics: transformer fundamentals → inference/serving → RAG → RAG eval → agents → production agents → MCP → AI security → production AI eng → SFT → QLoRA → experiment design) |
+| [knowledge-map.md](Test%20Book%20Knowledge/Applied-AI-Engineer-MCQ-Bank/knowledge-map.md) | Q1-Q92 concept list + cross-cutting principles, sourced from source.md |
+| [knowledge-tracker.md](Test%20Book%20Knowledge/Applied-AI-Engineer-MCQ-Bank/knowledge-tracker.md) | Mastery state, gaps, question log |
+| [session-log.md](Test%20Book%20Knowledge/Applied-AI-Engineer-MCQ-Bank/session-log.md) | Session history |
+
+**Status:** Not started — imported 2026-09-12, source.md + knowledge-map.md ready, 0/92 concepts tested. Not a book chapter (external revision bank), so it follows the book-chapter template/protocol (`Test Book Knowledge/CLAUDE.md`) but sits outside the two book series above.
+
+---
+
 ## Maintenance note
 
 When starting a new chapter: create

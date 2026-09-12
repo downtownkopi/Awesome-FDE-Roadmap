@@ -1,6 +1,8 @@
 # Book-Chapter Testing Protocol
 
-Applies to any `knowledge/<Book>-Chapter-N-<Title>/` folder.
+Applies to any `knowledge/<Book>-Chapter-N-<Title>/` folder. Also applies to
+`Applied-AI-Engineer-MCQ-Bank/` — an imported external revision bank, not a
+book chapter, but same 4-file shape and same per-question protocol.
 
 Files in each chapter folder:
 - `source.md` — condensed chapter reference. Read-only; don't edit
