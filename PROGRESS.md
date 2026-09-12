@@ -92,7 +92,7 @@ Folder: [`Test FDE Role/`](Test%20FDE%20Role/)
 | [take-home-practice/](Test%20FDE%20Role/take-home-practice/) | Timed take-home-build reps (OpenAI ~5hr+video / Anthropic 3-4hr style briefs) — 0 attempted |
 | [mock-loop/](Test%20FDE%20Role/mock-loop/) | Full chained multi-round simulation per company — 0 runs |
 
-**Status:** 3/6 categories started, 1/6 PASS (system design).
+**Status:** 4/6 categories started, 2/6 PASS (system design, customer-facing judgment).
 
 - **System design** — PASS (9/10), 2 attempts, both S20 Eval-harness-first.
   - Q1 (healthcare triage) 7/10 — negotiating stakeholder agreement arrived last/narrow instead of leading.
@@ -104,7 +104,10 @@ Folder: [`Test FDE Role/`](Test%20FDE%20Role/)
   - Excellent clarifying-question phase (self-discovered the CAD batch-only/no-live-status constraint) and strong prioritization (quick-wins-first, correct travel-time triage).
   - Gap: to-be architecture proposed AI dispatch without officer confirmation, contradicting that same self-discovered constraint; no rollout/evaluation plan for a high-stakes automation proposal.
   - Follow-up discussion refined this live: correctly defended that a future system could have self-reported live status, then correctly re-affirmed acknowledgment should stay (self-reported status can go stale under duress). Score unchanged, but reclassified as "doesn't surface unprompted" rather than "doesn't understand."
-- **Other 3 categories** (customer-facing judgment, behavioral, business judgment) — 0 attempts.
+- **Customer-facing judgment** — PASS (9/10), 1 scenario attempted (CJ9, Anthropic-style discovery-only simulation, insurance claims processing).
+  - Excellent technical/workflow discovery from the start (channel fragmentation, quantified cycle-time gaps, third-party SLA-leverage gap, legacy architecture), but tried to transition into pitching before touching the Administrative & Political bucket.
+  - Once flagged, closed it fully in one round: weak/self-identified Champion, two distinct Blockers (IT security + adjuster job-security fear), contested Success Metric across 3 stakeholders, CJ8's "why now" question. Docked one point for reassurance-before-asking mid-discovery.
+- **Other 2 categories** (behavioral, business judgment) — 0 attempts.
 - Anthropic added as a target company + interview story 2026-09-06; `star-stories.md` needs personal stories filled in before real loops.
 - New pieces added 2026-09-06 (`cohere-stack.md`, `architecture-presentation.md`, `primary-sources/`, `take-home-practice/`, `mock-loop/`) — all at 0 attempts/empty, structural coverage only, no reps yet.
 
